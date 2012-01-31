@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:conf="http://net.mjahn.jenkins/schema/configruation/v1-0"
+    targetNamespace="http://net.mjahn.jenkins/schema/configruation/v1-0" 
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <!-- the root of all XML evil -->
+    <xs:element name="setup">
+        <xs:annotation>
+            <xs:documentation>
+                <xs:description>Root element to configure your build indicators.</xs:description>
+                <xs:LineNumber>Root Element</xs:LineNumber>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <xs:description>An alias identifying this particular configuration. Should be unique, but is not enforced.</xs:description>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="configuration" type="conf:BuildTestConfigurationType" minOccurs="1" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <xs:description>The actual configuration that combines all the configuration elements used above.</xs:description>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- the actual meat - what we want to test for -->
+    <xs:complexType name="BuildTestConfigurationType">
+        <xs:sequence>
+            <xs:element name="projectTriggers" type="conf:ProjectTriggersType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="statusIndicators" type="conf:StatusIndicatorsType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="alias" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="ProjectTriggersType">
+        <xs:sequence>
+            <xs:element name="trigger" type="conf:ProjectTriggerType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="project" type="conf:ProjectType" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <!-- make this a complex type to find the actual project -->
+        <xs:attribute name="or" type="xs:boolean" use="optional"  default="true"/>
+    </xs:complexType>
+    
+    <xs:complexType name="ProjectType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:sequence>
+                    <xs:element name="serverAlias" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="serverSource" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:element name="projectURL" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="ProjectTriggerType">
+        <xs:sequence>
+            <xs:element name="status" minOccurs="0" maxOccurs="1" default="failure">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="ok|warning|failure|building"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="StatusIndicatorsType">
+        <xs:sequence>
+            <xs:element name="statusIndicator" type="conf:StatusIndicatorType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="StatusIndicatorType">
+        <xs:sequence>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:sequence>
+                    <xs:element name="componendId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="indicatorId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:element name="id" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

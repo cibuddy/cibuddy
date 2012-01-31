@@ -1,0 +1,510 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cibuddy</groupId>
+    <artifactId>cibuddy</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.groupId} (Main Project)</name>
+    <description>
+        This project provides the software to monitor the status of your CI builds
+    </description>
+    <url>http://osgi.mjahn.net</url>
+    <organization>
+        <name>net.mjahn</name>
+        <url>http://osgi.mjahn.net</url>
+    </organization>
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <comments>Copyright 2012 Mirko Jahn.
+
+                Licensed under the Apache License, Version 2.0 (the "License");
+                you may not use this file except in compliance with the License.
+                You may obtain a copy of the License at
+
+                http://www.apache.org/licenses/LICENSE-2.0
+
+                Unless required by applicable law or agreed to in writing, software
+                distributed under the License is distributed on an "AS IS" BASIS,
+                WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                implied.
+
+                See the License for the specific language governing permissions and
+                limitations under the License.
+            </comments>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <id>mirkojahn</id>
+            <name>Mirko Jahn</name>
+            <email>mirkojahn@gmail.com</email>
+            <organization>mjahn.net</organization>
+            <roles>
+                <role>Developer</role>
+                <role>Architect</role>
+            </roles>
+            <timezone>UTC+1</timezone>
+        </developer>
+    </developers>
+    
+    <properties>
+        <!-- Default OSGi Bundle Properties used by the maven-bundle-plugin -->
+        <bundle.symbolicNameDirective />
+        <bundle.symbolicName>${project.groupId}.${project.artifactId}${bundle.symbolicNameDirective}</bundle.symbolicName>
+        <osgi.export.pkg></osgi.export.pkg>
+        <osgi.import.pkg>*</osgi.import.pkg>
+        <osgi.dynamic.import.pkg />
+        <osgi.private.pkg />
+        <osgi.bundle.activator />
+        <osgi.bundle.classpath />
+        <osgi.embed.dependency />
+        <osgi.fragment.host />
+        <osgi.require.bundle />
+        <osgi.spring.context />
+        <osgi.native.code/>
+        <eclipse.supplement.bundle />
+        <osgi.execution.env>J2SE-1.5, JavaSE-1.6</osgi.execution.env>
+        <osgi.bundle.vendor>com.cibuddy</osgi.bundle.vendor>
+        <osgi.bundle.license>Apache License, Version 2.0;url=http://www.apache.org/licenses/LICENSE-2.0;description=OpenSource license provided by the Apache foundation</osgi.bundle.license>
+        <osgi.bundle.category>tools</osgi.bundle.category>
+        
+        <!-- project specific properties -->
+        <application.domain>${project.groupId}</application.domain>
+        <application.name>CIBuddy</application.name>
+        
+        <!-- other properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- project dependency versions -->
+        <pax.web>1.1.1</pax.web>
+    </properties>
+
+
+    <prerequisites>
+        <maven>2.2.1</maven>
+    </prerequisites>
+
+    <modules>
+        <module>drivers</module>
+        <module>lights</module>
+        <module>main</module>
+        <module>distributions</module>
+        <module>servers</module>
+        <!--module>ui</module-->
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.10</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient-osgi</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore-osgi</artifactId>
+                <version>4.1.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.3.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>4.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-sslengine</artifactId>
+                <version>6.1.26</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
+                <version>6.1.26</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty</artifactId>
+                <version>6.1.26</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>servlet-api-2.5</artifactId>
+                <version>6.1.14</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.http.jetty</artifactId>
+                <version>2.2.0</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.sonatype.tycho</groupId>
+                <artifactId>org.eclipse.osgi</artifactId>
+                <version>3.6.2.R36x_v20110210</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.runner</groupId>
+                <artifactId>pax-runner</artifactId>
+                <version>1.7.6</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.fileinstall</artifactId>
+                <version>3.1.10</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- 
+                think about getting rid of them 
+            -->
+            
+            
+            <!-- Pax dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-api</artifactId>
+                <version>${pax.web}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-spi</artifactId>
+                <version>${pax.web}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-jsp</artifactId>
+                <version>${pax.web}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-runtime</artifactId>
+                <version>${pax.web}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.web</groupId>
+                <artifactId>pax-web-jetty</artifactId>
+                <version>${pax.web}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <!-- Aries dependencies -->
+            <dependency>
+                <groupId>org.apache.aries</groupId>
+                <artifactId>org.apache.aries.util</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.proxy</groupId>
+                <artifactId>org.apache.aries.proxy</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.quiesce</groupId>
+                <artifactId>org.apache.aries.quiesce.api</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.quiesce</groupId>
+                <artifactId>org.apache.aries.quiesce.manager</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.blueprint</groupId>
+                <artifactId>org.apache.aries.blueprint</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.blueprint</groupId>
+                <artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.aries.blueprint</groupId>
+                <artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
+                <version>0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <scope>provided</scope>
+                <version>1.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+                <version>1.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <optional>true</optional>
+                <version>1.6.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.log4j</groupId>
+                <artifactId>com.springsource.org.apache.log4j</artifactId>
+                <scope>runtime</scope>
+                <type>jar</type>
+                <optional>true</optional>
+                <version>1.2.16</version>
+            </dependency>
+            <dependency>
+                <groupId>asm</groupId>
+                <artifactId>asm-all</artifactId>
+                <optional>true</optional>
+                <version>3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xbean</groupId>
+                <artifactId>xbean-finder</artifactId>
+                <version>3.7</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <build>
+        <!-- plugin configuration -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.sun.tools.xjc.maven2</groupId>
+                    <artifactId>maven-jaxb-plugin</artifactId>
+                    <version>1.1.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.ops4j</groupId>
+                    <artifactId>maven-pax-plugin</artifactId>
+                    <version>1.5</version>
+                    <configuration>
+                        <provision>
+                            <param>--platform=equinox</param>
+                            <param>--version=3.7.1</param>
+                            <param>--ee=J2SE-1.6</param>
+                            <param>--vmo=-Dosgi.classloader.lock=classname</param>
+                            <param>--startLevel=5</param>
+                            <param>--bundleStartLevel=4</param>
+                            <param>--workingDirectory=${project.build.directory}/runtime</param>
+                            <param>mvn:${application.domain}/hid/${project.version}@1</param>
+                            <param>mvn:${application.domain}/lights.status/${project.version}@2</param>
+                            <param>mvn:${application.domain}/delcom.lights/${project.version}@2</param>
+                        </provision>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>ide-support</id>
+                            <goals>
+                                <goal>eclipse</goal>
+                            </goals>
+                            <configuration>
+                                <pde>true</pde>
+                                <downloadJavadocs>true</downloadJavadocs>
+                                <downloadSources>true</downloadSources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.3.6</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <unpackBundle>true</unpackBundle>
+                        <manifestLocation>META-INF</manifestLocation>
+                        <excludeDependencies>*;scope=provided|runtime</excludeDependencies>
+                        <instructions>
+                            <!-- remove the qualifier from ANY versioning rule -->
+                            <_versionpolicy>[$(version;==;$(@)),$(version;+;$(@)))</_versionpolicy>
+
+                            <!-- This doesn't work with the 2.0.1 version of the plug-in, but probably later-->
+                            <_versionpolicy-impl>[$(version;==;$(@)),$(version;=+;$(@)))</_versionpolicy-impl>
+                            <_versionpolicy-uses>[$(version;=;$(@)),$(version;+;$(@)))</_versionpolicy-uses>
+                            <!-- enable simple spring xml file analysis -->
+                            <_plugin>aQute.lib.spring.SpringComponent</_plugin>
+                            <!-- Changed behavior in the > 2.0.0 bundle version forces us to do it this way -->
+                            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+                            <Export-Package>${osgi.export.pkg}</Export-Package>
+                            <Import-Package>${osgi.import.pkg}</Import-Package>
+                            <DynamicImport-Package>${osgi.dynamic.import.pkg}</DynamicImport-Package>
+                            <Private-Package>${osgi.private.pkg}</Private-Package>
+                            <Bundle-Activator>${osgi.bundle.activator}</Bundle-Activator>
+                            <Bundle-ClassPath>${osgi.bundle.classpath}</Bundle-ClassPath>
+                            <Embed-Dependency>${osgi.embed.dependency}</Embed-Dependency>
+                            <Fragment-Host>${osgi.fragment.host}</Fragment-Host>
+                            <Require-Bundle>${osgi.require.bundle}</Require-Bundle>
+                            <Bundle-Category>${osgi.bundle.category}</Bundle-Category>
+                            <_removeheaders>Private-Package,Include-Resource,Built-By</_removeheaders>
+                            <!-- project specifics -->
+                            <Bundle-Description>${project.description}</Bundle-Description>
+                            <Bundle-Vendor>${osgi.bundle.vendor}</Bundle-Vendor>
+                            <Bundle-License>${osgi.bundle.license}</Bundle-License>
+                            <Bundle-RequiredExecutionEnvironment>${osgi.execution.env}</Bundle-RequiredExecutionEnvironment>
+                            <Bundle-NativeCode>${osgi.native.code}</Bundle-NativeCode>
+                            <!-- custom headers (not according to OSGi-Spec standard) -->
+                            <Spring-Context>${osgi.spring.context}</Spring-Context>
+                            <Eclipse-SupplementBundle>${eclipse.supplement.bundle}</Eclipse-SupplementBundle>
+
+                            <Build-Time>$(now)</Build-Time>
+                        </instructions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>bundle-manifest</id>
+                            <phase>process-classes</phase>
+                            <goals>
+                                <goal>manifest</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>bundle-install</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>install</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>bundle-deploy</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
+    
+    <repositories>
+        <repository>
+            <id>nexus-oss-snapshots</id>
+            <name>Nexus OSS Snapshot Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-oss-staging</id>
+            <name>Nexus OSS Staging Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.bundles.release</id>
+            <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-oss-plugins-snapshots</id>
+            <url>http://oss.sonatype.org/content/groups/staging/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>nexus-oss-plugins-staging</id>
+            <url>http://oss.sonatype.org/content/groups/staging/</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+  
+</project>

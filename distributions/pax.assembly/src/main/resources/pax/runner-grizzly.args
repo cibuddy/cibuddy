@@ -1,0 +1,30 @@
+# runner.args
+#############################################
+#                                           #
+#         Configuration first               #
+#                                           #
+#############################################
+
+# use Eclipse as runtime (any other is possible as well)
+--p=e 
+--version=3.7.1 
+
+# properties for http service ports
+--vmo=-Dorg.osgi.service.http.port=8080 \
+-Dorg.osgi.service.http.port.secure=8443 \
+
+# set debug as log level
+--log=debug
+
+#############################################
+#                                           #
+#         Bundle setup second               #
+#                                           #
+#############################################
+
+# the libraries, started first
+scan-dir:../core
+scan-dir:../${application.name}
+scan-dir:../${application.name}-driver
+mvn:http://download.java.net/maven/2/!com.sun.grizzly.osgi/grizzly-httpservice-bundle/1.9.17
+

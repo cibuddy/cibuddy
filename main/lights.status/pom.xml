@@ -1,0 +1,63 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lights.status</artifactId>
+    <packaging>bundle</packaging>
+    
+    <name>${application.domain}.${project.artifactId}</name>
+    
+    <parent>
+        <groupId>com.cibuddy</groupId>
+        <artifactId>main</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <properties>
+        <!-- osgi directives used in the maven-bundle-plugin, defined in the root pom -->
+        <bundle.symbolicNameDirective>singleton:=true</bundle.symbolicNameDirective>
+        <bundle.symbolicName>${project.name};${bundle.symbolicNameDirective}</bundle.symbolicName>
+        <bundle.namespace>${project.name}</bundle.namespace>
+        <osgi.bundle.activator>${project.name}.impl.Activator</osgi.bundle.activator>
+        <osgi.private.pkg>${project.name}*</osgi.private.pkg>
+        <osgi.import.pkg>
+            org.osgi.framework;version=[1.3.0','2.0.0),
+            *
+        </osgi.import.pkg>
+    </properties>
+
+    <dependencies>
+        <!-- inter project dependencies -->
+        <dependency>
+            <groupId>${application.domain}</groupId>
+            <artifactId>hid</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- 3rd party dependencies -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <!-- test dependencies (scope defined in parent pom) -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <!-- plugins used -->
+        <plugins>
+            <!-- compile code against java 1.6 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <!-- enable it being an osgi bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
