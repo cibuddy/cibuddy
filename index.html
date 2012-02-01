@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>cibuddy @ GitHub</title>
 
-  <title>cibuddy/cibuddy @ GitHub</title>
-
+  <meta name="keywords" content="CIBuddy delcom lights jenkins hudson integration physical build indicator" />
+  <meta name="description" content="CIBuddy - Visualization Project for Continuous Integration Servers" />
+  <meta name="robots" content="index, follow" />
+    
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #988868;
+      background-color: #FFFFFF;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
@@ -42,28 +45,53 @@
         <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="https://github.com/cibuddy/cibuddy">cibuddy</a>
-      <span class="small">by <a href="https://github.com/cibuddy">cibuddy</a></span></h1>
+    <h1><a href="https://github.com/cibuddy/cibuddy">CIBuddy</a>
+      <span class="small">by <a href="http://cibuddy.com">cibuddy.com</a></span></h1>
 
     <div class="description">
-      Visualization Project for continuos integration servers
+      Visualization Project for Continuous Integration Servers
     </div>
-
     
 
-    
+    <h2>What is it about?</h2>
+    <p>
+      CI Servers like <a href="http://jenkins-ci.org/">Jenkins</a> or <a href="http://hudson-ci.org/">Hudson</a> are
+      playing a crucial role in our daily business and are essential for high quality software. Unfortunately, we're
+      living in a fast-paced world and we are often overwhelmed with information coming from many different sources 
+      like instant messengers, email or text messages for instance. So it is no surprise that the actual status of 
+      the our build environment and therefore the quality of our software tends to lack some love and attention.
+      <!--
+      <img style="width: 300px; margin: 0 auto; border: 0;" src="jenkins_default.jpg" alt="Visit: http://geekandpoke.typepad.com">
+      <img style="width: 300px; margin: 0 auto; border: 0;" src="jenkins_great.jpg" alt="Visit: http://geekandpoke.typepad.com">
+       -->
+    </p>
+    <p>
+      Here is where CIBuddy comes into play. With CIBuddy you are able to bind physical build indicators like USB lights
+      or geeky stuff like the iBuddy to the status of your various build server projects. Just configure what project
+      status should reflect what kind of physical reaction of your lamp (or tool) - that easy. Now you always have the
+      status of your important projects right infront of your eyes and no longer have excuses for not maintaining a
+      fast feedback on build problems. You immediately see when something breaks one of your important projects.
+    </p>
+      
+    <h2>Usage</h2>
+    <p>
+      The usage is as easy as it can get. This is what you need:
+      <ul>
+        <li>the binary of CIBuddy</li>
+        <li>a list of your build servers (currently only jenkins is supported)</li>
+        <li>a physical build indicator lamp (like the iBuddy or a delcom light)</li>
+      </ul>
+    </p>
+      
+    <h2>Extending CIBuddy</h2>
+    <p>
+      CIBuddy is implemented in Java and is based on OSGi. It is developed with the idea to be easily extendable and
+      as such contains many extension points that make it very easy to start working. Just have a look at the 
+      <a href="https://github.com/cibuddy/cibuddy">github page</a> and read through the documentation to learn more 
+      about it.
+    </p>
 
-    
-
-    
-
-    
-
-    
-      <h2>Contact</h2>
-      <p> (mirkojahn+ci-buddy@gmail.com)<br/>      </p>
-    
-
+      
     <h2>Download</h2>
     <p>
       You can download this project in either
