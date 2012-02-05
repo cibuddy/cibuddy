@@ -48,10 +48,10 @@
                 <include>${application.domain}:lights.status</include>
                 <include>${application.domain}:core</include>
                 <include>${application.domain}:demo.light</include>
-                <include>${application.domain}:lights.configuration</include>
                 <include>${application.domain}:ibuddy</include>
                 <include>${application.domain}:delcom.lights</include>
                 <include>${application.domain}:jenkins.status</include>
+                <include>${application.domain}:project.configuration</include>
             </includes>
             <outputDirectory>./${application.name}</outputDirectory>
         </dependencySet>

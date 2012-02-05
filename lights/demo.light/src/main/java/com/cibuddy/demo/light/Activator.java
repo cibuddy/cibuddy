@@ -32,7 +32,7 @@ public class Activator implements BundleActivator, IBuildStatusIndicator {
         dict.put(IBuildStatusIndicator.INDICATOR_ID, getIndicatorId());
         sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
-            System.out.println("Exposed iBuddy Figure: "+getComponentId()+":"+getIndicatorId());
+            System.out.println("Exposed Demo Light (for testing): "+getComponentId()+":"+getIndicatorId());
         }
 
     }
@@ -62,18 +62,22 @@ public class Activator implements BundleActivator, IBuildStatusIndicator {
     }
 
     public void success(){
+        System.out.println("indicating success");
         dl.updateCircle(gl);
     }
 
     public void warning(){
+        System.out.println("indicating warning");
         dl.updateCircle(yl);
     }
     
     public void failure(){
+        System.out.println("indicating failure");
         dl.updateCircle(rl);
     }
 
     public void building(){
+        System.out.println("indicating building");
         dl.updateCircle(bl);
     }
 }

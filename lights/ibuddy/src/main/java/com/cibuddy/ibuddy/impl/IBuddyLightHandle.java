@@ -36,6 +36,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
             buddyFigure = new IBuddyQueen(deviceInfo);
             figure = "iBuddyQueen";
         } else {
+            System.out.println(deviceInfo);
             throw new IOException("Unsupported IBuddy device.");
         }
         buddyFigure.open();

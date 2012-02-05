@@ -1,4 +1,4 @@
-package com.cibuddy.core.build.configuration;
+package com.cibuddy.project.configuration;
 
 /**
  *

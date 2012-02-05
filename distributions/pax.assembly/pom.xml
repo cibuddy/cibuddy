@@ -18,11 +18,6 @@
         <!-- inter project dependencies -->
         <dependency>
             <groupId>${application.domain}</groupId>
-            <artifactId>lights.configuration</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${application.domain}</groupId>
             <artifactId>demo.light</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -54,6 +49,11 @@
         <dependency>
             <groupId>${application.domain}</groupId>
             <artifactId>jenkins.status</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${application.domain}</groupId>
+            <artifactId>project.configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- 3rd party dependencies -->

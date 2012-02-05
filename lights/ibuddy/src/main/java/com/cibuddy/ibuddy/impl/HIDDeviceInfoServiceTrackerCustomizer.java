@@ -29,8 +29,8 @@ public class HIDDeviceInfoServiceTrackerCustomizer implements ServiceTrackerCust
                 lightHandles.put(reference, handle);
             }
             return handle.getHIDDeviceInfo();
-        } catch (IOException ex) {
-            // do nothing
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return Activator.getBundleContext().getService(reference);
     }

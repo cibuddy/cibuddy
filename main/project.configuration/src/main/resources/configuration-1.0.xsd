@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:conf="http://net.mjahn.jenkins/schema/configruation/v1-0"
-    targetNamespace="http://net.mjahn.jenkins/schema/configruation/v1-0" 
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified">
+           xmlns:conf="http://net.mjahn.jenkins/schema/configruation/v1-0"
+           targetNamespace="http://net.mjahn.jenkins/schema/configruation/v1-0" 
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
 
     <!-- the root of all XML evil -->
     <xs:element name="setup">
@@ -37,19 +37,16 @@
     <!-- the actual meat - what we want to test for -->
     <xs:complexType name="BuildTestConfigurationType">
         <xs:sequence>
-            <xs:element name="projectTriggers" type="conf:ProjectTriggersType" minOccurs="1" maxOccurs="unbounded"/>
-            <xs:element name="statusIndicators" type="conf:StatusIndicatorsType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="projects" type="conf:ProjectsType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="trigger" type="conf:TriggerType" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="alias" type="xs:string" use="required" />
     </xs:complexType>
     
-    <xs:complexType name="ProjectTriggersType">
+    <xs:complexType name="ProjectsType">
         <xs:sequence>
-            <xs:element name="trigger" type="conf:ProjectTriggerType" minOccurs="1" maxOccurs="unbounded"/>
             <xs:element name="project" type="conf:ProjectType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
-        <!-- make this a complex type to find the actual project -->
-        <xs:attribute name="or" type="xs:boolean" use="optional"  default="true"/>
     </xs:complexType>
     
     <xs:complexType name="ProjectType">
@@ -65,26 +62,14 @@
         </xs:sequence>
     </xs:complexType>
     
-    
-    <xs:complexType name="ProjectTriggerType">
+    <xs:complexType name="TriggerType">
         <xs:sequence>
-            <xs:element name="status" minOccurs="0" maxOccurs="1" default="failure">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="ok|warning|failure|building"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="statusIndicator" type="conf:SimpleStatusIndicatorType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="action" type="conf:ActionIndicatorType" minOccurs="1" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="StatusIndicatorsType">
-        <xs:sequence>
-            <xs:element name="statusIndicator" type="conf:StatusIndicatorType" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
-        
-    <xs:complexType name="StatusIndicatorType">
+    <xs:complexType name="SimpleStatusIndicatorType">
         <xs:sequence>
             <xs:choice minOccurs="1" maxOccurs="1">
                 <xs:sequence>
@@ -94,5 +79,43 @@
                 <xs:element name="id" type="xs:integer" minOccurs="1" maxOccurs="1"/>
             </xs:choice>
         </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ActionIndicatorType">
+        <xs:sequence>
+            <xs:element name="indicate" minOccurs="1" maxOccurs="1" default="off">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="ok"/>
+                        <xs:enumeration value="warning"/>
+                        <xs:enumeration value="failure"/>
+                        <xs:enumeration value="building"/>
+                        <xs:enumeration value="off"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="status">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="red"/>
+                    <xs:enumeration value="red_anime"/>
+                    <xs:enumeration value="yellow"/>
+                    <xs:enumeration value="yellow_anime"/>
+                    <xs:enumeration value="blue"/>
+                    <xs:enumeration value="blue_anime"/>
+                    <xs:enumeration value="grey"/>
+                    <xs:enumeration value="grey_anime"/>
+                    <xs:enumeration value="disabled"/>
+                    <xs:enumeration value="disabled_anime"/>
+                    <xs:enumeration value="aborted"/>
+                    <xs:enumeration value="aborted_anime"/>
+                    <xs:enumeration value="notbuilt"/>
+                    <xs:enumeration value="notbuilt_anime"/>
+                    <xs:enumeration value="default"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="condition" default="all" />
     </xs:complexType>
 </xs:schema>

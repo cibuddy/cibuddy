@@ -13,19 +13,6 @@ import javax.swing.UIManager;
 
 public class DemoLight extends JFrame {
 
-//    public static void main(String[] args) {
-//        DemoLight dc = new DemoLight();
-//        Light redCircle = new RedLight();
-//        dc.updateCircle(redCircle);
-//        try {
-//            Thread.sleep(10000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(DemoLight.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        Light greenCircle = new GreenLight();
-//        dc.updateCircle(greenCircle);
-//
-//    }
     private Container content;
     private JPanel oldPanel;
 

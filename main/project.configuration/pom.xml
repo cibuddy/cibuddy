@@ -31,10 +31,24 @@
     </properties>
   
     <dependencies>
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>${application.domain}</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.fileinstall</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <!-- test dependencies (scope defined in parent pom) -->
         <dependency>
@@ -51,7 +65,7 @@
                 <groupId>com.sun.tools.xjc.maven2</groupId>
                 <artifactId>maven-jaxb-plugin</artifactId>
                 <configuration>
-                    <generatePackage>${application.domain}.lights.configuration.schema</generatePackage>
+                    <generatePackage>${project.name}.schema</generatePackage>
                 </configuration>
             </plugin>
             <!-- compile code against java 1.6 -->

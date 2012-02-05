@@ -25,7 +25,6 @@
         <osgi.private.pkg>${project.name}*</osgi.private.pkg>
         <osgi.import.pkg>
             org.osgi.framework;version=[1.3.0','2.0.0),
-            ${application.domain}.lights.configuration;version=[1.0.0','2.0.0),
             *
         </osgi.import.pkg>
     </properties>

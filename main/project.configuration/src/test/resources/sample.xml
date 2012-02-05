@@ -1,53 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration  xmlns="http://net.mjahn.jenkins/schema/configruation/v1-0" 
+<setup  xmlns="http://net.mjahn.jenkins/schema/configruation/v1-0" 
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:schemaLocation='http://net.mjahn.jenkins/schema/configruation/v1-0 ../../main/resources/configuration-1.0.xsd'>
 
-    <servers>
-        <server id="main">
-            <url>http://ci.jruby.org/</url>
-        </server>
-    </servers>
-    <projects>
-        <project id="someTest">
-            <name>jruby-git</name>
-            <!--credentials>
-                <username>jenk</username>
-                <token>passwd</token>
-            </credentials-->
-        </project>
-    </projects>
-    <lights>
-        <light id="lightOne">
-            <uuid>979235793295793</uuid>
-            <capability>
-                <lightIndicator id="red"/>
-                <lightIndicator id="green"/>
-                <lightIndicator id="yellow"/>
-                <lightIndicator id="blue"/>
-                <soundIndicator id="sound"/>
-            </capability>
-            <onError>ignore</onError>
-        </light>
-    </lights>
-    <groups>
-        <group name="mainGroup">
-            <triggers project="someTest" or="true">
-                <trigger>
-                    <status>failure</status>
-                    <health>
-                        <below value="100"/>
-                    </health>
-                </trigger>
-            </triggers>
-            <lights>
-                <light id="lightOne">
-                    <indicators>
-                        <indicator ref="red"/>
-                    </indicators>
-                </light>
-            </lights>
-        </group>
-    </groups>
-</configuration>
+    <name>test</name>
+    <configuration alias="defaultConfig">
+        <projects>
+            <project>
+                <name>cibuddy</name>
+                <projectURL>http://localhost:8080/job/cibuddy%20masterbuild/</projectURL>
+            </project>
+        </projects>
+        <trigger>
+            <statusIndicator>
+                <id>0</id>
+            </statusIndicator>
+            <action status="blue" condition="all">
+                <indicate>success</indicate>
+            </action>
+            <action status="red" condition="1:*"><!-- at least one -->
+                <indicate>failure</indicate>
+            </action>
+            <action status="yellow" condition="1:*"><!-- at least one -->
+                <indicate>warning</indicate>
+            </action>
+            <action status="default"><!-- at least one -->
+                <indicate>off</indicate>
+            </action>
+        </trigger>
+    </configuration>
+</setup>

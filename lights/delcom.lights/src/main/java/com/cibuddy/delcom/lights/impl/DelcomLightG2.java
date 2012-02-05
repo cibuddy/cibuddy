@@ -32,15 +32,18 @@ public class DelcomLightG2 implements IDelcomLight{
     
     public DelcomLightG2(HIDDeviceInfo devInfo) {
         deviceInfo = devInfo;
+        enabled = true;
     }
     
     @Override
     public void setColor(Color color) throws IOException{
+        System.out.println("setting light");
         if(!enabled) {
             return;
         }
         byte[] buffer = SET_STRUCTURE.clone();
         buffer[SET_BYTE] = color.getCode();
+        System.out.println("writig color "+color);
         device.write(buffer);
         currentColor = color;
     }

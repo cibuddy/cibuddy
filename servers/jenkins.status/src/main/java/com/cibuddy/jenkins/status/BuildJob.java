@@ -79,33 +79,10 @@ public class BuildJob implements IBuildProject {
 
     public BuildStatus getProjectColor() {
         BuildStatus status;
-        if("red".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.RED;
-        } else if("red_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.RED_ANIME;
-        } else if("yellow".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.YELLOW;
-        } else if("yellow_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.YELLOW_ANIME;
-        } else if("blue".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.BLUE;
-        } else if("blue_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.BLUE_ANIME;
-        } else if("disabled".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.DISABLED;
-        } else if("disabled_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.DISABLED_ANIME;
-        } else if("aborted".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.ABORTED;
-        } else if("aborted_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.ABORTED_ANIME;
-        } else if("notbuilt".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.NOTBUILT;
-        } else if("notbuilt_anime".equalsIgnoreCase(lastBuildResult)){
-            status =BuildStatus.NOTBUILD_ANIME;
-        } else {
-            // unknown status, use NOTBUILT as default to have minimal impact
-            status = BuildStatus.NOTBUILT;
+        try {
+            status = BuildStatus.get(color);
+        } catch (Exception e) {
+            status = BuildStatus.unknown;
         }
         return status;
     }

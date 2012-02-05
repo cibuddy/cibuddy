@@ -6,7 +6,7 @@ package com.cibuddy.ibuddy;
  */
 public enum FigureType {
     
-    IBUDDY_GENERATION_1(1), IBUDDY_GENERATION_2(2), DEVIL(5), QUEEN(5);
+    IBUDDY_GENERATION_1(1), IBUDDY_GENERATION_2(2), DEVIL(5), QUEEN(6);
     private int type;
 
     private FigureType(int t) {

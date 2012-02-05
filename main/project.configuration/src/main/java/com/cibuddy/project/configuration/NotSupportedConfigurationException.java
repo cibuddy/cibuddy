@@ -1,4 +1,4 @@
-package com.cibuddy.lights.configuration;
+package com.cibuddy.project.configuration;
 
 /**
  *
