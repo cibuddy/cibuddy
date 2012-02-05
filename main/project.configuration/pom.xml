@@ -25,9 +25,9 @@
             org.osgi.framework;version=[1.3.0','2.0.0),
             *
         </osgi.import.pkg>
-        <osgi.export.pkg>
+        <!--osgi.export.pkg>
             ${project.name};version="1.0.0"
-        </osgi.export.pkg>
+        </osgi.export.pkg-->
     </properties>
   
     <dependencies>
