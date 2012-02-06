@@ -4,8 +4,10 @@ import com.cibuddy.core.build.server.IBuildProject;
 import com.cibuddy.core.build.server.IServer;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
 import org.apache.http.HeaderIterator;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,7 +26,9 @@ public class JenkinsServer implements IServer {
     
     private static final Logger LOG = LoggerFactory.getLogger(JenkinsServer.class);
     public static final String JENKINS_HEADER = "X-Jenkins";
-    public static final String  JENKINS_SERVER_JOBS = "/api/xml?tree=jobs[name,url,color,lastBuild[result,id,building,number,actions[causes[userName]]]]";
+    public static final String JENKINS_SERVER_JOB = "/api/xml?tree=name,url,color,lastBuild[result,id,building,number,actions[causes[userName]]]";
+    public static final String JENKINS_SERVER_JOBS = "/api/xml?tree=jobs["+JENKINS_SERVER_JOB+"]";
+    public static final String JENKINS_PROJECT_COLOR = "/api/xml?xpath=/*/color/text()";
     
     private URI uri;
     private String name;
@@ -44,7 +48,6 @@ public class JenkinsServer implements IServer {
             HttpClient httpclient = new DefaultHttpClient();
             
             URI u = new URI(serverUri.toString()+JENKINS_SERVER_JOBS);
-//            System.out.println(u.toString());
             HttpGet httpget = new HttpGet(u);
             HttpResponse response = httpclient.execute(httpget);
             
@@ -58,7 +61,7 @@ public class JenkinsServer implements IServer {
             checkResult(response.getStatusLine().getStatusCode());
             if (entity != null) {
                 byte[] bytes = EntityUtils.toByteArray(entity);
-                JobParser parser = new JobParser(bytes);
+                JobParser parser = new JobParser(bytes, this);
                 parser.parseDocument();
                 projects = parser.getBuildJobs();
             }
@@ -66,6 +69,27 @@ public class JenkinsServer implements IServer {
             // do nothing
             LOG.warn("Problem occured while adding Jenkins Server to configuration", ex);
         } 
+    }
+    
+    private static byte[] getContent(URI uri) {
+        try {
+        HttpClient client = new DefaultHttpClient();
+
+            HttpClient httpclient = new DefaultHttpClient();
+            
+            HttpGet httpget = new HttpGet(uri);
+            HttpResponse response = httpclient.execute(httpget);
+            
+            HttpEntity entity = response.getEntity();
+            checkResult(response.getStatusLine().getStatusCode());
+            if (entity != null) {
+                byte[] bytes = EntityUtils.toByteArray(entity);
+                return bytes;
+            }
+        } catch (IOException e) {
+            LOG.info("Problem occured while checking Jenkins Server",e);
+        }
+        return null;
     }
 
     private static void checkResult(int i) throws IOException {
@@ -108,4 +132,17 @@ public class JenkinsServer implements IServer {
         return source;
     }
     
+    protected void updateProject(BuildJob project) {
+        // for now, only update the color
+        String requestURI = project.getRootURI()+JENKINS_SERVER_JOB;
+        try {
+            // get the color
+            byte[] result = getContent(new URI(requestURI));
+            JobParser parser = new JobParser(result, this, project);
+            // update the job reference
+            parser.parseDocument();
+        } catch (URISyntaxException ex) {
+            LOG.warn("URI Syntax problem. Check your configuration!", ex);
+        }
+    }
 }

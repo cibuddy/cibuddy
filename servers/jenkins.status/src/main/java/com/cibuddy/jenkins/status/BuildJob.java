@@ -16,9 +16,10 @@ public class BuildJob implements IBuildProject {
     private int buildNumber;
     private String username;
     private String lastBuildResult;
+    private JenkinsServer server;
 
-    public BuildJob(){
-        
+    public BuildJob(JenkinsServer jkServer){
+        server = jkServer;
     }
     
     public int getBuildNumber() {
@@ -65,18 +66,22 @@ public class BuildJob implements IBuildProject {
         this.lastBuildResult = result;
     }
 
+    @Override
     public URI getRootURI() {
         return getUri();
     }
 
+    @Override
     public String getProjectName() {
         return name;
     }
 
+    @Override
     public void refresh() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        server.updateProject(this);
     }
 
+    @Override
     public BuildStatus getProjectColor() {
         BuildStatus status;
         try {
@@ -87,6 +92,7 @@ public class BuildJob implements IBuildProject {
         return status;
     }
 
+    @Override
     public String getBuildStatus() {
         return lastBuildResult;
     }
