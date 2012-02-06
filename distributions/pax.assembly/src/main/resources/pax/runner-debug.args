@@ -1,0 +1,30 @@
+# runner.args
+#############################################
+#                                           #
+#         Configuration first               #
+#                                           #
+#############################################
+
+# use Eclipse as runtime (any other is possible as well)
+--p=e 
+--version=3.7.1 
+--profiles=prefs,config,event,felix.obr
+
+# properties for the file install dir
+--vmo=-Dfelix.fileinstall.poll=4000 \
+-Dfelix.fileinstall.dir=../../deploy \
+-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+
+# set debug as log level
+#--log=debug
+
+#############################################
+#                                           #
+#         Bundle setup second               #
+#                                           #
+#############################################
+
+# the libraries, started first
+scan-dir:../core
+scan-dir:../${application.name}
+scan-dir:../${application.name}-driver

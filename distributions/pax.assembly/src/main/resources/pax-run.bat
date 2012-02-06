@@ -14,6 +14,11 @@ echo starting with web server provisioning (not useful right now - no Servlet is
 CALL java %JAVA_OPTS% -cp ".;%_SCRIPTS_%;%_SCRIPTS_%\pax\pax-runner.jar" org.ops4j.pax.runner.Run --args="file:runner-grizzly.args" %2 %3 %4 %5 %6 %7 %8 %9
 goto:eof
 
+:debug
+echo starting with remote debugging enabled
+CALL java %JAVA_OPTS% -cp ".;%_SCRIPTS_%;%_SCRIPTS_%\pax\pax-runner.jar" org.ops4j.pax.runner.Run --args="file:runner-debug.args" %2 %3 %4 %5 %6 %7 %8 %9
+goto:eof
+
 :default
 echo starting ${application.name}
 CALL java %JAVA_OPTS% -cp ".;%_SCRIPTS_%;%_SCRIPTS_%\pax\pax-runner.jar" org.ops4j.pax.runner.Run %1 %2 %3 %4 %5 %6 %7 %8 %9
