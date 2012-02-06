@@ -21,7 +21,7 @@ public class Helper {
     private static final Logger LOG = LoggerFactory.getLogger(Helper.class);
     // FIXME: don't forget to update the project with the heartbeat!!!
     
-    static IBuildProject getProject(ProjectType pt) {
+    static IBuildProject getProject(ProjectType pt, boolean update) {
         Object[] servers = Activator.getServerTracker().getServices();
         if(servers != null && servers.length > 0) {
             for(int i=0;i<servers.length;i++) {
@@ -33,11 +33,17 @@ public class Helper {
                      if(pt.getProjectURL() != null 
                              && pt.getProjectURL().equalsIgnoreCase(project.getRootURI().toString())) {
                          LOG.debug("matching project: {}", project.toString());
+                         if(update) {
+                             project.refresh();
+                         }
                          return project;
                      } else if(pt.getName() != null && pt.getServerAlias() != null && pt.getServerSource() != null 
                              && pt.getName().equalsIgnoreCase(project.getProjectName())
                              && pt.getServerAlias().equalsIgnoreCase(server.getBuildServerAlias())
                              && pt.getServerSource().equalsIgnoreCase(server.getBuildServerSource())) {
+                         if(update) {
+                             project.refresh();
+                         }
                          return project;
                      } else {
                          LOG.debug("Project is not matching: {}  against {}",pt.getProjectURL(),project.getRootURI());
@@ -112,7 +118,7 @@ public class Helper {
     }
 
     static void indicateLight(String indicate, IBuildStatusIndicator ibsi) {
-        System.out.println("to indicate: "+indicate);
+        LOG.debug("trying to indicate: "+indicate);
         SimpleStatusIndicatorTrigger ssit = new SimpleStatusIndicatorTrigger(ibsi,StatusAction.get(indicate));
         ssit.enableStatusIndicator();
     }

@@ -10,6 +10,8 @@ import com.cibuddy.project.configuration.schema.ProjectType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultBuildTestConfiguration.class);
     private BuildTestConfigurationType bct;
     
     public DefaultBuildTestConfiguration(BuildTestConfigurationType bct) {
@@ -39,15 +42,14 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
         int i = 0;
         while(projectIterator.hasNext()){
             ProjectType pt = projectIterator.next();
-            IBuildProject ibp = Helper.getProject(pt);
+            IBuildProject ibp = Helper.getProject(pt,true);
             if(ibp != null){
-                System.out.println("xx using project: "+ibp);
                 SimpleProjectTrigger spt = new SimpleProjectTrigger(ibp);
                 spt.check();
-                System.out.println("xx color: "+spt.getLastBuildStatus());
+                LOG.debug("Project found with current status: "+spt.getLastBuildStatus());
                 result[i] = spt.getLastBuildStatus();
             } else {
-                System.out.println("no project found... indicating unknown as build status.");
+                LOG.debug("no project found... indicating unknown as build status.");
                 result[i] = BuildStatus.unknown;
             }
             i++;
@@ -58,7 +60,6 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
         while(aitIterator.hasNext()){
             ActionIndicatorType ait = aitIterator.next();
             String status = ait.getStatus();
-            System.out.println("checking for: "+status);
             if(status.equalsIgnoreCase("default")){
                 String indicate = ait.getIndicate();
                 Helper.indicateLight(indicate, ibsi);
@@ -66,7 +67,6 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
             } else {
                 BuildStatus bStatus = BuildStatus.valueOf(status);
                 if(Helper.checkCondition(ait.getCondition(), bStatus, result)){
-                    System.out.println("match!");
                     String indicate = ait.getIndicate();
                     Helper.indicateLight(indicate, ibsi);
                     // we're done, exit here.
@@ -85,7 +85,7 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
         while(projectIterator.hasNext()){
             i++;
             ProjectType pt = projectIterator.next();
-            IBuildProject ibp = Helper.getProject(pt);
+            IBuildProject ibp = Helper.getProject(pt, true);
             if(ibp != null){
                 ibps.add(ibp);
             } 
