@@ -6,10 +6,10 @@ package com.cibuddy.delcom.lights;
  */
 public enum Color {
     BLACK((byte)0xFF), 
-    GREEN((byte)0xFE), 
+    GREEN((byte)0xFE), // depending on device might also be blue
     RED ((byte)0xFD), 
-    YELLOW((byte)0xFB), // depending on device might also be blue
-    BLUE((byte)0xFB); // depending on device might also be yellow
+    YELLOW((byte)0xFB), 
+    BLUE((byte)0xFE); // depending on device might also be green
     
     private byte code;
 
