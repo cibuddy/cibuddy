@@ -81,9 +81,8 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
                     device = null;
                 }
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
         }
-        System.out.println("Goodbye...");
     }
 
     private int updateState() throws IOException {
@@ -116,9 +115,9 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
             if(writtenBytes > 0){
                 update = false;
             }
-            System.out.println("SUCCESS: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
-        } catch (IOException ex) {
-            System.out.println("FAILED: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
+            //System.out.println("SUCCESS: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
+        } catch (Exception ex) {
+            //System.out.println("FAILED: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
         }
         return writtenBytes;
     }
@@ -227,7 +226,7 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
 
         @Override
         public void doExecute() {
-            System.out.println("heartbeating");
+            //System.out.println("heartbeating");
             toggleHeart();
         }
         @Override
