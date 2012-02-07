@@ -67,8 +67,20 @@ is also an [example][3] in the `deploy` folder. The respective [xsd][4] is locat
 </setup>
 ```
 
+## Native code and portability
+
+Addressing hardware from within Java is not really great supported. Fortunately there
+are a couple of fine projects out there, that did all the hard work. As of time of 
+writing, CIBuddy supports the [javahidapi][5] driver, wrapped in a distinct bundle and
+OSGi-efied. This bundle should attach as soon as your OS seems compatible, but this is
+not thoroughly tested. Currently the code runs successful on an 
+`OS X 10.7 Lion MacBook Air 13" 1.7GHz i5`. For Linux you require [libusb 1.0][6]. For 
+more details take a look at the [libusb project][6] or the cibuddy [hid driver][7] bundle.
+
 [1]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [2]: https://github.com/cibuddy/cibuddy/blob/master/distributions/pax.assembly/src/main/resources/deploy/testLocalhost.jenkins "server configuration file"
 [3]: https://github.com/cibuddy/cibuddy/blob/master/distributions/pax.assembly/src/main/resources/deploy/sample.xml "test build configuration file"
 [4]: https://github.com/cibuddy/cibuddy/blob/master/main/project.configuration/src/main/resources/configuration-1.0.xsd "CIBuddy project configuration xsd"
-
+[5]: http://code.google.com/p/javahidapi/ "JavaHIDAPI project"
+[6]: http://www.libusb.org/ "LibUSB project"
+[7]: https://github.com/cibuddy/cibuddy/tree/master/drivers/hid "CIBuddy HID Driver wrapper"

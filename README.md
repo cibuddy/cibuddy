@@ -11,7 +11,7 @@ well known [Delcom Lights][1] and secondly the [i-Buddy][2] MSN notification fig
 Just plug-in your lights and wire each one with your distinct build configuration. 
 You could use multiple lights and also mix and match different types of lights to 
 indicate your build status independently for each project for instance. The cool 
-thing is that an i-Buddy only costs about 10$, which is a very cool price for the fun.
+thing is that an i-Buddy only costs about [15 Euro][8], which is a very cool price for the fun.
 
 ![The i-Buddy for instance...][3] ![i-Buddy packaging][4]
 
@@ -51,3 +51,5 @@ do not hesitate to open an issue here as well.
 [5]: https://github.com/cibuddy/cibuddy/tree/master/distributions/pax.assembly "CIBuddy installation instructions"
 [6]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [7]: https://github.com/cibuddy/cibuddy/issues "CIBuddy Open Issues"
+[8]: http://www.idealo.de/preisvergleich/OffersOfProduct/1608018_-usb-messenger-i-buddy.html 
+    "Idealo Preisvergleich - i-buddy"
