@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           xmlns:conf="http://net.mjahn.jenkins/schema/configruation/v1-0"
-           targetNamespace="http://net.mjahn.jenkins/schema/configruation/v1-0" 
+           xmlns:conf="http://com.cibuddy.project.configuration/schema/setup/v1-0"
+           targetNamespace="http://com.cibuddy.project.configuration/schema/setup/v1-0" 
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
@@ -86,7 +86,7 @@
             <xs:element name="indicate" minOccurs="1" maxOccurs="1" default="off">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="ok"/>
+                        <xs:enumeration value="success"/>
                         <xs:enumeration value="warning"/>
                         <xs:enumeration value="failure"/>
                         <xs:enumeration value="building"/>
