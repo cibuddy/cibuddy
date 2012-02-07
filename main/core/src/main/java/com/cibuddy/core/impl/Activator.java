@@ -16,7 +16,7 @@ public class Activator  implements BundleActivator{
     Timer caretaker;
     private final long EXECUTION_DELAY = 10*1000; // 10 Seconds
     // FIXME: make the heartbeat interval of the server configurable
-    private final long HEARTBEAT_INTERVAL = 5*60*1000; // 5 Minutes
+    private final long HEARTBEAT_INTERVAL = 1*60*1000; // 1 Minute
     
     private static ServiceTracker buildConfigTracker;
     
