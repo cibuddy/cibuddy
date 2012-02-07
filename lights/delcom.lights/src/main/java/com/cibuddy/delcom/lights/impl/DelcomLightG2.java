@@ -20,7 +20,7 @@ public class DelcomLightG2 implements IDelcomLight{
     private final byte [] SET_STRUCTURE = new byte[] { (byte)0x65, (byte)0x02,
             (byte) 0x00, (byte) 0x00,
             (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00};
-    private final int SET_BYTE = 3;
+    private final int SET_BYTE = 2;
     
     // object specific immutable:
     private final HIDDeviceInfo deviceInfo;
