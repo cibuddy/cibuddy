@@ -31,7 +31,7 @@ result?). This is a (rather) simple xml file specifying what happens when. There
 is also an [example][3] in the `deploy` folder. The respective [xsd][4] is located in the 
 `com.cibuddy.project.configuration` project under `src/main/resources`.
 
-<pre>
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <setup  xmlns="http://com.cibuddy.project.configuration/schema/setup/v1-0" 
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
@@ -65,7 +65,7 @@ is also an [example][3] in the `deploy` folder. The respective [xsd][4] is locat
         </trigger>
     </configuration>
 </setup>
-</pre>
+```
 
 [1]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [2]: https://github.com/cibuddy/cibuddy/blob/master/distributions/pax.assembly/src/main/resources/deploy/testLocalhost.jenkins "server configuration file"
