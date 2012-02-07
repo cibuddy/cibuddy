@@ -13,7 +13,7 @@ You could use multiple lights and also mix and match different types of lights t
 indicate your build status independently for each project for instance. The cool 
 thing is that an i-Buddy only costs about 10$, which is a very cool price for the fun.
 
-![The i-Buddy for instance...][3] 
+![The i-Buddy for instance...][3] ![i-Buddy packaging][4]
 
 ## Jenkins Server Integration
 
@@ -46,7 +46,8 @@ do not hesitate to open an issue here as well.
 [2]: http://www.i-buddy.com/ "i-Buddy MSN Notifier"
 [3]: https://github.com/glueckkanja/LyncFellow/blob/gh-pages/img/ibuddy-fly.gif?raw=true 
     "Image provided by the https://github.com/glueckkanja/LyncFellow project, also doing cool stuff with the i-buddy"
-[4]: http://www.delcomproducts.com/images/Beacon3C.jpg "Delcom GII Beacon Light as supported by CIBuddy"
+[4]: https://github.com/glueckkanja/LyncFellow/blob/gh-pages/img/ibuddy-package.jpg?raw=true 
+    "Image provided by the https://github.com/glueckkanja/LyncFellow project, also doing cool stuff with the i-buddy"
 [5]: https://github.com/cibuddy/cibuddy/tree/master/distributions/pax.assembly "CIBuddy installation instructions"
 [6]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [7]: https://github.com/cibuddy/cibuddy/issues "CIBuddy Open Issues"
