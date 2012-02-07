@@ -35,6 +35,7 @@ in the [Issues Section][6] of this project. In case you encounter a new one, ple
 do not hesitate to open an issue here as well.
 
 ## References:
+
 * [Delcom Produkt Homepage][1]
 * [i-Buddy MSN Notifier][2]
 * [CIBuddy installation instructions][5]
