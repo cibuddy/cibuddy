@@ -33,11 +33,6 @@
         </dependency>
         <dependency>
             <groupId>${application.domain}</groupId>
-            <artifactId>lights.status</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${application.domain}</groupId>
             <artifactId>hid</artifactId>
             <version>${project.version}</version>
         </dependency>
