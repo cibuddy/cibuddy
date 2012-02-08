@@ -5,7 +5,7 @@ cd pax
 echo Welcome to ${application.name}
 
 if "%1%"=="test" goto test
-if "%1%"=="mem" goto mem
+if "%1%"=="debug" goto mem
 :: the default runner is requested
 goto default
 
