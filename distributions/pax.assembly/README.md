@@ -83,24 +83,32 @@ more details take a look at the [libusb project][6] or the cibuddy [hid driver][
 	<tr>
 		<td>OS</td>
 		<td>Version(s)</td>
+		<td>Processor</td>
+		<td>Architecture</td>
 		<td>Verified</td>
 		<td>Comment</td>
 	</tr>
 	<tr>
 		<td>OS X</td>
 		<td>10.7.3</td>
+		<td>i5</td>
+		<td>x86_64</td>
 		<td>OK</td>
 		<td>on one machine I got an error. See <a src="http://code.google.com/p/javahidapi/issues/detail?id=7">this</a> for details.</td>
 	</tr>
 	<tr>
 		<td>Ubuntu Linux</td>
 		<td>11.04</td>
+		<td>i7</td>
+		<td>x86_64</td>
 		<td>OK</td>
 		<td>no issues</td>
 	</tr>
 	<tr>
 		<td>Windows</td>
 		<td>XP SP3</td>
+		<td>Core 2 duo</td>
+		<td>x86 (32bit)</td>
 		<td>Unknown</td>
 		<td>next in line for testing</td>
 	</tr>
