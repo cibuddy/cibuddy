@@ -28,7 +28,7 @@ public class Activator  implements BundleActivator{
         HeartBeat heartBeat = new HeartBeat(buildConfigTracker);
         caretaker = new Timer();
         caretaker.schedule(heartBeat, EXECUTION_DELAY, HEARTBEAT_INTERVAL);
-
+        detectOS();
     }
 
     @Override
@@ -39,5 +39,51 @@ public class Activator  implements BundleActivator{
             buildConfigTracker = null;
         }
     }
+    public static void detectOS() {
+		if (isWindows()) {
+			System.out.println("This is Windows: " + System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+		} else if (isMac()) {
+			System.out.println("This is Mac: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+		} else if (isUnix()) {
+			System.out.println("This is Unix or Linux: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+//		} else if (isSolaris()) {
+//			System.out.println("This is Solaris: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+		} else {
+			System.out.println("Your OS is not support!!");
+            System.out.println("Your OS identified itself as: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+		}
+	}
+ 
+	public static boolean isWindows() {
+ 
+		String os = System.getProperty("os.name").toLowerCase();
+		// windows
+		return (os.indexOf("win") >= 0);
+ 
+	}
+ 
+	public static boolean isMac() {
+ 
+		String os = System.getProperty("os.name").toLowerCase();
+		// Mac
+		return (os.indexOf("mac") >= 0);
+ 
+	}
+ 
+	public static boolean isUnix() {
+ 
+		String os = System.getProperty("os.name").toLowerCase();
+		// linux or unix
+		return (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0);
+ 
+	}
+ 
+	public static boolean isSolaris() {
+ 
+		String os = System.getProperty("os.name").toLowerCase();
+		// Solaris
+		return (os.indexOf("sunos") >= 0);
+ 
+	}
     
 }
