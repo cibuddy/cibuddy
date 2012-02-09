@@ -13,7 +13,9 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class Activator implements BundleActivator{
 
-    private static String filterString = "(&(" + Constants.OBJECTCLASS + "="+HIDDeviceInfo.class.getName()+")("+HIDServiceConstants.VENDOR_ID+"=4400)("+HIDServiceConstants.USAGE+">=1))";
+    //private static String filterString = "(&(" + Constants.OBJECTCLASS + "="+HIDDeviceInfo.class.getName()+")("+HIDServiceConstants.VENDOR_ID+"=4400)("+HIDServiceConstants.USAGE+">=1))";
+    // on linux, we do not know which of the two exposed hid devices is actually the correct one. We have to try both at runtime unfortunately.
+    private static String filterString = "(&(" + Constants.OBJECTCLASS + "="+HIDDeviceInfo.class.getName()+")("+HIDServiceConstants.VENDOR_ID+"=4400))";
     
     private static BundleContext ctx;
     private static ServiceTracker lightsTracker = null;
