@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Dictionary;
 import org.osgi.framework.ServiceRegistration;
 
 public class HIDManagerImpl extends HIDManager {
@@ -40,17 +41,17 @@ public class HIDManagerImpl extends HIDManager {
     private void exposeDevice(HIDDeviceInfo dev) {
         if(enabled){
             synchronized(guard){
-                Hashtable<String,String> dict = new Hashtable<String,String>();
-                dict.put(HIDServiceConstants.VENDOR_ID, Integer.valueOf(dev.getVendor_id()).toString());
-                dict.put(HIDServiceConstants.PRODUCT_ID, Integer.valueOf(dev.getProduct_id()).toString());
-                dict.put(HIDServiceConstants.SERIAL_NUMBER, dev.getSerial_number());
-                dict.put(HIDServiceConstants.MANUFACTURER_STRING, dev.getManufacturer_string());
-                dict.put(HIDServiceConstants.PRODUCT_STRING, dev.getProduct_string());
-                dict.put(HIDServiceConstants.RELEASE_NUMBER, Integer.valueOf(dev.getRelease_number()).toString());
-                dict.put(HIDServiceConstants.INTERFACE_NUMBER, Integer.valueOf(dev.getInterface_number()).toString());
-                dict.put(HIDServiceConstants.PATH, dev.getPath());
-                dict.put(HIDServiceConstants.USAGE, Integer.valueOf(dev.getUsage()).toString());
-                dict.put(HIDServiceConstants.USAGE_PAGE, Integer.valueOf(dev.getUsage_page()).toString());
+                Dictionary<String,String> dict = new Hashtable<String,String>();
+                safePut(dict,HIDServiceConstants.VENDOR_ID, Integer.valueOf(dev.getVendor_id()).toString());
+                safePut(dict,HIDServiceConstants.PRODUCT_ID, Integer.valueOf(dev.getProduct_id()).toString());
+                safePut(dict,HIDServiceConstants.SERIAL_NUMBER, dev.getSerial_number());
+                safePut(dict,HIDServiceConstants.MANUFACTURER_STRING, dev.getManufacturer_string());
+                safePut(dict,HIDServiceConstants.PRODUCT_STRING, dev.getProduct_string());
+                safePut(dict,HIDServiceConstants.RELEASE_NUMBER, Integer.valueOf(dev.getRelease_number()).toString());
+                safePut(dict,HIDServiceConstants.INTERFACE_NUMBER, Integer.valueOf(dev.getInterface_number()).toString());
+                safePut(dict,HIDServiceConstants.PATH, dev.getPath());
+                safePut(dict,HIDServiceConstants.USAGE, Integer.valueOf(dev.getUsage()).toString());
+                safePut(dict,HIDServiceConstants.USAGE_PAGE, Integer.valueOf(dev.getUsage_page()).toString());
                 ServiceRegistration<HIDDeviceInfo> registedService = Activator.getContext().registerService(HIDDeviceInfo.class, dev, dict);
                 devices.put(dev.getPath(), registedService);
 //                System.out.print("Added:" + "\n" + dev + "\n");
@@ -58,6 +59,13 @@ public class HIDManagerImpl extends HIDManager {
         }
     }
     
+    private void safePut(Dictionary dict, String key, Object value) {
+        if(key != null && value != null){
+            dict.put(key, value);
+        } else if(key != null){
+            dict.put(key, "");
+        }
+    }
     private void withdrawDevice(HIDDeviceInfo dev) {
         if(enabled){
             synchronized(guard){
@@ -66,7 +74,7 @@ public class HIDManagerImpl extends HIDManager {
                     registedService.unregister();
                     devices.remove(dev.getPath());
                     // calling close on the device doesn't make sence (already closed)
-                    System.out.print("Removal:" + "\n" + dev + "\n");
+                    System.out.print("HID - Removal:" + "\n" + dev + "\n");
                 }
             }
         }
@@ -79,10 +87,9 @@ public class HIDManagerImpl extends HIDManager {
      * @param dev Reference to the <code>HIDDeviceInfo</code> object.
      * @throws IOException
      */
-    @Override
     public void deviceAdded( HIDDeviceInfo dev )
     {
-       System.out.print("XXX Added:" + "\n" + dev + "\n");
+       System.out.print("HID - Added:" + "\n" + dev + "\n");
        exposeDevice(dev);
     }
     
@@ -93,10 +100,9 @@ public class HIDManagerImpl extends HIDManager {
      * @param dev Reference to the <code>HIDDeviceInfo</code> object.
      * @throws IOException
      */
-    @Override
     public void deviceRemoved( HIDDeviceInfo dev)
     {
-        System.out.print("ZZZ Removal:" + "\n" + dev + "\n");
+        System.out.print("HID - Removal:" + "\n" + dev + "\n");
         withdrawDevice(dev);
     }
     
