@@ -73,9 +73,39 @@ Addressing hardware from within Java is not really great supported. Fortunately 
 are a couple of fine projects out there, that did all the hard work. As of time of 
 writing, CIBuddy supports the [javahidapi][5] driver, wrapped in a distinct bundle and
 OSGi-efied. This bundle should attach as soon as your OS seems compatible, but this is
-not thoroughly tested. Currently the code runs successful on an 
-`OS X 10.7 Lion MacBook Air 13" 1.7GHz i5`. For Linux you require [libusb 1.0][6]. For 
+not thoroughly tested. Currently the code runs successfully on an 
+`OS X 10.7 Lion MacBook Air 13" 1.7GHz i5`. For Linux you require [libusb 1.0][6]!!! For 
 more details take a look at the [libusb project][6] or the cibuddy [hid driver][7] bundle.
+
+## Compatibility Matix
+
+<table>
+	<tr>
+		<td>OS</td>
+		<td>Version(s)</td>
+		<td>Verified</td>
+		<td>Comment</td>
+	</tr>
+	<tr>
+		<td>OS X</td>
+		<td>10.7.3</td>
+		<td>OK</td>
+		<td>on one machine I got an error. See <a src="http://code.google.com/p/javahidapi/issues/detail?id=7">this</a> for details.</td>
+	</tr>
+	<tr>
+		<td>Ubuntu Linux</td>
+		<td>11.04</td>
+		<td>OK</td>
+		<td>no issues</td>
+	</tr>
+	<tr>
+		<td>Windows</td>
+		<td>XP SP3</td>
+		<td>Unknown</td>
+		<td>next in line for testing</td>
+	</tr>
+</table>
+
 
 [1]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [2]: https://github.com/cibuddy/cibuddy/blob/master/distributions/pax.assembly/src/main/resources/deploy/testLocalhost.jenkins "server configuration file"
@@ -84,3 +114,4 @@ more details take a look at the [libusb project][6] or the cibuddy [hid driver][
 [5]: http://code.google.com/p/javahidapi/ "JavaHIDAPI project"
 [6]: http://www.libusb.org/ "LibUSB project"
 [7]: https://github.com/cibuddy/cibuddy/tree/master/drivers/hid "CIBuddy HID Driver wrapper"
+[8]: http://code.google.com/p/javahidapi/issues/detail?id=7 "Compilation error on Mac OS X"
