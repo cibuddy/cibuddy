@@ -94,7 +94,7 @@ more details take a look at the [libusb project][6] or the cibuddy [hid driver][
 		<td>i5</td>
 		<td>x86_64</td>
 		<td>OK</td>
-		<td>on one machine I got an error. See <a src="http://code.google.com/p/javahidapi/issues/detail?id=7">this</a> for details.</td>
+		<td>no issues</td>
 	</tr>
 	<tr>
 		<td>Ubuntu Linux</td>
@@ -109,8 +109,24 @@ more details take a look at the [libusb project][6] or the cibuddy [hid driver][
 		<td>XP SP3</td>
 		<td>Core 2 duo</td>
 		<td>x86 (32bit)</td>
-		<td>Unknown</td>
-		<td>next in line for testing</td>
+		<td>OK</td>
+		<td>no issues</td>
+	</tr>
+	<tr>
+		<td>Windows</td>
+		<td>7 (Ultimate)</td>
+		<td>i7</td>
+		<td>x86 (32bit)</td>
+		<td>OK</td>
+		<td>no issues</td>
+	</tr>
+	<tr>
+		<td>Windows</td>
+		<td>8 (Developer Preview)</td>
+		<td>i7</td>
+		<td>x86 (32bit)</td>
+		<td>OK</td>
+		<td>no issues</td>
 	</tr>
 </table>
 
