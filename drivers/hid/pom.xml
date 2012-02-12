@@ -57,7 +57,7 @@
                 osname=Windows7
             ,lib/hid.driver-winXP.dll;
                 processor=x86;
-                osname=WindowsXP
+                osname=WinXP
             ,lib/hid.driver-win8.dll;
                 processor=x86;
                 osname=WindowsVista;
