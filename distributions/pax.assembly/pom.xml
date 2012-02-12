@@ -33,6 +33,11 @@
         </dependency>
         <dependency>
             <groupId>${application.domain}</groupId>
+            <artifactId>log4j.config.fragment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${application.domain}</groupId>
             <artifactId>hid</artifactId>
             <version>${project.version}</version>
         </dependency>

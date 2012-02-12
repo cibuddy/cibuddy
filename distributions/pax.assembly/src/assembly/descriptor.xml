@@ -23,16 +23,17 @@
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <unpack>false</unpack>
             <includes>
-                <include>org.apache.aries.blueprint:*</include>
+                <!--include>org.apache.aries.blueprint:*</include>
                 <include>org.apache.aries.proxy:*</include>
                 <include>org.apache.aries.quiesce:*</include>
                 <include>org.apache.aries:*</include>
-                <include>org.apache.log4j:*</include>
                 <include>org.apache.xbean:*</include>
-                <include>asm:*</include>
+                <include>asm:*</include-->
+                <include>org.apache.log4j:*</include>
                 <include>org.osgi:*</include>
                 <include>org.slf4j:*</include>
                 <include>org.apache.log4j:com.springsource.org.apache.log4j</include>
+                <include>${application.domain}:log4j.config.fragment</include>
                 <include>org.apache.httpcomponents:httpclient-osgi</include>
                 <include>org.apache.httpcomponents:httpcore-osgi</include>
                 <include>org.apache.felix:org.apache.felix.fileinstall</include>
@@ -47,7 +48,6 @@
             <includes>
                 <include>${application.domain}:lights.status</include>
                 <include>${application.domain}:core</include>
-                <include>${application.domain}:demo.light</include>
                 <include>${application.domain}:ibuddy</include>
                 <include>${application.domain}:delcom.lights</include>
                 <include>${application.domain}:jenkins.status</include>
@@ -55,6 +55,7 @@
             </includes>
             <outputDirectory>./${application.name}</outputDirectory>
         </dependencySet>
+        <!-- native drivers -->
         <dependencySet>
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <unpack>false</unpack>
@@ -62,6 +63,15 @@
                 <include>${application.domain}:hid</include>
             </includes>
             <outputDirectory>./${application.name}-driver</outputDirectory>
+        </dependencySet>
+        <!-- test dependencies -->
+        <dependencySet>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <unpack>false</unpack>
+            <includes>
+                <include>${application.domain}:demo.light</include>
+            </includes>
+            <outputDirectory>./${application.name}-test</outputDirectory>
         </dependencySet>
         <dependencySet>
             <useTransitiveDependencies>true</useTransitiveDependencies>
