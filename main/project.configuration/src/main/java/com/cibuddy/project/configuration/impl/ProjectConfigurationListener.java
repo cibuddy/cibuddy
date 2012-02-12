@@ -30,12 +30,14 @@ public class ProjectConfigurationListener implements ArtifactInstaller {
             return false;
         } else if (file.getName().endsWith(".xml")) {
             try {
-                JAXBContext jc = JAXBContext.newInstance(packageName);
+                JAXBContext jc = JAXBContext.newInstance(packageName,this.getClass().getClassLoader());
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
                 Setup config = (Setup) unmarshaller.unmarshal(file);
                 return true;
             } catch (Exception ex) {
                 // couldn't parse xml with expected schema... do nothing.
+                // FIXME: this is nasty! in case this is not an xml according to the schema this is wrong!
+                LOG.debug("Problems setting up configuration file.",ex);
             }
             return false;
         } else {
@@ -47,7 +49,7 @@ public class ProjectConfigurationListener implements ArtifactInstaller {
     public void install(File file) throws Exception {
         LOG.info("Handle Install: " + file.getAbsolutePath());
         try {
-            JAXBContext jc = JAXBContext.newInstance(packageName);
+            JAXBContext jc = JAXBContext.newInstance(packageName,this.getClass().getClassLoader());
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Setup config = (Setup) unmarshaller.unmarshal(file);
             List<BuildTestConfigurationType> configurations = config.getConfiguration();
@@ -61,7 +63,7 @@ public class ProjectConfigurationListener implements ArtifactInstaller {
             }
             configuredFiles.put(file, configServices);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.warn("Problems setting up configuration file.",e);
         }
     }
 
