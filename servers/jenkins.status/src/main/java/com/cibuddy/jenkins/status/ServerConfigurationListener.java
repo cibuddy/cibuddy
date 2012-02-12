@@ -58,7 +58,7 @@ public class ServerConfigurationListener implements ArtifactInstaller {
             configuredServers.put(file.getName(), registeredServers);
             files.put(file.getName(), servers);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.warn("Problems setting up configuration file.",e);
         }
     }
 
