@@ -1,0 +1,44 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>log4j.config.fragment</artifactId>
+    <packaging>bundle</packaging>
+    
+    <name>${application.domain}.${project.artifactId}</name>
+    <description>The log4j.xml to configure log4j properly.</description>
+    
+    <parent>
+        <groupId>com.cibuddy</groupId>
+        <artifactId>utils</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <properties>
+        <!-- osgi directives used in the maven-bundle-plugin, defined in the root pom -->
+        <bundle.symbolicNameDirective>singleton:=true</bundle.symbolicNameDirective>
+        <bundle.symbolicName>${project.name};${bundle.symbolicNameDirective}</bundle.symbolicName>
+        <bundle.namespace>${project.name}</bundle.namespace>
+        <osgi.private.pkg>${project.name}*</osgi.private.pkg>
+        <osgi.fragment.host>com.springsource.org.apache.log4j</osgi.fragment.host>
+    </properties>
+  
+    <dependencies>
+        <!-- 3rd party dependencies -->
+        <dependency>
+            <groupId>org.apache.log4j</groupId>
+            <artifactId>com.springsource.org.apache.log4j</artifactId>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <!-- plugins used -->
+        <plugins>
+            <!-- enable it being an osgi bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
