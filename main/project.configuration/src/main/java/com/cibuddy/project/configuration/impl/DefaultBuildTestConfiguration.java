@@ -21,7 +21,7 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultBuildTestConfiguration.class);
     private BuildTestConfigurationType bct;
-    
+
     public DefaultBuildTestConfiguration(BuildTestConfigurationType bct) {
         this.bct = bct;
     }
@@ -35,18 +35,22 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
     public void update() {
         // get the "build light"
         IBuildStatusIndicator ibsi = Helper.getStatusIndicator(bct.getTrigger().getStatusIndicator());
-        
+        if (ibsi == null) {
+            LOG.info("The build indicator was not found. Make sure the configuration is correct. " + bct.getTrigger().getStatusIndicator());
+            // no need to go on.
+            return;
+        }
         // get the results of the projects to test for
         BuildStatus[] result = new BuildStatus[bct.getProjects().getProject().size()];
         Iterator<ProjectType> projectIterator = bct.getProjects().getProject().iterator();
         int i = 0;
-        while(projectIterator.hasNext()){
+        while (projectIterator.hasNext()) {
             ProjectType pt = projectIterator.next();
-            IBuildProject ibp = Helper.getProject(pt,true);
-            if(ibp != null){
+            IBuildProject ibp = Helper.getProject(pt, true);
+            if (ibp != null) {
                 SimpleProjectTrigger spt = new SimpleProjectTrigger(ibp);
                 spt.check();
-                LOG.debug("Project found with current status: "+spt.getLastBuildStatus());
+                LOG.debug("Project found with current status: " + spt.getLastBuildStatus());
                 result[i] = spt.getLastBuildStatus();
             } else {
                 LOG.debug("no project found... indicating unknown as build status.");
@@ -54,26 +58,27 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
             }
             i++;
         }
-        
+
         // analyse the results according to the defined actions
         Iterator<ActionIndicatorType> aitIterator = bct.getTrigger().getAction().iterator();
-        while(aitIterator.hasNext()){
+        while (aitIterator.hasNext()) {
             ActionIndicatorType ait = aitIterator.next();
             String status = ait.getStatus();
-            if(status.equalsIgnoreCase("default")){
+            if (status.equalsIgnoreCase("default")) {
                 String indicate = ait.getIndicate();
                 Helper.indicateLight(indicate, ibsi);
+                // we're done, exit here
                 return;
             } else {
                 BuildStatus bStatus = BuildStatus.valueOf(status);
-                if(Helper.checkCondition(ait.getCondition(), bStatus, result)){
+                if (Helper.checkCondition(ait.getCondition(), bStatus, result)) {
                     String indicate = ait.getIndicate();
                     Helper.indicateLight(indicate, ibsi);
-                    // we're done, exit here.
+                    // we're done, exit here
                     return;
+
                 }
             }
-            
         }
     }
 
@@ -82,15 +87,14 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
         List<IBuildProject> ibps = new ArrayList<IBuildProject>();
         Iterator<ProjectType> projectIterator = bct.getProjects().getProject().iterator();
         int i = 0;
-        while(projectIterator.hasNext()){
+        while (projectIterator.hasNext()) {
             i++;
             ProjectType pt = projectIterator.next();
             IBuildProject ibp = Helper.getProject(pt, true);
-            if(ibp != null){
+            if (ibp != null) {
                 ibps.add(ibp);
-            } 
+            }
         }
         return ibps;
     }
-    
 }
