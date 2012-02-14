@@ -6,8 +6,8 @@
 #############################################
 
 # use Eclipse as runtime (any other is possible as well)
---p=e 
---version=3.7.1 
+#--p=e 
+#--version=3.7.1 
 --profiles=prefs,config,event,felix.obr
 
 # properties for the file install dir
