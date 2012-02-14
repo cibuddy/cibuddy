@@ -19,7 +19,7 @@
             </includes>
             <excludes>
                 <exclude>**/*.sh</exclude> 
-                <exclude>**/*.bat</exclude> 
+                <!--exclude>**/*.bat</exclude--> 
             </excludes>
         </fileSet>
         <fileSet>
@@ -28,9 +28,9 @@
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>**/*.sh</include> 
-                <include>**/*.bat</include> 
+                <!--include>**/*.bat</include--> 
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>0754</fileMode>
         </fileSet>
     </fileSets>
 </assembly>
