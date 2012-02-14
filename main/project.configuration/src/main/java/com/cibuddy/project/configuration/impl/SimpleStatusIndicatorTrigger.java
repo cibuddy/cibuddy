@@ -27,14 +27,18 @@ public class SimpleStatusIndicatorTrigger implements StatusIndicatorTrigger {
     @Override
     public void enableStatusIndicator() {
         LOG.debug("trying to indicate an action: {}",myAction.getCode());
-        if (StatusAction.SUCCESS.equals(myAction)) {
-            buildIndicator.success();
-        } else if (StatusAction.WARNING.equals(myAction)) {
-            buildIndicator.warning();
-        } else if (StatusAction.FAILURE.equals(myAction)) {
-            buildIndicator.failure();
-        } else if (StatusAction.BUILDING.equals(myAction)) {
-            buildIndicator.building();
+        if(buildIndicator != null) {
+            if (StatusAction.SUCCESS.equals(myAction)) {
+                buildIndicator.success();
+            } else if (StatusAction.WARNING.equals(myAction)) {
+                buildIndicator.warning();
+            } else if (StatusAction.FAILURE.equals(myAction)) {
+                buildIndicator.failure();
+            } else if (StatusAction.BUILDING.equals(myAction)) {
+                buildIndicator.building();
+            }
+        } else {
+            LOG.info("The build indicator was not found. Make sure the configuration is correct.");
         }
     }
 }
