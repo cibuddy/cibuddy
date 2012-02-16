@@ -8,6 +8,7 @@ import com.cibuddy.project.configuration.schema.ProjectType;
 import com.cibuddy.project.configuration.schema.SimpleStatusIndicatorType;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,45 +76,48 @@ public class Helper {
         return null;
     }
 
-    static boolean checkCondition(String condition, BuildStatus bStatus, BuildStatus[] result) {
+    static boolean checkCondition(String condition, List<BuildStatus> configuredBuildStatiMatches, BuildStatus[] result) {
         int hits = 0;
         for(int i=0;i<result.length;i++){
-            if(result[i].equals(bStatus)){
-                hits++;
-            } else {
-                LOG.debug("no match: {} vs. {}", result[i], bStatus);
+            Iterator<BuildStatus> iter = configuredBuildStatiMatches.iterator();
+            // check for each possible match configured
+            while(iter.hasNext()){
+                BuildStatus bs = iter.next();
+                if(result[i].equals(bs)){
+                    hits++;
+                    LOG.debug("match found: actual status [{}] vs. expected status [{}]", result[i], bs);
+                    break;
+                } else {
+                    LOG.debug("no match: actual status [{}] vs. expected status [{}]", result[i], bs);
+                }
             }
         }
-        LOG.trace("hits found: {}",hits);
+        LOG.debug("hits found: {}",hits);
         if(condition.equalsIgnoreCase("all")){
-            LOG.trace("checking if all are matching");
+            LOG.debug("checking if all are matching");
             if(hits == result.length){
                 return true;
             } else {
-                LOG.trace("false: {} vs. {}", hits, result.length);
+                LOG.debug("false: {} vs. {}", hits, result.length);
             }
         } else if(condition.contains(":")){
-            LOG.trace("boundary matching rule identified");
+            LOG.debug("boundary matching rule identified");
             String[] boundaries = condition.split(":");
             if(boundaries[1].contains("*")) {
-                LOG.trace("matching rule with unbound upper bound identified.");
+                LOG.debug("matching rule with unbound upper bound identified.");
                 if(Integer.parseInt(boundaries[0]) == hits) {
-                    LOG.trace("matching rule!");
+                    LOG.debug("matching rule!");
                     return true;
                 }
             } else {
-                LOG.trace("matching rule with fixed upper bound identified.");
+                // FIXME: enable fraction matches!!
+                LOG.debug("matching rule with fixed upper bound identified -> not yet supported! Only exact match for now");
                 if(Integer.parseInt(boundaries[0]) == hits && Integer.parseInt(boundaries[1]) == result.length) {
-                    LOG.trace("matching rule!");
+                    LOG.debug("matching rule!");
                     return true;
                 }
             }
-        } else if(condition.contains("%")){
-            LOG.trace("percentage matching rule identified");
-            // we need to have an indicator if this is a upper or lower boundary (lower is more intuitive)
-            LOG.warn("conditon not supported yet. Will be ignored => not matching.");
-        }
-                // FIXME: also enable percentage
+        } 
         return false;
     }
 

@@ -63,15 +63,16 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
         Iterator<ActionIndicatorType> aitIterator = bct.getTrigger().getAction().iterator();
         while (aitIterator.hasNext()) {
             ActionIndicatorType ait = aitIterator.next();
-            String status = ait.getStatus();
-            if (status.equalsIgnoreCase("default")) {
+            List<String> expectedStati = ait.getStatus();
+            String condition = ait.getCondition();
+            if (condition.equalsIgnoreCase("default")) {
                 String indicate = ait.getIndicate();
                 Helper.indicateLight(indicate, ibsi);
                 // we're done, exit here
                 return;
             } else {
-                BuildStatus bStatus = BuildStatus.valueOf(status);
-                if (Helper.checkCondition(ait.getCondition(), bStatus, result)) {
+                List<BuildStatus> expStati = getStatiList(expectedStati);
+                if (Helper.checkCondition(ait.getCondition(), expStati, result)) {
                     String indicate = ait.getIndicate();
                     Helper.indicateLight(indicate, ibsi);
                     // we're done, exit here
@@ -80,6 +81,15 @@ public class DefaultBuildTestConfiguration implements BuildTestConfiguration {
                 }
             }
         }
+    }
+    
+    private List<BuildStatus> getStatiList(List<String> stati){
+        List<BuildStatus> statusList = new ArrayList<BuildStatus>();
+        Iterator<String> iter = stati.iterator();
+        while(iter.hasNext()){
+            statusList.add(BuildStatus.valueOf(iter.next()));
+        }
+        return statusList;
     }
 
     @Override
