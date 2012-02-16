@@ -4,14 +4,17 @@ import com.cibuddy.hid.HIDServiceConstants;
 import com.codeminders.hidapi.HIDDeviceInfo;
 import com.codeminders.hidapi.HIDManager;
 import java.io.IOException;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Dictionary;
 import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HIDManagerImpl extends HIDManager {
     
+    private static final Logger LOG = LoggerFactory.getLogger(HIDManagerImpl.class);
     private HashMap<String,ServiceRegistration<HIDDeviceInfo>> devices = new HashMap<String,ServiceRegistration<HIDDeviceInfo>>();
     
     private final Object guard = new Object();
@@ -27,9 +30,9 @@ public class HIDManagerImpl extends HIDManager {
     public void setup() throws IOException{
         HIDDeviceInfo[] devs = listDevices();
         if(devs != null) {
-//            System.out.print("Found " + devs.length + " devices:");
+            LOG.debug("Found " + devs.length + " devices:");
         } else {
-//            System.out.print("Found 0 devices:");
+            LOG.debug("Found 0 devices:");
         }
         if(devs != null){
             for (int i=0;i<devs.length;i++){
@@ -54,7 +57,7 @@ public class HIDManagerImpl extends HIDManager {
                 safePut(dict,HIDServiceConstants.USAGE_PAGE, Integer.valueOf(dev.getUsage_page()).toString());
                 ServiceRegistration<HIDDeviceInfo> registedService = Activator.getContext().registerService(HIDDeviceInfo.class, dev, dict);
                 devices.put(dev.getPath(), registedService);
-//                System.out.print("Added:" + "\n" + dev + "\n");
+                LOG.debug("Added:" + "\n" + dev + "\n");
             }
         }
     }
