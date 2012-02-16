@@ -6,9 +6,11 @@
 #############################################
 
 # use Eclipse as runtime (any other is possible as well)
---p=e 
---version=3.7.1 
---profiles=prefs,config,event,felix.obr
+#--p=e 
+#--version=3.7.1 
+--profiles=prefs,config,event,felix.obr,felix.webconsole,jsp,web
+
+--bootDelegation=sun.*,com.sun.*,javax.xml.bind.*
 
 # properties for the file install dir
 --vmo=-Dfelix.fileinstall.poll=4000 \
