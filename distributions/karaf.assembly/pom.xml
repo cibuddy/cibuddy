@@ -11,10 +11,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
   
-    <properties>
-        <karaf.version>2.2.5</karaf.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.karaf</groupId>

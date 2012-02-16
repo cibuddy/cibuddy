@@ -85,6 +85,7 @@
         
         <!-- project dependency versions -->
         <pax.web>1.1.1</pax.web>
+        <karaf.version>2.2.5</karaf.version>
     </properties>
 
 
