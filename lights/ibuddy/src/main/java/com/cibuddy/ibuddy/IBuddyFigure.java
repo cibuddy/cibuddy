@@ -23,5 +23,5 @@ public interface IBuddyFigure {
 
     void setCurrentColor(Color currentColor);
 
-    
+    void setHeart(boolean heart);
 }

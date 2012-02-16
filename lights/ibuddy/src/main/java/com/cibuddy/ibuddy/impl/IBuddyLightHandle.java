@@ -79,30 +79,37 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
 
     public void success() {
         try{
+            LOG.debug("indicating success.");
             buddyFigure.setCurrentColor(Color.GREEN);
+            buddyFigure.setHeart(true);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating success. ",e);
         }
     }
 
     public void warning() {
         try{
+            LOG.debug("indicating warning.");
             buddyFigure.setCurrentColor(Color.YELLOW);
+            buddyFigure.setHeart(false);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating warning. ",e);
         }
     }
 
     public void failure() {
         try{
+            LOG.debug("indicating failure.");
             buddyFigure.setCurrentColor(Color.RED);
+            buddyFigure.setHeart(false);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating failure. ",e);
         }
     }
 
     public void building() {
         // blinking yellow is not supported yet
+        LOG.info("Indicating 'building' not supported yet by the i-Buddy.");
     }
     
 }
