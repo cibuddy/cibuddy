@@ -8,6 +8,8 @@ import com.codeminders.hidapi.HIDDevice;
 import com.codeminders.hidapi.HIDDeviceInfo;
 import java.io.IOException;
 import java.math.BigInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -15,6 +17,7 @@ import java.math.BigInteger;
  */
 public class IBuddyDefault extends Thread implements IBuddyFigure {
 
+    private static final Logger LOG = LoggerFactory.getLogger(IBuddyDefault.class);
     public static final short DEVICE_PRODUCT = 0x0002;
     private static final long UPDATE_INTERVAL = 50L; // in ms
     private final HIDDeviceInfo deviceInfo;
@@ -71,7 +74,10 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
                     updateState();
                 }
             } catch (InterruptedException ex) {
+                LOG.debug("interrupt.", ex);
             } catch (IOException ex) {
+                LOG.warn("Problem writing state to the device. This most likely "
+                        + "depends on the native code part or hardware.",ex);
             }
         }
         try {
@@ -110,14 +116,15 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         byte[] command = SET_COMMAND.clone();
         command[8] = payload;
         try {
+            // FIXME: use feature or direct write -> decide!
             //writtenBytes = device.write(command);
             writtenBytes = device.sendFeatureReport(command);
             if(writtenBytes > 0){
                 update = false;
             }
-            //System.out.println("SUCCESS: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
+            LOG.debug("SUCCESS: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
         } catch (Exception ex) {
-            //System.out.println("FAILED: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
+            LOG.debug("FAILED: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
         }
         return writtenBytes;
     }

@@ -11,12 +11,15 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author mirkojahn
  */
 public class IBuddyLightHandle implements IBuildStatusIndicator {
     
+    private static final Logger LOG = LoggerFactory.getLogger(IBuddyLightHandle.class);
     private final ServiceReference hidDriverService;
     private final IBuddyFigure buddyFigure;
     private final HIDDeviceInfo deviceInfo;
@@ -36,8 +39,8 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
             buddyFigure = new IBuddyQueen(deviceInfo);
             figure = "iBuddyQueen";
         } else {
-            System.out.println(deviceInfo);
-            throw new IOException("Unsupported IBuddy device.");
+            LOG.info("unsupported i-Buddy device: "+deviceInfo);
+            throw new IOException("Unsupported i-Buddy device.");
         }
         buddyFigure.open();
     }
@@ -52,7 +55,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         dict.put(IBuildStatusIndicator.INDICATOR_ID, getIndicatorId());
         ServiceRegistration sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
-            System.out.println("Exposed iBuddy Figure: "+getComponentId()+":"+getIndicatorId());
+            LOG.info("Exposed iBuddy Figure: "+getComponentId()+":"+getIndicatorId());
             return true;
         } else {
             return false;
