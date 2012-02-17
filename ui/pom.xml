@@ -16,6 +16,7 @@
     </parent>
     
     <modules>
-        <module>web.ui</module>
+        <module>gogo.shell.extension</module>
+        <!--module>web.ui</module-->
     </modules>
 </project>

@@ -1,0 +1,30 @@
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:ns1="null">
+    
+   <reference-list id="lights" 
+                   interface="com.cibuddy.core.build.indicator.IBuildStatusIndicator" 
+                   member-type="service-object"
+                   availability="optional"/>
+    
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="cibuddy/indicator-list">
+            <action
+                class="com.cibuddy.gogo.shell.extension.IndicatorListCommand">
+                    <property name="indicators" ref="lights"/>
+            </action>
+        </command>
+        <command name="cibuddy/indicator-test">
+            <action
+                class="com.cibuddy.gogo.shell.extension.IndicatorTestCommand">
+                    <property name="indicators" ref="lights"/>
+            </action>
+            <completers>
+                <ref component-id="actionCompleter"/>
+                <null/>
+            </completers>
+        </command>
+    </command-bundle>
+    
+    <bean id="actionCompleter" class="com.cibuddy.gogo.shell.extension.ActionCompleter"/>
+    
+</blueprint>
