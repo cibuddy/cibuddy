@@ -12,6 +12,14 @@
     </parent>
   
     <dependencies>
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gogo.shell.extension</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.apache.karaf</groupId>
             <artifactId>apache-karaf</artifactId>
@@ -97,19 +105,61 @@
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>core</artifactId>
                                     <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies</outputDirectory>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>project.configuration</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>jenkins.status</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>hid</artifactId>
                                     <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies</outputDirectory>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>ibuddy</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>delcom.lights</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>gogo.shell.extension</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.httpcomponents</groupId>
+                                    <artifactId>httpclient-osgi</artifactId>
+                                    <!--version>${project.version}</version-->
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.httpcomponents</groupId>
+                                    <artifactId>httpcore-osgi</artifactId>
+                                    <!--version>${project.version}</version-->
+                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
                     <execution>
-            <!-- Uncompress the standard Karaf distribution -->
+                    <!-- Uncompress the standard Karaf distribution -->
                         <id>unpack</id>
                         <phase>generate-resources</phase>
                         <goals>

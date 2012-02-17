@@ -4,6 +4,7 @@
 
     <formats>
         <format>tar.gz</format>
+        <format>zip</format>
     </formats>
 
     <fileSets>
@@ -43,11 +44,11 @@
 
         <!-- Copy over jar files -->
         <fileSet>
-            <directory>target/dependencies</directory>
+            <directory>target/dependencies/deploy</directory>
+            <outputDirectory>/deploy/</outputDirectory>
             <includes>
-                <include>my-custom.jar</include>
+                <include>**</include>
             </includes>
-            <outputDirectory>/lib/</outputDirectory>
         </fileSet>
 
         <fileSet>
