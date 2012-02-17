@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class HIDManagerImpl extends HIDManager {
     
     private static final Logger LOG = LoggerFactory.getLogger(HIDManagerImpl.class);
-    private HashMap<String,ServiceRegistration<HIDDeviceInfo>> devices = new HashMap<String,ServiceRegistration<HIDDeviceInfo>>();
+    private HashMap<String,ServiceRegistration> devices = new HashMap<String,ServiceRegistration>();
     
     private final Object guard = new Object();
     private boolean enabled = true;
@@ -44,7 +44,7 @@ public class HIDManagerImpl extends HIDManager {
     private void exposeDevice(HIDDeviceInfo dev) {
         if(enabled){
             synchronized(guard){
-                Dictionary<String,String> dict = new Hashtable<String,String>();
+                Dictionary<String,?> dict = new Hashtable<String,String>();
                 safePut(dict,HIDServiceConstants.VENDOR_ID, Integer.valueOf(dev.getVendor_id()).toString());
                 safePut(dict,HIDServiceConstants.PRODUCT_ID, Integer.valueOf(dev.getProduct_id()).toString());
                 safePut(dict,HIDServiceConstants.SERIAL_NUMBER, dev.getSerial_number());
@@ -55,7 +55,7 @@ public class HIDManagerImpl extends HIDManager {
                 safePut(dict,HIDServiceConstants.PATH, dev.getPath());
                 safePut(dict,HIDServiceConstants.USAGE, Integer.valueOf(dev.getUsage()).toString());
                 safePut(dict,HIDServiceConstants.USAGE_PAGE, Integer.valueOf(dev.getUsage_page()).toString());
-                ServiceRegistration<HIDDeviceInfo> registedService = Activator.getContext().registerService(HIDDeviceInfo.class, dev, dict);
+                ServiceRegistration registedService = Activator.getContext().registerService(HIDDeviceInfo.class.getName(), dev, dict);
                 devices.put(dev.getPath(), registedService);
                 LOG.debug("Added:" + "\n" + dev + "\n");
             }
@@ -112,9 +112,9 @@ public class HIDManagerImpl extends HIDManager {
     public void shutdown() {
         if(enabled){
             enabled = false;
-            Iterator<ServiceRegistration<HIDDeviceInfo>> iter = devices.values().iterator();
+            Iterator<ServiceRegistration> iter = devices.values().iterator();
             while(iter.hasNext()){
-                ServiceRegistration<HIDDeviceInfo> next = iter.next();
+                ServiceRegistration next = iter.next();
                 if(next != null) {
                     next.unregister();
                 }
