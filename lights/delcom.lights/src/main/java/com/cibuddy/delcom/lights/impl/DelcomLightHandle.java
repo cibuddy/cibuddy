@@ -13,12 +13,15 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author mirkojahn
  */
 public class DelcomLightHandle implements IBuildStatusIndicator {
     
+    private static final Logger LOG = LoggerFactory.getLogger(DelcomLightHandle.class);
     private final ServiceReference hidDriverService;
     private final IDelcomLight delcomLight;
     private final HIDDeviceInfo deviceInfo;
@@ -47,6 +50,7 @@ public class DelcomLightHandle implements IBuildStatusIndicator {
         ServiceRegistration sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
             System.out.println("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
+            LOG.info("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
             return true;
         } else {
             return false;
@@ -70,30 +74,34 @@ public class DelcomLightHandle implements IBuildStatusIndicator {
 
     public void success() {
         try{
+            LOG.debug("indicating success.");
             delcomLight.setColor(Color.GREEN);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating success. ",e);
         }
     }
 
     public void warning() {
         try{
+            LOG.debug("indicating warning.");
             delcomLight.setColor(Color.YELLOW);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating warning. ",e);
         }
     }
 
     public void failure() {
         try{
+            LOG.debug("indicating failure.");
             delcomLight.setColor(Color.RED);
         }catch(Exception e){
-            // FIXME: do some logging...
+            LOG.warn("Problem indicating failure. ",e);
         }
     }
 
     public void building() {
         // blinking yellow is not supported yet
+        LOG.info("Indicating 'building' not supported yet by the delcom beacon.");
     }
     
 }
