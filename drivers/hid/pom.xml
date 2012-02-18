@@ -55,7 +55,7 @@
             ,lib/hid.driver-win7.dll;
                 processor=x86;
                 osname=Windows7
-            ,lib/hid.driver-winXP.dll;
+            ,lib/winXP/hid.driver.dll;
                 processor=x86;
                 osname=WinXP
             ,lib/hid.driver-win8.dll;
@@ -64,10 +64,10 @@
                 osname=Windows2003;
                 osname=WindowsVista;
                 osname=WindowsServer2008
-            ,lib/libhid.driver.jnilib;
+            ,lib/osx/x86_64/libhid.driver.jnilib;
                 osname=MacOSX;
                 processor=x86-64
-            ,lib/libhid.driver.so;
+            ,lib/linux/libhid.driver.so;
                 osname=Linux;
                 processor=x86-64
         </osgi.native.code>
