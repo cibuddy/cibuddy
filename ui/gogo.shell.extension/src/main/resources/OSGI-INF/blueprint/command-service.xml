@@ -1,12 +1,19 @@
 
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:ns1="null">
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:ns1="null" xmlns:ns2="null">
     
    <reference-list id="lights" 
+                   interface="com.cibuddy.core.build.server.IServer" 
+                   member-type="service-object"
+                   availability="optional"/>
+    
+    <reference-list id="servers" 
                    interface="com.cibuddy.core.build.indicator.IBuildStatusIndicator" 
                    member-type="service-object"
                    availability="optional"/>
     
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        
+        <!-- Lights/Indicator management -->
         <command name="cibuddy/indicator-list">
             <action
                 class="com.cibuddy.gogo.shell.extension.IndicatorListCommand">
@@ -23,6 +30,21 @@
                 <null/>
             </completers>
         </command>
+        
+        <!-- Server management -->
+        <command name="cibuddy/server-list">
+            <action
+                class="com.cibuddy.gogo.shell.extension.ServerListCommand">
+                    <property name="servers" ref="servers"/>
+            </action>
+        </command>
+        <command name="cibuddy/server-details">
+            <action
+                class="com.cibuddy.gogo.shell.extension.ServerDetailsCommand">
+                    <property name="servers" ref="servers"/>
+            </action>
+        </command>
+        
     </command-bundle>
     
     <bean id="actionCompleter" class="com.cibuddy.gogo.shell.extension.ActionCompleter"/>
