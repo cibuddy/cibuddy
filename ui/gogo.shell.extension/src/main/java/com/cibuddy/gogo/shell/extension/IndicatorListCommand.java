@@ -23,7 +23,6 @@ public class IndicatorListCommand extends OsgiCommandSupport {
     protected Object doExecute() throws Exception {
         Iterator iter = indicators.iterator();
         int i = -1;
-        boolean match = false;
         while(iter.hasNext()){
             i++;
             
