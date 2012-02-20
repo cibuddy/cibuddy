@@ -54,6 +54,15 @@
             </includes>
         </fileSet>
         
+        <!-- Copy over sample configurations -->
+        <fileSet>
+            <directory>src/main/resources/deploy</directory>
+            <outputDirectory>/deploy/</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+        
         <!-- Copy over jar files -->
         <fileSet>
             <directory>target/dependencies/deploy</directory>
