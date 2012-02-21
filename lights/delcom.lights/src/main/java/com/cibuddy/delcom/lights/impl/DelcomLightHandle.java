@@ -104,4 +104,14 @@ public class DelcomLightHandle implements IBuildStatusIndicator {
         LOG.info("Indicating 'building' not supported yet by the delcom beacon.");
     }
     
+    public void off(){
+        try {
+            LOG.debug("indicating light OFF/black.");
+            delcomLight.setColor(Color.BLACK);
+        } catch (IOException ex) {
+            LOG.warn("Problem turning the light off. ",ex);
+            
+        }
+    }
+    
 }

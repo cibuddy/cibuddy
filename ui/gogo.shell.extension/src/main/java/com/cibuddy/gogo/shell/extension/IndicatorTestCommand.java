@@ -47,7 +47,7 @@ public class IndicatorTestCommand extends OsgiCommandSupport {
                 } else if (action.equals("building")){
                     ibsi.building();
                 } else if (action.equals("off")){
-                    // FIXME: provide an "off" action on the indicator
+                    ibsi.off();
                 }
                 
                 match = true;

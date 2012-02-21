@@ -13,4 +13,5 @@ public interface IBuildStatusIndicator {
     void warning();
     void failure();
     void building();
+    void off();
 }

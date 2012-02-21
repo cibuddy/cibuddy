@@ -112,4 +112,14 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         LOG.info("Indicating 'building' not supported yet by the i-Buddy.");
     }
     
+    
+    public void off(){
+        try {
+            LOG.debug("indicating light OFF/black.");
+            buddyFigure.resetEverything();
+        } catch (Exception ex) {
+            LOG.warn("Problem turning the light off. ",ex);
+            
+        }
+    }
 }

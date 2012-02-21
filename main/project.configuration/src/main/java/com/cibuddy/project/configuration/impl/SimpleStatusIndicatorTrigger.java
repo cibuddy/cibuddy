@@ -36,6 +36,8 @@ public class SimpleStatusIndicatorTrigger implements StatusIndicatorTrigger {
                 buildIndicator.failure();
             } else if (StatusAction.BUILDING.equals(myAction)) {
                 buildIndicator.building();
+            } else if (StatusAction.OFF.equals(myAction)) {
+                buildIndicator.off();
             }
         } else {
             LOG.info("The build indicator was not found. Make sure the configuration is correct.");

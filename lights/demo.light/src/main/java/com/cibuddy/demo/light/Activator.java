@@ -80,4 +80,9 @@ public class Activator implements BundleActivator, IBuildStatusIndicator {
         System.out.println("indicating building");
         dl.updateCircle(bl);
     }
+    
+    public void off(){
+        System.out.println("indicating light off");
+        dl.turnOff();
+    }
 }
