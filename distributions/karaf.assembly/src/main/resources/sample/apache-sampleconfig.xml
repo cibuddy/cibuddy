@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup  xmlns="http://com.cibuddy.project.configuration/schema/setup/v1-0" 
+		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <name>Apache test configuration</name>
+    <configuration alias="felix tests">
+        <projects>
+            <project>
+                <name>felix file install</name>
+                <projectURL>https://builds.apache.org/job/Felix-FileInstall/</projectURL>
+            </project>
+            <project>
+                <name>felix web console</name>
+                <projectURL>https://builds.apache.org/job/Felix-WebConsole/</projectURL>
+            </project>
+        </projects>
+        <trigger>
+            <statusIndicator>
+                <id>0</id>
+            </statusIndicator>
+            <action condition="all">
+                <status>blue</status>
+                <status>blue_anime</status>
+                <indicate>success</indicate>
+            </action>
+            <action condition="1:*"><!-- at least one -->
+                <status>red</status>
+                <status>red_anime</status>
+                <indicate>failure</indicate>
+            </action>
+            <action condition="1:*"><!-- at least one -->
+                <status>yellow</status>
+                <status>yellow_anime</status>
+                <indicate>warning</indicate>
+            </action>
+            <action condition="default"><!-- catch all -->
+                <indicate>off</indicate>
+            </action>
+        </trigger>
+    </configuration>
+    
+    <configuration alias="warning test">
+        <projects>
+            <project>
+                <name>blah</name>
+                <projectURL>https://builds.apache.org/job/mailbox-integration-tests-site/</projectURL>
+            </project>
+        </projects>
+        <trigger>
+            <statusIndicator>
+                <id>1</id>
+            </statusIndicator>
+            <action condition="all">
+                <status>blue</status>
+                <status>blue_anime</status>
+                <indicate>success</indicate>
+            </action>
+            <action condition="1:*"><!-- at least one -->
+                <status>red</status>
+                <status>red_anime</status>
+                <indicate>failure</indicate>
+            </action>
+            <action condition="1:*"><!-- at least one -->
+                <status>yellow</status>
+                <status>yellow_anime</status>
+                <indicate>warning</indicate>
+            </action>
+            <action condition="default"><!-- catch all -->
+                <indicate>off</indicate>
+            </action>
+        </trigger>
+    </configuration>
+</setup>
