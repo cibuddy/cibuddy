@@ -116,8 +116,6 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         byte[] command = SET_COMMAND.clone();
         command[8] = payload;
         try {
-            // FIXME: use feature or direct write -> decide!
-            //writtenBytes = device.write(command);
             writtenBytes = device.sendFeatureReport(command);
             if(writtenBytes > 0){
                 update = false;
