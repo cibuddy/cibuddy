@@ -4,8 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/setup/v1-0 ../../main/resources/configuration-1.0.xsd'>
 
-    <name>test</name>
-    <configuration alias="defaultConfig">
+    <name>SampleConfigurationFile</name>
+    <configuration alias="aSimpleConfigurationForLocalhost">
         <projects>
             <project>
                 <name>cibuddy</name>
