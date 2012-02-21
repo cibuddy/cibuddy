@@ -57,6 +57,13 @@
         
         <!-- Copy over sample configurations -->
         <fileSet>
+            <directory>src/main/resources/sample</directory>
+            <outputDirectory>/sample/</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>src/main/resources/deploy</directory>
             <outputDirectory>/deploy/</outputDirectory>
             <includes>
