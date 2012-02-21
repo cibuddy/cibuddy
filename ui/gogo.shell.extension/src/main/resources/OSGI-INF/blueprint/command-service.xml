@@ -1,13 +1,13 @@
 
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:ns1="null" xmlns:ns2="null">
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" >
     
    <reference-list id="lights" 
-                   interface="com.cibuddy.core.build.server.IServer" 
+                   interface="com.cibuddy.core.build.indicator.IBuildStatusIndicator" 
                    member-type="service-object"
                    availability="optional"/>
     
     <reference-list id="servers" 
-                   interface="com.cibuddy.core.build.indicator.IBuildStatusIndicator" 
+                   interface="com.cibuddy.core.build.server.IServer" 
                    member-type="service-object"
                    availability="optional"/>
     
