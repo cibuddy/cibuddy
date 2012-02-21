@@ -16,6 +16,7 @@
             <excludes>
                 <exclude>**/demos/**</exclude>
                 <exclude>bin/**</exclude>
+                <exclude>deploy/README</exclude>
                 <exclude>etc/system.properties</exclude>
                 <exclude>etc/users.properties</exclude>
                 <exclude>etc/org.apache.karaf.features.cfg</exclude>
