@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 public class Helper {
 
     private static final Logger LOG = LoggerFactory.getLogger(Helper.class);
-    // FIXME: don't forget to update the project with the heartbeat!!!
     
     static IBuildProject getProject(ProjectType pt, boolean update) {
         Object[] servers = Activator.getServerTracker().getServices();
