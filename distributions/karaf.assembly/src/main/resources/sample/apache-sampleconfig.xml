@@ -3,7 +3,7 @@
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <name>Apache test configuration</name>
+    <name>Apache Felix test configurations</name>
     <configuration alias="felix tests">
         <projects>
             <project>
@@ -40,35 +40,4 @@
         </trigger>
     </configuration>
     
-    <configuration alias="warning test">
-        <projects>
-            <project>
-                <name>blah</name>
-                <projectURL>https://builds.apache.org/job/mailbox-integration-tests-site/</projectURL>
-            </project>
-        </projects>
-        <trigger>
-            <statusIndicator>
-                <id>1</id>
-            </statusIndicator>
-            <action condition="all">
-                <status>blue</status>
-                <status>blue_anime</status>
-                <indicate>success</indicate>
-            </action>
-            <action condition="1:*"><!-- at least one -->
-                <status>red</status>
-                <status>red_anime</status>
-                <indicate>failure</indicate>
-            </action>
-            <action condition="1:*"><!-- at least one -->
-                <status>yellow</status>
-                <status>yellow_anime</status>
-                <indicate>warning</indicate>
-            </action>
-            <action condition="default"><!-- catch all -->
-                <indicate>off</indicate>
-            </action>
-        </trigger>
-    </configuration>
 </setup>
