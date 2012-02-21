@@ -37,8 +37,8 @@ is also an [example][3] in the `deploy` folder. The respective [xsd][4] is locat
 		xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <name>test</name>
-    <configuration alias="defaultConfig">
+        <name>SampleConfigurationFile</name>
+    <configuration alias="aSimpleConfigurationForLocalhost">
         <projects>
             <project>
                 <name>cibuddy</name>
@@ -49,17 +49,22 @@ is also an [example][3] in the `deploy` folder. The respective [xsd][4] is locat
             <statusIndicator>
                 <id>0</id>
             </statusIndicator>
-            <!-- stop at the first match and execute the indicate action -->
-            <action status="blue" condition="all">
+            <action condition="all">
+                <status>blue</status>
+                <status>blue_anime</status>
                 <indicate>success</indicate>
             </action>
-            <action status="red" condition="1:*"><!-- at least one -->
+            <action condition="1:*"><!-- at least one -->
+                <status>red</status>
+                <status>red_anime</status>
                 <indicate>failure</indicate>
             </action>
-            <action status="yellow" condition="1:*"><!-- at least one -->
+            <action condition="1:*"><!-- at least one -->
+                <status>yellow</status>
+                <status>yellow_anime</status>
                 <indicate>warning</indicate>
             </action>
-            <action status="default"><!-- if you reach this, indicate the default -->
+            <action condition="default"><!-- catch all -->
                 <indicate>off</indicate>
             </action>
         </trigger>
