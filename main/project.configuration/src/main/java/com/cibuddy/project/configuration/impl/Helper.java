@@ -109,10 +109,10 @@ public class Helper {
                     return true;
                 }
             } else {
-                // FIXME: enable fraction matches!!
-                LOG.debug("matching rule with fixed upper bound identified -> not yet supported! Only exact match for now");
-                if(Integer.parseInt(boundaries[0]) == hits && Integer.parseInt(boundaries[1]) == result.length) {
-                    LOG.debug("matching rule!");
+                float boundary = Integer.parseInt(boundaries[0]) / Integer.parseInt(boundaries[1]);
+                float found = hits/result.length;
+                if(found <= boundary) {
+                    LOG.debug("matching rule: {}/{} <= {}/{}", new Object [] {boundaries[0], boundaries[1], String.valueOf(hits), String.valueOf(result.length)});
                     return true;
                 }
             }
