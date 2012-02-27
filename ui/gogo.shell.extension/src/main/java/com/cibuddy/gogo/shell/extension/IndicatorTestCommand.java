@@ -37,7 +37,7 @@ public class IndicatorTestCommand extends OsgiCommandSupport {
             IBuildStatusIndicator ibsi = (IBuildStatusIndicator) iter.next();
             if(i == toMatch) {
                 // indicate success
-                System.out.println("indicating success on indicator: "+toMatch);
+                System.out.println("indicating " + action + " on indicator: "+toMatch);
                 if(action.equals("success")){
                     ibsi.success();
                 } else if (action.equals("failure")){
