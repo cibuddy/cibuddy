@@ -5,6 +5,8 @@ import java.util.Timer;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -13,7 +15,9 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class Activator  implements BundleActivator{
 
-    Timer caretaker;
+    private static final Logger LOG = LoggerFactory.getLogger(Activator.class);
+    
+    private Timer caretaker;
     private final long EXECUTION_DELAY = 10*1000; // 10 Seconds
     // FIXME: make the heartbeat interval of the server configurable
     private final long HEARTBEAT_INTERVAL = 1*60*1000; // 1 Minute
@@ -43,11 +47,11 @@ public class Activator  implements BundleActivator{
 		if (isWindows()) {
 			System.out.println("This is Windows: " + System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
 		} else if (isMac()) {
-			System.out.println("This is Mac: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+			System.out.println("I'm a Mac: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
 		} else if (isUnix()) {
 			System.out.println("This is Unix or Linux: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
-//		} else if (isSolaris()) {
-//			System.out.println("This is Solaris: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
+		} else if (isSolaris()) {
+			System.out.println("This is Solaris: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");
 		} else {
 			System.out.println("Your OS is not support!!");
             System.out.println("Your OS identified itself as: "+System.getProperty("os.name") + " (arch: "+ System.getProperty("os.arch") +")");

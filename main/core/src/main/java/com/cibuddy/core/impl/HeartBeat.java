@@ -3,6 +3,8 @@ package com.cibuddy.core.impl;
 import com.cibuddy.core.build.configuration.BuildTestConfiguration;
 import java.util.TimerTask;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -10,6 +12,7 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class HeartBeat extends TimerTask {
 
+    private static final Logger LOG = LoggerFactory.getLogger(HeartBeat.class);
     ServiceTracker buildTestConfigurationTracker;
     public HeartBeat(ServiceTracker tracker) {
         buildTestConfigurationTracker = tracker;
@@ -17,8 +20,6 @@ public class HeartBeat extends TimerTask {
     }
     @Override
     public void run() {
-        // no idea, why this doesn't work... maybe it is to late and I should take a nap
-//        BuildTestConfiguration[] configs = (BuildTestConfiguration[])buildTestConfigurationTracker.getServices();
         Object[] objs = buildTestConfigurationTracker.getServices();
         if(objs != null && objs.length > 0){
             for(int i=0;i<objs.length;i++){
@@ -28,11 +29,11 @@ public class HeartBeat extends TimerTask {
                         btc.update();
                     }
                 } catch (Exception e){
-                    e.printStackTrace();
+                    LOG.warn("Updating the BuildTestConfiguration raised an exception!",e);
                 }
             }
         } else {
-            System.out.println("no TestConfiguration services found.");
+            LOG.debug("no TestConfiguration services found.");
         }
         
     }
