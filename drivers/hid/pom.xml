@@ -48,17 +48,17 @@
         <osgi.private.pkg>${project.name}*</osgi.private.pkg>
         <osgi.bundle.license>BSD 2-Clause License;url=http://www.opensource.org/licenses/BSD-2-Clause;description=OpenSource license approved by the open source initiative</osgi.bundle.license>
         <osgi.native.code>
-            lib/hid.driver-win8.dll;
+            lib/win8/hid.driver.dll;
                 processor=x86;
                 osname=Windows NT (unknown);
                 osname=Windows8
-            ,lib/hid.driver-win7.dll;
+            ,lib/win7/hid.driver.dll;
                 processor=x86;
                 osname=Windows7
             ,lib/winXP/hid.driver.dll;
                 processor=x86;
                 osname=WinXP
-            ,lib/hid.driver-win8.dll;
+            ,lib/hid.driver.dll;
                 processor=x86;
                 osname=WindowsVista;
                 osname=Windows2003;
