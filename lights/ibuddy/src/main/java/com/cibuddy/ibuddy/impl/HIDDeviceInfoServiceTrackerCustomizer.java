@@ -49,7 +49,7 @@ public class HIDDeviceInfoServiceTrackerCustomizer implements ServiceTrackerCust
         }
     }
     
-    public void close() {
+    public synchronized void close() {
         Iterator<Entry<ServiceReference,IBuddyLightHandle>> iter = lightHandles.entrySet().iterator();
         while(iter.hasNext()){
             Entry<ServiceReference,IBuddyLightHandle> entry = iter.next();
