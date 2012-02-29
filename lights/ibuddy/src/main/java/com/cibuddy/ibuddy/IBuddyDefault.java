@@ -1,13 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cibuddy.ibuddy;
 
 import com.codeminders.hidapi.HIDDevice;
 import com.codeminders.hidapi.HIDDeviceInfo;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.Timer;
+import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +13,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author mirkojahn
  */
-public class IBuddyDefault extends Thread implements IBuddyFigure {
+public class IBuddyDefault extends TimerTask implements IBuddyFigure {
 
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyDefault.class);
     public static final short DEVICE_PRODUCT = 0x0002;
-    private static final long UPDATE_INTERVAL = 50L; // in ms
+    private static final long UPDATE_INTERVAL = 100L; // in ms
     private final HIDDeviceInfo deviceInfo;
     private HIDDevice device;
     
@@ -38,9 +36,13 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
     private final Object guard = new Object();
     private volatile boolean update = false;
     private volatile boolean enabled = false;
-
+    
+    private final Timer timer = new Timer();
+    private final long EXECUTION_DELAY = 1000; // 1 Seconds
+    
     public IBuddyDefault(HIDDeviceInfo devInfo) {
         deviceInfo = devInfo;
+        
     }
 
     @Override
@@ -48,7 +50,7 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         synchronized (guard) {
             device = deviceInfo.open();
             enabled = true;
-            this.start();
+            timer.schedule(this, EXECUTION_DELAY, UPDATE_INTERVAL);
         }
     }
 
@@ -57,29 +59,6 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         update = true;
         enabled = false; // see Thread.stop()
         updateState();
-    }
-
-    @Override
-    public void run() {
-        // check if device is running (or there are pending actions)
-        while (enabled || update) {
-            try {
-                Thread.sleep(UPDATE_INTERVAL);
-                // check complex types
-                beatingHeard.check();
-                wingsFlapping.check();
-                dancing.check();
-                if (update) {
-                    // actually update the state
-                    updateState();
-                }
-            } catch (InterruptedException ex) {
-                LOG.debug("interrupt.", ex);
-            } catch (IOException ex) {
-                LOG.warn("Problem writing state to the device. This most likely "
-                        + "depends on the native code part or hardware.",ex);
-            }
-        }
         try {
             synchronized (guard) {
                 if (device != null) {
@@ -88,6 +67,26 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
                 }
             }
         } catch (Exception ex) {
+        }
+    }
+
+    @Override
+    public void run() {
+        // check if device is running (or there are pending actions)
+        while (enabled | update) {
+            try {
+                // check complex types
+                beatingHeard.check();
+                wingsFlapping.check();
+                dancing.check();
+                if (update) {
+                    // actually update the state
+                    updateState();
+                }
+            } catch (IOException ex) {
+                LOG.warn("Problem writing state to the device. This most likely "
+                        + "depends on the native code part or hardware.",ex);
+            }
         }
     }
 
@@ -144,6 +143,7 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         update = true;
     }
 
+    @Override
     public void setHeart(boolean heart) {
         if(!enabled){
             return;
@@ -227,6 +227,7 @@ public class IBuddyDefault extends Thread implements IBuddyFigure {
         heart = (heart ? false : true);
         update = true;
     }
+    
     class HeartBeat extends ComplexState {
 
         @Override
