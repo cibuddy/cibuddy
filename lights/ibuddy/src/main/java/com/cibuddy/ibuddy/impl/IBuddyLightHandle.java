@@ -82,7 +82,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
             LOG.debug("indicating success.");
             buddyFigure.setCurrentColor(Color.GREEN);
             buddyFigure.setHeart(true);
-        }catch(Exception e){
+        } catch(Exception e){
             LOG.warn("Problem indicating success. ",e);
         }
     }
@@ -92,7 +92,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
             LOG.debug("indicating warning.");
             buddyFigure.setCurrentColor(Color.YELLOW);
             buddyFigure.setHeart(false);
-        }catch(Exception e){
+        } catch(Exception e){
             LOG.warn("Problem indicating warning. ",e);
         }
     }
@@ -102,7 +102,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
             LOG.debug("indicating failure.");
             buddyFigure.setCurrentColor(Color.RED);
             buddyFigure.setHeart(false);
-        }catch(Exception e){
+        } catch(Exception e){
             LOG.warn("Problem indicating failure. ",e);
         }
     }
