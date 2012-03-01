@@ -1,12 +1,11 @@
-/*
- * 
- */
 package com.cibuddy.ibuddy.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
@@ -16,8 +15,8 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  */
 public class HIDDeviceInfoServiceTrackerCustomizer implements ServiceTrackerCustomizer {
 
-    private HashMap<ServiceReference,IBuddyLightHandle> lightHandles = 
-            new HashMap<ServiceReference,IBuddyLightHandle>();
+    private ConcurrentMap<ServiceReference,IBuddyLightHandle> lightHandles = 
+            new ConcurrentHashMap<ServiceReference,IBuddyLightHandle>(5);
     
     @Override
     public Object addingService(ServiceReference reference) {
@@ -49,7 +48,7 @@ public class HIDDeviceInfoServiceTrackerCustomizer implements ServiceTrackerCust
         }
     }
     
-    public synchronized void close() {
+    public void close() {
         Iterator<Entry<ServiceReference,IBuddyLightHandle>> iter = lightHandles.entrySet().iterator();
         while(iter.hasNext()){
             Entry<ServiceReference,IBuddyLightHandle> entry = iter.next();
