@@ -119,6 +119,7 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
         command[8] = payload;
         try {
             // attempt 1:
+            // Did not work!
 //            device.disableBlocking();
 //            device.writeTimeout(SETUP_COMMAND,100);
 //            writtenBytes = device.writeTimeout(command, 100);
@@ -155,7 +156,7 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
                 LOG.debug("FAILED: command execution based on written bytes {} for command: {}", writtenBytes , new BigInteger(new byte[]{payload}).toString(16));
             }
         } catch (Exception ex) {
-            LOG.debug("FAILED: command execution: {}", new BigInteger(new byte[]{payload}).toString(16));
+            LOG.debug("FAILED: command execution: {}", new BigInteger(new byte[]{payload}).toString(16), ex);
         }
         return writtenBytes;
     }
