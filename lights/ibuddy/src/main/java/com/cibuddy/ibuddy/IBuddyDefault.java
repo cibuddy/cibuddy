@@ -118,13 +118,44 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
         byte[] command = SET_COMMAND.clone();
         command[8] = payload;
         try {
-            writtenBytes = device.sendFeatureReport(command);
+            // attempt 1:
+//            device.disableBlocking();
+//            device.writeTimeout(SETUP_COMMAND,100);
+//            writtenBytes = device.writeTimeout(command, 100);
+            
+            
+            // attempt 3:
+            // working on windows and mac os (linux seems to have issues)
+            device.write(SETUP_COMMAND);
+            writtenBytes = device.write(command);
+            
+            
+            // attempt 4:
+//            device.sendFeatureReport(SETUP_COMMAND);
+//            writtenBytes = device.sendFeatureReport(command);
+//            
+//            
+            // attempt 5:
+//            writtenBytes = device.writeTimeout(command, 100);
+//            
+//            
+            // attempt 6:
+//            writtenBytes = device.write(command);
+//            
+//            
+            // attempt 7:
+//            writtenBytes = device.sendFeatureReport(command);
+            
+            // adding blocking, then there are even more combinations to test
+            
             if(writtenBytes > 0){
                 update = false;
+                LOG.debug("SUCCESS: command execution: {}", new BigInteger(new byte[]{payload}).toString(16));
+            } else {
+                LOG.debug("FAILED: command execution based on written bytes {} for command: {}", writtenBytes , new BigInteger(new byte[]{payload}).toString(16));
             }
-            LOG.debug("SUCCESS: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
         } catch (Exception ex) {
-            LOG.debug("FAILED: command execution: " + new BigInteger(new byte[]{payload}).toString(16));
+            LOG.debug("FAILED: command execution: {}", new BigInteger(new byte[]{payload}).toString(16));
         }
         return writtenBytes;
     }
