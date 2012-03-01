@@ -30,7 +30,7 @@ public class ProjectConfigurationListener implements ArtifactInstaller {
             return false;
         } else if (file.getName().endsWith(".xml")) {
             try {
-                JAXBContext jc = JAXBContext.newInstance(packageName,this.getClass().getClassLoader());
+                JAXBContext jc = JAXBContext.newInstance(packageName, BuildTestConfigurationType.class.getClass().getClassLoader());
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
                 Setup config = (Setup) unmarshaller.unmarshal(file);
                 return true;
