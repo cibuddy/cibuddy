@@ -72,9 +72,10 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
 
     @Override
     public void run() {
-        // check if device is running (or there are pending actions)
-        while (enabled | update) {
-            try {
+        try {
+            // check if device is running (or there are pending actions)
+            if (enabled | update) {
+
                 // check complex types
                 beatingHeard.check();
                 wingsFlapping.check();
@@ -83,10 +84,11 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
                     // actually update the state
                     updateState();
                 }
-            } catch (IOException ex) {
-                LOG.warn("Problem writing state to the device. This most likely "
-                        + "depends on the native code part or hardware.",ex);
+
             }
+        } catch (IOException ex) {
+            LOG.warn("Problem writing state to the device. This most likely "
+                    + "depends on the native code part or hardware.", ex);
         }
     }
 
