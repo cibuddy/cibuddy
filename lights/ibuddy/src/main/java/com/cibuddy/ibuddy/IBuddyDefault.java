@@ -17,7 +17,7 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
 
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyDefault.class);
     public static final short DEVICE_PRODUCT = 0x0002;
-    private static final long UPDATE_INTERVAL = 100L; // in ms
+    private static final long UPDATE_INTERVAL = 500L; // in ms
     private final HIDDeviceInfo deviceInfo;
     private HIDDevice device;
     
@@ -59,6 +59,7 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
         update = true;
         enabled = false; // see Thread.stop()
         updateState();
+        timer.cancel();
         try {
             synchronized (guard) {
                 if (device != null) {
