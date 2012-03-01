@@ -28,7 +28,7 @@ public class Activator implements BundleActivator {
             LOG.info("Finished exposing HID devices as services.");
         } catch (Throwable e) {
             LOG.warn("Huston we have a problem. Loading of the hid driver failed.",e);
-            System.out.println("Huston we have a problem. Loading of the hid driver failed."+e.getMessage());
+            System.out.println("Huston we have a problem. Loading of the hid driver failed: "+e.getMessage());
             e.printStackTrace(System.out);
             throw new Exception("Start Problem with bundle "+bc.getBundle().getBundleId(),e);
         }
