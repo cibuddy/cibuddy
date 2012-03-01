@@ -21,7 +21,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
     
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyLightHandle.class);
     private final ServiceReference hidDriverService;
-    private final IBuddyFigure buddyFigure;
+    private final IBuddyDefault buddyFigure;
     private final HIDDeviceInfo deviceInfo;
     private ServiceRegistration sr;
     private final String figure;
@@ -53,6 +53,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         Dictionary dict = new Hashtable();
         dict.put(IBuildStatusIndicator.COMPONENT_ID, getComponentId());
         dict.put(IBuildStatusIndicator.INDICATOR_ID, getIndicatorId());
+        dict.put("DeviceInfoProperties", deviceInfo);
         ServiceRegistration sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
             LOG.info("Exposed iBuddy Figure: "+getComponentId()+":"+getIndicatorId());
@@ -80,6 +81,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
     public void success() {
         try{
             LOG.debug("indicating success.");
+            buddyFigure.resetEverything();
             buddyFigure.setCurrentColor(Color.GREEN);
             buddyFigure.setHeart(true);
         } catch(Exception e){
@@ -90,8 +92,8 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
     public void warning() {
         try{
             LOG.debug("indicating warning.");
+            buddyFigure.resetEverything();
             buddyFigure.setCurrentColor(Color.YELLOW);
-            buddyFigure.setHeart(false);
         } catch(Exception e){
             LOG.warn("Problem indicating warning. ",e);
         }
@@ -100,16 +102,16 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
     public void failure() {
         try{
             LOG.debug("indicating failure.");
+            buddyFigure.resetEverything();
             buddyFigure.setCurrentColor(Color.RED);
-            buddyFigure.setHeart(false);
         } catch(Exception e){
             LOG.warn("Problem indicating failure. ",e);
         }
     }
 
     public void building() {
-        // blinking yellow is not supported yet
-        LOG.info("Indicating 'building' not supported yet by the i-Buddy.");
+        LOG.info("Indicating 'building' by beating heart.");
+        buddyFigure.enableBeatingHeart();
     }
     
     
