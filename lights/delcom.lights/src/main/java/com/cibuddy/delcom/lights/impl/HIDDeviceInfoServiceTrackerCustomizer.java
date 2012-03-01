@@ -5,9 +5,10 @@ package com.cibuddy.delcom.lights.impl;
 
 import com.cibuddy.delcom.lights.DeviceType;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
@@ -17,8 +18,8 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  */
 public class HIDDeviceInfoServiceTrackerCustomizer implements ServiceTrackerCustomizer {
 
-    private HashMap<ServiceReference,DelcomLightHandle> lightHandles = 
-            new HashMap<ServiceReference,DelcomLightHandle>();;
+    private ConcurrentMap<ServiceReference,DelcomLightHandle> lightHandles = 
+            new ConcurrentHashMap<ServiceReference,DelcomLightHandle>(5);
     
     @Override
     public Object addingService(ServiceReference reference) {
