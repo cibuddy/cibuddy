@@ -1,6 +1,3 @@
-/*
- * 
- */
 package com.cibuddy.delcom.lights.impl;
 
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
@@ -47,6 +44,7 @@ public class DelcomLightHandle implements IBuildStatusIndicator {
         Dictionary dict = new Hashtable();
         dict.put(IBuildStatusIndicator.COMPONENT_ID, getComponentId());
         dict.put(IBuildStatusIndicator.INDICATOR_ID, getIndicatorId());
+        dict.put("DeviceInfoProperties", deviceInfo);
         ServiceRegistration sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
             System.out.println("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
