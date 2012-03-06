@@ -104,14 +104,14 @@ public class Helper {
             String[] boundaries = condition.split(":");
             if(boundaries[1].contains("*")) {
                 LOG.debug("matching rule with unbound upper bound identified.");
-                if(Integer.parseInt(boundaries[0]) == hits) {
+                if(Integer.parseInt(boundaries[0]) <= hits) {
                     LOG.debug("matching rule!");
                     return true;
                 }
             } else {
                 float boundary = Integer.parseInt(boundaries[0]) / Integer.parseInt(boundaries[1]);
                 float found = hits/result.length;
-                if(found <= boundary) {
+                if(boundary <= found) {
                     LOG.debug("matching rule: {}/{} <= {}/{}", new Object [] {boundaries[0], boundaries[1], String.valueOf(hits), String.valueOf(result.length)});
                     return true;
                 }
