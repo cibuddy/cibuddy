@@ -34,6 +34,10 @@ there will be problems when trying to run the binary. You could find all known i
 in the [Issues Section][6] of this project. In case you encounter a new one, please 
 do not hesitate to open an issue here as well.
 
+## Travis-CI integration
+[![Build Status](https://secure.travis-ci.org/cibuddy/cibuddy.png)](http://travis-ci.org/cibuddy/cibuddy)
+
+
 ## References:
 
 * [Delcom Produkt Homepage][1]
