@@ -30,8 +30,17 @@ public class ProjectConfigurationListener implements ArtifactInstaller {
             return false;
         } else if (file.getName().endsWith(".xml")) {
             try {
-                JAXBContext jc = JAXBContext.newInstance(packageName, BuildTestConfigurationType.class.getClass().getClassLoader());
+                BuildTestConfigurationType btct = new BuildTestConfigurationType();
+                ClassLoader cl = btct.getClass().getClassLoader();
+                if(cl == null){
+                    // pretty bad. We have a bootstrap classloader. Not much we can do.
+                    LOG.warn("Found BootClassLoader, trying the bundle class loader instead. This might not work! "
+                            + "Better upgrade your JVM!");
+                    cl = this.getClass().getClassLoader();
+                }
+                JAXBContext jc = JAXBContext.newInstance(packageName,cl);
                 Unmarshaller unmarshaller = jc.createUnmarshaller();
+                // make sure the schema matches. Otherwise an exception will be raised.
                 Setup config = (Setup) unmarshaller.unmarshal(file);
                 return true;
             } catch (Exception ex) {
