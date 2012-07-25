@@ -72,7 +72,7 @@ public class HIDManagerImpl extends HIDManager {
     private void withdrawDevice(HIDDeviceInfo dev) {
         if(enabled){
             synchronized(guard){
-                ServiceRegistration<HIDDeviceInfo> registedService = devices.get(dev.getPath());
+                ServiceRegistration registedService = devices.get(dev.getPath());
                 if(registedService != null) {
                     registedService.unregister();
                     devices.remove(dev.getPath());
