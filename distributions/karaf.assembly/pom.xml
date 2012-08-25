@@ -26,25 +26,9 @@
             <version>${karaf.version}</version>
             <type>tar.gz</type>
         </dependency>
-        <dependency>
-            <groupId>org.apache.karaf</groupId>
-            <artifactId>apache-karaf</artifactId>
-            <version>${karaf.version}</version>
-            <type>xml</type>
-            <classifier>features</classifier>
-        </dependency>
     </dependencies>
 
     <build>
-        <!--resources>
-            <resource>
-                <directory>/home/jbonofre/workspace/release/karaf-${karaf.version}/manual/src/main/filtered-resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
