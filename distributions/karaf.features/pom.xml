@@ -55,7 +55,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
                 <executions>
                     <execution>
                         <id>copy-features</id>
@@ -75,12 +74,9 @@
                     </execution>
                 </executions>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
                 <executions>
                     <execution>
                         <id>attach-artifacts</id>
@@ -100,29 +96,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!--plugin>
-                <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>features-maven-plugin</artifactId>
-                <version>${karaf.version}</version>
-                <executions>
-                    <execution>
-                        <id>add-features-to-repo</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>add-features-to-repo</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>mvn:org.apache.karaf/apache-karaf/${karaf.version}/xml/features</descriptor>
-                            </descriptors>
-                            <features>
-                                <feature>my-feature</feature>
-                            </features>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin-->
         </plugins>
     </build>
 </project>
