@@ -90,7 +90,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- project dependency versions -->
-        <pax.web>1.1.1</pax.web>
         <karaf.version>2.2.8</karaf.version>
     </properties>
 
@@ -139,48 +138,6 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-sslengine</artifactId>
-                <version>6.1.26</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-util</artifactId>
-                <version>6.1.26</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty</artifactId>
-                <version>6.1.26</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>servlet-api-2.5</artifactId>
-                <version>6.1.14</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.http.jetty</artifactId>
-                <version>2.2.0</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.sonatype.tycho</groupId>
-                <artifactId>org.eclipse.osgi</artifactId>
-                <version>3.6.2.R36x_v20110210</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.runner</groupId>
-                <artifactId>pax-runner</artifactId>
-                <version>1.7.6</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>2.5</version>
@@ -197,124 +154,11 @@
                 <artifactId>org.apache.karaf.shell.console</artifactId>
                 <version>${karaf.version}</version>
             </dependency>
-        
-            
-            <!-- 
-                think about getting rid of them 
-            -->
-            
-            
-            <!-- Pax dependencies -->
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-api</artifactId>
-                <version>${pax.web}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-spi</artifactId>
-                <version>${pax.web}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-jsp</artifactId>
-                <version>${pax.web}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-runtime</artifactId>
-                <version>${pax.web}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.web</groupId>
-                <artifactId>pax-web-jetty</artifactId>
-                <version>${pax.web}</version>
-                <scope>provided</scope>
-            </dependency>
-            
-            <!-- Aries dependencies -->
-            <dependency>
-                <groupId>org.apache.aries</groupId>
-                <artifactId>org.apache.aries.util</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.proxy</groupId>
-                <artifactId>org.apache.aries.proxy</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.quiesce</groupId>
-                <artifactId>org.apache.aries.quiesce.api</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.quiesce</groupId>
-                <artifactId>org.apache.aries.quiesce.manager</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.blueprint</groupId>
-                <artifactId>org.apache.aries.blueprint</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.blueprint</groupId>
-                <artifactId>org.apache.aries.blueprint.annotation.api</artifactId>
-                <version>0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.aries.blueprint</groupId>
-                <artifactId>org.apache.aries.blueprint.annotation.impl</artifactId>
-                <version>0.3</version>
-            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <scope>provided</scope>
                 <version>1.6.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <scope>runtime</scope>
-                <optional>true</optional>
-                <version>1.6.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <optional>true</optional>
-                <version>1.6.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.log4j</groupId>
-                <artifactId>com.springsource.org.apache.log4j</artifactId>
-                <scope>runtime</scope>
-                <type>jar</type>
-                <optional>true</optional>
-                <version>1.2.16</version>
-            </dependency>
-            <dependency>
-                <groupId>asm</groupId>
-                <artifactId>asm-all</artifactId>
-                <optional>true</optional>
-                <version>3.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.xbean</groupId>
-                <artifactId>xbean-finder</artifactId>
-                <version>3.7</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -342,38 +186,6 @@
                         <source>1.6</source>
                         <target>1.6</target>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.ops4j</groupId>
-                    <artifactId>maven-pax-plugin</artifactId>
-                    <version>1.5</version>
-                    <configuration>
-                        <provision>
-                            <param>--platform=equinox</param>
-                            <param>--version=3.7.1</param>
-                            <param>--ee=J2SE-1.6</param>
-                            <param>--vmo=-Dosgi.classloader.lock=classname</param>
-                            <param>--startLevel=5</param>
-                            <param>--bundleStartLevel=4</param>
-                            <param>--workingDirectory=${project.build.directory}/runtime</param>
-                            <param>mvn:${application.domain}/hid/${project.version}@1</param>
-                            <param>mvn:${application.domain}/lights.status/${project.version}@2</param>
-                            <param>mvn:${application.domain}/delcom.lights/${project.version}@2</param>
-                        </provision>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>ide-support</id>
-                            <goals>
-                                <goal>eclipse</goal>
-                            </goals>
-                            <configuration>
-                                <pde>true</pde>
-                                <downloadJavadocs>true</downloadJavadocs>
-                                <downloadSources>true</downloadSources>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
