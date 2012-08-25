@@ -54,7 +54,13 @@
             <timezone>UTC+1</timezone>
         </developer>
     </developers>
+   
     
+    <scm>
+      <connection>scm:git:git@github.com:cibuddy/cibuddy.git</connection>
+      <developerConnection>scm:git:git@github.com:cibuddy/cibuddy.git</developerConnection>
+      <url>git@github.com:cibuddy/cibuddy.git</url>
+    </scm> 
     <properties>
         <!-- Default OSGi Bundle Properties used by the maven-bundle-plugin -->
         <bundle.symbolicNameDirective />
