@@ -43,7 +43,8 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes</outputDirectory>
+                            <!-- use the default directory, usually target/classes/ -->
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/distribution</directory>
@@ -67,7 +68,6 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <!--descriptor>mvn:org.apache.karaf/apache-karaf/${karaf.version}/xml/features</descriptor-->
                                 <descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <features>
