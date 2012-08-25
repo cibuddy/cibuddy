@@ -4,4 +4,4 @@ jdk:
   - openjdk7
   - oraclejdk7
 install: mvn clean install -DskipTests=true
-skript: mvn package
+script: mvn package
