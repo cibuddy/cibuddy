@@ -74,6 +74,7 @@
                                 <feature>cibuddy-main</feature>
                                 <feature>cibuddy-test</feature>
                             </features>
+                            <repository>${project.build.directory}/features-repo</repository>
                         </configuration>
                     </execution>
                 </executions>
