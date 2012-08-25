@@ -99,7 +99,6 @@
         <module>main</module>
         <module>distributions</module>
         <module>servers</module>
-        <module>utils</module>
         <module>ui</module>
     </modules>
 
