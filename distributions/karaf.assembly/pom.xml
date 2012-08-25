@@ -14,9 +14,11 @@
     <dependencies>
         <!-- project dependencies -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gogo.shell.extension</artifactId>
+            <groupId>com.cibuddy</groupId>
+            <artifactId>karaf.features</artifactId>
             <version>${project.version}</version>
+            <type>xml</type>
+            <classifier>features</classifier>
         </dependency>
         
         <!-- 3rd party dependencies -->
@@ -38,12 +40,21 @@
                         <id>filter</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>resources</goal>
+                            <goal>copy-resources</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/distribution</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!--plugin>
+            <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>features-maven-plugin</artifactId>
                 <version>${karaf.version}</version>
@@ -56,93 +67,21 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>mvn:org.apache.karaf/apache-karaf/${karaf.version}/xml/features</descriptor>
-                                <descriptor>file:/home/jbonofre/workspace/release/karaf-${karaf.version}/manual/target/classes/my-features.xml</descriptor>
+                                <!--descriptor>mvn:org.apache.karaf/apache-karaf/${karaf.version}/xml/features</descriptor-->
+                                <descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <features>
-                                <feature>my-feature</feature>
+                                <feature>cibuddy-main</feature>
+                                <feature>cibuddy-test</feature>
                             </features>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.4</version>
                 <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <!--artifactItem>
-                                    <groupId>my.groupId</groupId>
-                                    <artifactId>my.branding.id</artifactId>
-                                    <version>1.0</version>
-                                    <outputDirectory>target/dependencies</outputDirectory>
-                                    <destFileName>mybranding.jar</destFileName>
-                                </artifactItem-->
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>core</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>project.configuration</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>jenkins.status</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>hid</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>ibuddy</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>delcom.lights</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>gogo.shell.extension</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.apache.httpcomponents</groupId>
-                                    <artifactId>httpclient-osgi</artifactId>
-                                    <!--version>${project.version}</version-->
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.apache.httpcomponents</groupId>
-                                    <artifactId>httpcore-osgi</artifactId>
-                                    <!--version>${project.version}</version-->
-                                    <outputDirectory>target/dependencies/deploy</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                     <execution>
                     <!-- Uncompress the standard Karaf distribution -->
                         <id>unpack</id>
@@ -191,5 +130,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -64,28 +64,6 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/main/resources/deploy</directory>
-            <outputDirectory>/deploy/</outputDirectory>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
-        
-        <!-- Copy over jar files -->
-        <fileSet>
-            <directory>target/dependencies/deploy</directory>
-            <outputDirectory>/deploy/</outputDirectory>
-            <includes>
-                <include>**</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/main/distribution</directory>
-            <outputDirectory>/</outputDirectory>
-            <fileMode>0644</fileMode>
-        </fileSet>
-        <fileSet>
             <directory>target/classes/etc</directory>
             <outputDirectory>/etc/</outputDirectory>
             <lineEnding>unix</lineEnding>
@@ -96,24 +74,5 @@
             <directory>target/features-repo</directory>
             <outputDirectory>/system</outputDirectory>
         </fileSet>
-
     </fileSets>
-
-    <!--files>
-        <file>
-            <source>/home/jbonofre/workspace/release/karaf-${karaf.version}/manual/target/dependencies/apache-karaf-2.2.5/bin/karaf</source>
-            <outputDirectory>/bin/</outputDirectory>
-            <destName>my-custom</destName>
-            <fileMode>0755</fileMode>
-            <lineEnding>unix</lineEnding>
-        </file>
-        <file>
-            <source>/home/jbonofre/workspace/release/karaf-${karaf.version}/manual/target/classes/features.xml</source>
-            <outputDirectory>/system/my.groupid/my-features/${karaf.version}</outputDirectory>
-            <destName>my-features-${karaf.version}-features.xml</destName>
-            <fileMode>0644</fileMode>
-            <lineEnding>unix</lineEnding>
-        </file>
-    </files-->
-
 </assembly>
