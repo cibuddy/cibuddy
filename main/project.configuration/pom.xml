@@ -72,6 +72,13 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
+            <!-- attach obsolete artifacts for sonatypes oss (also for 'package' phase) -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
             <!-- enable it being an osgi bundle -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
