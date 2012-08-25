@@ -16,7 +16,6 @@
     </parent>
     
     <modules>
-        <module>pax.assembly</module>
         <module>karaf.assembly</module>
     </modules>
 </project>
