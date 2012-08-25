@@ -1,0 +1,1 @@
+mvn clean; grep -rl '1.0-SNAPSHOT' ./ | xargs sed -i 's/1.0-SNAPSHOT/0.9-SNAPSHOT/g'
