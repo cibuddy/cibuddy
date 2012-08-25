@@ -41,6 +41,7 @@
                 <include>bin/stop</include>
             </includes>
             <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
         </fileSet>
 
         <!-- Copy over bin/* separately for windows -->
@@ -53,6 +54,8 @@
                 <include>bin/start.bat</include>
                 <include>bin/stop.bat</include>
             </includes>
+            <fileMode>0644</fileMode>
+            <lineEnding>dos</lineEnding>
         </fileSet>
         
         <!-- Copy over sample configurations -->
