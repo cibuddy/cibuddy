@@ -7,14 +7,18 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 
 public class DemoLight extends JFrame {
 
     private Container content;
-    private JPanel oldPanel;
+    private Light oldPanel;
+    public final static Light BLUE_LIGHT = new BlueLight();
+    public final static Light RED_LIGHT = new RedLight();
+    public final static Light YELLOW_LIGHT = new YellowLight();
+    public final static Light GREEN_LIGHT = new GreenLight();   
+    public final static Light WHITE_LIGHT = new WhiteLight();    
 
     public DemoLight() {
         super("Jenkins Status Light Indicator");
@@ -26,15 +30,12 @@ public class DemoLight extends JFrame {
         addWindowListener(new ExitListener());
         content = getContentPane();
         content.setPreferredSize(new Dimension(400, 400));
-        content.setBackground(Color.lightGray);
         content.setBackground(Color.white);
-        JPanel drawingArea = new RedLight();
-        //content.add(drawingArea, BorderLayout.WEST);
-        pack();
-        setVisible(true);
+        // set the "off" light
+        updateCircle(WHITE_LIGHT);
     }
 
-    public void updateCircle(Light panel) {
+    public final void updateCircle(Light panel) {
         if (oldPanel != null) {
             content.remove(oldPanel);
         }
@@ -42,15 +43,21 @@ public class DemoLight extends JFrame {
         content.add(panel, BorderLayout.WEST);
         pack();
         setVisible(true);
+        repaint();
     }
     
     public void turnOff(){
-        if (oldPanel != null) {
-            content.remove(oldPanel);
-        }
-        oldPanel = null;
-        pack();
-        setVisible(true);
+        updateCircle(WHITE_LIGHT);
+    }
+    
+    /**
+     * Obtain the color of the light (black in case the light is off).
+     * 
+     * @return color of the light.
+     */
+    public Color getLightColor(){
+        // this should never be null (set in the constructor)
+        return oldPanel.getLightColor();
     }
 }
 class ExitListener extends WindowAdapter {

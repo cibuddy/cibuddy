@@ -22,6 +22,7 @@ public class Light extends JPanel {
         setBackground(Color.white);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -34,6 +35,10 @@ public class Light extends JPanel {
         g.setColor(color);
         g.fillOval(mid_x - 180, mid_y - 180, 350, 350);
 
+    }
+    
+    public Color getLightColor(){
+        return color;
     }
 }
 
@@ -60,5 +65,10 @@ class GreenLight extends Light {
 class YellowLight extends Light {
     public YellowLight(){
         super(Color.YELLOW);
+    }
+}
+class WhiteLight extends Light {
+    public WhiteLight(){
+        super(Color.WHITE);
     }
 }

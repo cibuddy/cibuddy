@@ -16,13 +16,9 @@ import org.osgi.framework.ServiceRegistration;
 public class Activator implements BundleActivator, IBuildStatusIndicator {
 
     private DemoLight dl = null;
-    private BlueLight bl = new BlueLight();
-    private RedLight rl = new RedLight();
-    private YellowLight yl = new YellowLight();
-    private GreenLight gl = new GreenLight();
-
     private static BundleContext ctx;
     private ServiceRegistration sr;
+    
     @Override
     public void start(BundleContext bc) throws Exception {
         ctx = bc;
@@ -53,36 +49,43 @@ public class Activator implements BundleActivator, IBuildStatusIndicator {
     public static BundleContext getBundleContext(){
         return ctx;
     }
+    @Override
     public String getComponentId(){
         return this.getClass().getPackage().getName();
     }
 
+    @Override
     public String getIndicatorId() {
         return "DemoLight";
     }
 
+    @Override
     public void success(){
-        System.out.println("indicating success");
-        dl.updateCircle(gl);
+//        System.out.println("indicating success");
+        dl.updateCircle(DemoLight.GREEN_LIGHT);
     }
 
+    @Override
     public void warning(){
-        System.out.println("indicating warning");
-        dl.updateCircle(yl);
+//        System.out.println("indicating warning");
+        dl.updateCircle(DemoLight.YELLOW_LIGHT);
     }
     
+    @Override
     public void failure(){
-        System.out.println("indicating failure");
-        dl.updateCircle(rl);
+//        System.out.println("indicating failure");
+        dl.updateCircle(DemoLight.RED_LIGHT);
     }
 
+    @Override
     public void building(){
-        System.out.println("indicating building");
-        dl.updateCircle(bl);
+//        System.out.println("indicating building");
+        dl.updateCircle(DemoLight.BLUE_LIGHT);
     }
     
+    @Override
     public void off(){
-        System.out.println("indicating light off");
+//        System.out.println("indicating light off");
         dl.turnOff();
     }
 }
