@@ -4,41 +4,77 @@ import com.cibuddy.hid.HIDServiceConstants;
 import com.codeminders.hidapi.HIDDeviceInfo;
 import com.codeminders.hidapi.HIDManager;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TimerTask;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HIDManagerImpl extends HIDManager {
+public class HIDManagerImpl extends TimerTask{
     
     private static final Logger LOG = LoggerFactory.getLogger(HIDManagerImpl.class);
     private HashMap<String,ServiceRegistration> devices = new HashMap<String,ServiceRegistration>();
+    private Set<HIDDeviceInfo> hidInfodevices = new HashSet<HIDDeviceInfo>();
     
     private final Object guard = new Object();
-    private boolean enabled = true;
+    private volatile boolean enabled = true;
+    private HIDManager manager = null;
+    
     /**
-     * Creates a new <code>HIDManagerTest</code> object.
+     * Creates a new <code>HIDManagerImpl</code> object.
      */
     public HIDManagerImpl() throws IOException {
-        super();
-               
+        manager = HIDManager.getInstance();
     }
     
-    public void setup() throws IOException{
-        HIDDeviceInfo[] devs = listDevices();
-        if(devs != null) {
-            LOG.debug("Found " + devs.length + " devices:");
+    public synchronized void updateDeviceList() throws IOException{
+        HIDDeviceInfo[] newdevs = manager.listDevices();
+        // some logging
+        if(newdevs != null) {
+            LOG.debug("Found " + newdevs.length + " devices:");
         } else {
             LOG.debug("Found 0 devices:");
         }
-        if(devs != null){
-            for (int i=0;i<devs.length;i++){
-                exposeDevice(devs[i]);
+        // now sorting through the result
+        Set<HIDDeviceInfo> newDevices = new HashSet<HIDDeviceInfo>();
+        newDevices.addAll(new ArrayList<HIDDeviceInfo>(Arrays.asList(newdevs)));
+        
+        // first quickly check if something changed at all...
+        if(hidInfodevices.equals(newDevices)){
+            // nothing to do...
+            return;
+        }
+        
+        
+        Set<HIDDeviceInfo> removedDevices = new HashSet<HIDDeviceInfo>();
+        removedDevices.addAll(hidInfodevices);
+        removedDevices.removeAll(newDevices);
+        // TODO: now unregister all services for those devices
+        if(removedDevices != null){
+            Iterator<HIDDeviceInfo> removedDeviceIter = removedDevices.iterator();
+            while (removedDeviceIter.hasNext()){
+                withdrawDevice(removedDeviceIter.next());
             }
         }
+        // obtain the new devices (not already known)
+        Set<HIDDeviceInfo> tempNewDevices = new HashSet<HIDDeviceInfo>();
+        tempNewDevices.addAll(newDevices);
+        tempNewDevices.removeAll(hidInfodevices);
+        if(tempNewDevices != null){
+            Iterator<HIDDeviceInfo> newDeviceIter = tempNewDevices.iterator();
+            while (newDeviceIter.hasNext()){
+                exposeDevice(newDeviceIter.next());
+            }
+        }
+        // set the deviceinfo set correctly
+        hidInfodevices = newDevices;
     }
     
     private void exposeDevice(HIDDeviceInfo dev) {
@@ -57,7 +93,7 @@ public class HIDManagerImpl extends HIDManager {
                 safePut(dict,HIDServiceConstants.USAGE_PAGE, Integer.valueOf(dev.getUsage_page()).toString());
                 ServiceRegistration registedService = Activator.getContext().registerService(HIDDeviceInfo.class.getName(), dev, dict);
                 devices.put(dev.getPath(), registedService);
-                LOG.debug("Added:" + "\n" + dev + "\n");
+                LOG.debug("HID - Added:" + "\n" + dev + "\n");
             }
         }
     }
@@ -77,7 +113,7 @@ public class HIDManagerImpl extends HIDManager {
                     registedService.unregister();
                     devices.remove(dev.getPath());
                     // calling close on the device doesn't make sence (already closed)
-                    System.out.print("HID - Removal:" + "\n" + dev + "\n");
+                    LOG.debug("HID - Removal:" + "\n" + dev + "\n");
                 }
             }
         }
@@ -119,6 +155,16 @@ public class HIDManagerImpl extends HIDManager {
                     next.unregister();
                 }
             }
+            manager.release();
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            updateDeviceList();
+        } catch (IOException ex) {
+            LOG.info(HIDManagerImpl.class.getName(),ex);
         }
     }
 }

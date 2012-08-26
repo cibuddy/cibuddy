@@ -164,5 +164,35 @@ public class HIDDeviceInfo
         builder.append("]");
         return builder.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + (this.path != null ? this.path.hashCode() : 0);
+        hash = 11 * hash + this.vendor_id;
+        hash = 11 * hash + this.product_id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final HIDDeviceInfo other = (HIDDeviceInfo) obj;
+        if ((this.path == null) ? (other.path != null) : !this.path.equals(other.path)) {
+            return false;
+        }
+        if (this.vendor_id != other.vendor_id) {
+            return false;
+        }
+        if (this.product_id != other.product_id) {
+            return false;
+        }
+        return true;
+    }
     
 }
