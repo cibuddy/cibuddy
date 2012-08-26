@@ -3,12 +3,14 @@ package com.codeminders.hidapi;
 import java.io.IOException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  *
  * @author Mirko Jahn <mirkojahn@gmail.com>
  */
+@Ignore
 public class HIDManagerTest {
     
     @BeforeClass
