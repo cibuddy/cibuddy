@@ -69,15 +69,18 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         }
     }
 
+    @Override
     public String getComponentId() {
         return this.getClass().getPackage().getName();
     }
 
+    @Override
     public String getIndicatorId() {
         // FIXME: for more than one instance use the unique id
         return figure;
     }
 
+    @Override
     public void success() {
         try{
             LOG.debug("indicating success.");
@@ -89,6 +92,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         }
     }
 
+    @Override
     public void warning() {
         try{
             LOG.debug("indicating warning.");
@@ -99,6 +103,7 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         }
     }
 
+    @Override
     public void failure() {
         try{
             LOG.debug("indicating failure.");
@@ -109,12 +114,14 @@ public class IBuddyLightHandle implements IBuildStatusIndicator {
         }
     }
 
+    @Override
     public void building() {
         LOG.info("Indicating 'building' by beating heart.");
         buddyFigure.enableBeatingHeart();
     }
     
     
+    @Override
     public void off(){
         try {
             LOG.debug("indicating light OFF/black.");
