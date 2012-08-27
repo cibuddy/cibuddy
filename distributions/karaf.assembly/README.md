@@ -1,33 +1,29 @@
 # The Karaf based CIBuddy application
 
-This project creates the binaries that could be used for all kinds of installation scenario's. It is based on the [Karaf OSGi][1] framework an utilizes a couple of its features for convenient usage like a shell extension.
+This project creates the binaries that could be used for all kinds of installation scenario's. It is based on the [Karaf OSGi][1] framework and utilizes a couple of its features for convenient usage like a shell extension.
 
 ## Installation
 
 There are two ways of installing the application. One is a more [interactive approach][2], that uses a shell. The other one installs the application as a [system service][3]. For simplicity only the first one is explained here. For the second one please refer to the [karaf manual][3].
 
-1. Unpack the `karaf.assembly-*.zip` or `karaf.assembly-*.tar.gz` file depending on your OS. 
+1. Unpack the `karaf.assembly-*.zip` or `karaf.assembly-*.tar.gz` file depending on your liking. 
 2. Change into the bin folder (like: `cd ./bin`)
 3. Start the application by calling `bash ./karaf` on Linux/ Mac or `karaf.bat` on Windows.
 4. To stop the application hit `ctrl` + `D`
 
 ## Configuration
 
-The distribution contains a "deploy" folder. This folder could handle two types of
-configuration files. First of all the list of jenkins servers. The file is called
-`*.jenkins` and a [sample][4] is located in the folder already. The syntax is simply a
-properties file with the key being a unique alias for the server and the URI that
-points to the Jenkins web ui (the xml api of jenkins must be enabled and not
-password protected to gather build information - for now). 
+The distribution contains a "deploy" folder. This folder could handle two types of configuration files. First of all the list of jenkins servers. The file is 
+`*.jenkins` and a [sample][4] is located in the folder already. The syntax is a
+properties file with the key being a unique alias for the server and the URI 
+points to the Jenkins web ui (the xml api of Jenkins must be enabled and read access must not be password protected to gather build information - for now). 
 
 <pre>
 localhost.test=http://localhost:8080
 </pre>
 
 Second, there is the actual 
-setup configuration for your build tests (what should happen if a build has a certain
-result?). This is a (rather) simple xml file specifying what happens when. There
-is also a [sample][5] file in the `deploy` folder. The respective [xsd][6] is located in the 
+setup configuration for your build tests (what should happen if a build has a certain result?). This is a (rather) simple xml file specifying what happens when. There is also a [sample][5] file in the `sample` folder. The respective 
 `com.cibuddy.project.configuration` project under `src/main/resources`.
 
 ```xml
@@ -48,6 +44,7 @@ is also a [sample][5] file in the `deploy` folder. The respective [xsd][6] is lo
             <statusIndicator>
                 <id>0</id>
             </statusIndicator>
+            <!-- processing of the actions is first come, first serve in the order of listing -->
             <action condition="all">
                 <status>blue</status>
                 <status>blue_anime</status>
@@ -89,15 +86,15 @@ This is an incomplete list of available commands in the karaf assembly.
 	</tr>
 	<tr>
 		<td><code>cibuddy:indicator-test</code></td>
-		<td>Expects an action and the index of the indicator to use. A sample would look like this: <code>cibuddy:indicator-test success 0</code>. The id is the same as it would be used for a concrete build test configuration. A command completer helps with identifying the possible actions (just press <code>tab</code>).</td>
+		<td>Expects an action and the index of the indicator to use. A sample would look like this: <code>cibuddy:indicator-test success 0</code>. The id is the same as it would be used for a concrete build test configuration. The command completion helps with identifying the possible actions (just press <code>tab</code>).</td>
 	</tr>
 	<tr>
 		<td><code>cibuddy:server-details</code></td>
-		<td>Displays a list of all projects associated with a given server. The server given is the id displayed in the server-list command.</td>
+		<td>Displays a list of all projects associated with a given server. The server given is the id displayed in the <code>cibuddy:server-list</code> command.</td>
 	</tr>
 	<tr>
 		<td><code>cibuddy:server-list</code></td>
-		<td>Displays a list of all configured servers.</td>
+		<td>Displays a list of all configured servers, introduced with the properties file for jenkins servers.</td>
 	</tr>
 </table>
 
