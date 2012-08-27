@@ -5,9 +5,9 @@ continuous environment. This is accomplished by several hard and software connec
 
 ## Hardware Light Integration
 
-The CIBuddy application currently supports two hardware lights. First of all, the well known [Delcom Lights][1] and secondly the [i-Buddy][2] MSN notification figures. Just plug-in your lights and wire each one with your distinct build configuration. You could use multiple lights and also mix and match different types of lights to indicate your build status independently for each project for instance. The cool thing is that an i-Buddy only costs about [15 Euro][8], which is a very cool price for the fun.
+The CIBuddy application currently supports two hardware lights. First of all, the well known [Delcom Lights][1] and secondly the [i-Buddy][2] MSN notification figures. Just plug-in your lights and wire each one with your distinct build configuration. You could use multiple lights and also mix and match different types of lights to indicate your build status independently for each project for instance. The cool thing is that an i-Buddy only costs about [15 Euro][8], which is a very cool price for the fun. Below is a picture from our deployment. You could see 3 indicators (a delcom light, a devel i-Buddy and the regular i-Buddy) indicating the build status of various build branches.
 
-![The i-Buddy for instance...][3] ![i-Buddy packaging][4]
+![9] 
 
 ## Jenkins Server Integration
 
@@ -67,5 +67,5 @@ As mentioned before, this is the early alpha phase of the project and very likel
 [5]: https://github.com/cibuddy/cibuddy/tree/master/distributions/karaf.assembly "CIBuddy installation instructions"
 [6]: https://github.com/cibuddy/cibuddy/downloads "CIBuddy Binary Downloads"
 [7]: https://github.com/cibuddy/cibuddy/issues "CIBuddy Open Issues"
-[8]: http://www.idealo.de/preisvergleich/OffersOfProduct/1608018_-usb-messenger-i-buddy.html 
-    "Idealo Preisvergleich - i-buddy"
+[8]: http://www.idealo.de/preisvergleich/OffersOfProduct/1608018_-usb-messenger-i-buddy.html "Idealo Preisvergleich - i-buddy"
+[9]: http://cibuddy.com/cibuddy/pics/cibuddy_groupOfIndicators_small.jpg "CIBuddies in Action - all good :-)"
