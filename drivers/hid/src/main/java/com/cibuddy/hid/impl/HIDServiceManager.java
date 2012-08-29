@@ -27,9 +27,9 @@ import org.slf4j.LoggerFactory;
  * @author Mirko Jahn <mirkojahn@gmail.com>
  * @version 1.0
  */
-public class HIDManagerImpl extends TimerTask{
+public class HIDServiceManager extends TimerTask{
     
-    private static final Logger LOG = LoggerFactory.getLogger(HIDManagerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HIDServiceManager.class);
     private HashMap<String,ServiceRegistration> devices = new HashMap<String,ServiceRegistration>();
     private Set<HIDDeviceInfo> hidInfodevices = new HashSet<HIDDeviceInfo>();
     
@@ -38,11 +38,11 @@ public class HIDManagerImpl extends TimerTask{
     private HIDManager manager = null;
     
     /**
-     * Creates a new <code>HIDManagerImpl</code> object.
+     * Creates a new <code>HIDServiceManager</code> object.
      * 
      * @since 1.0
      */
-    public HIDManagerImpl() throws IOException {
+    public HIDServiceManager() throws IOException {
         manager = HIDManager.getInstance();
     }
     
@@ -220,7 +220,7 @@ public class HIDManagerImpl extends TimerTask{
         try {
             updateDeviceList();
         } catch (IOException ex) {
-            LOG.info(HIDManagerImpl.class.getName(),ex);
+            LOG.info(HIDServiceManager.class.getName(),ex);
         }
     }
 }

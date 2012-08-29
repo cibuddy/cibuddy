@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class Activator implements BundleActivator {
     
     private static BundleContext bctx;
-    private HIDManagerImpl manager;
+    private HIDServiceManager manager;
     private Timer usbDeviceUpdateTimer;
     private final long EXECUTION_DELAY = 10*1000; // 10 seconds
     private final long UPDATE_INTERVAL = 5*1000; // 5 seconds
@@ -43,7 +43,7 @@ public class Activator implements BundleActivator {
             e.printStackTrace(System.out);
             throw new Exception("Start Problem with bundle "+bc.getBundle().getBundleId(),e);
         }
-        manager = new HIDManagerImpl();
+        manager = new HIDServiceManager();
         // use the method that is not throwing any exceptions here!
         manager.run();
         usbDeviceUpdateTimer = new Timer();
