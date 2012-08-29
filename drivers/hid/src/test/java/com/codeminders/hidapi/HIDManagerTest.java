@@ -7,12 +7,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- *
+ * A simple test to see if the native libraries could be loaded.
+ * 
  * @author Mirko Jahn <mirkojahn@gmail.com>
+ * @version 1.0
  */
 @Ignore
 public class HIDManagerTest {
     
+    /**
+     * Loads the native libraries before the test execution.
+     * @since 1.0
+     */
     @BeforeClass
     public static void beforeEverything() {
         ClassPathLibraryLoader.loadNativeHIDLibrary();

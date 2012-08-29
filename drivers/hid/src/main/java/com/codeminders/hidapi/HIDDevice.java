@@ -1,4 +1,3 @@
-
 package com.codeminders.hidapi;
 
 import java.io.IOException;

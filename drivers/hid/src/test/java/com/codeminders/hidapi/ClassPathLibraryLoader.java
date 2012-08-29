@@ -5,6 +5,15 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Helper class to manually load the native libraries from the local class path.
+ * 
+ * This class is not required in an OSGi environment and thus is only located in
+ * tests. Native library loading is done by the OSGi environment with the meta
+ * data located in the <code>META-INF/manifest.mf</code> file instead.
+ * 
+ * @author Mirko Jahn <mirkojahn@gmail.com>
+ */
 public class ClassPathLibraryLoader {
 
     private static final String[] HID_LIB_NAMES = {

@@ -1,12 +1,19 @@
-
 package com.codeminders.hidapi;
 
 import java.io.IOException;
 
 /**
  * Container class which contains HID device properties.
+ * 
+ * An instance of this class is exposed as an OSGi Service for every connected
+ * USB device. The list of devices is updated by the bundle on a regular basis.
+ * The service is annotated with properties defined in the 
+ * <code>com.cibuddy.hid.HIDServiceConstants</code> interface to allow for easier
+ * service discovery for your specific device.
  *
  * @author lord
+ * @version 1.1 
+ * @since 1.1 overwritten <code>#hashcode()</code> and <code>#equals()</code> methods.
  */
 public class HIDDeviceInfo
 {
@@ -24,6 +31,8 @@ public class HIDDeviceInfo
     /**
      * Protected constructor, used from JNI Allocates a new
      * <code>HIDDeviceInfo<code> object.
+     * 
+     * @since 1.0
      */
     HIDDeviceInfo()
     {
@@ -31,7 +40,13 @@ public class HIDDeviceInfo
     
     /** 
      * Get the platform-specific device path. 
+     * 
+     * A unique path for a device during a JVM instance run (restart of the JVM
+     * will produce a different path), that will change when a device is detached
+     * and re-attached. 
+     * 
      * @return the string value
+     * @since 1.0
      */
     public String getPath()
     {
@@ -40,7 +55,9 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device USB vendor ID. 
+     * 
      * @return integer value
+     * @since 1.0
      */
     public int getVendor_id()
     {
@@ -49,7 +66,9 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device USB product ID.
+     * 
      * @return the integer value
+     * @since 1.0
      */
     public int getProduct_id()
     {
@@ -58,7 +77,9 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device serial number.
+     * 
      * @return the string value
+     * @since 1.0
      */
     public String getSerial_number()
     {
@@ -68,7 +89,9 @@ public class HIDDeviceInfo
     /** 
      * Get the device release number in binary-coded decimal,
      * also known as device version number. 
+     * 
      * @return the integer value
+     * @since 1.0
      */
     public int getRelease_number()
     {
@@ -77,7 +100,10 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device manufacturer string. 
+     * !Not all devices support this!
+     * 
      * @return the string value
+     * @since 
      */
     public String getManufacturer_string()
     {
@@ -85,8 +111,11 @@ public class HIDDeviceInfo
     }
     
     /** 
-     * Get the device product string
+     * Get the device product string.
+     * !Not all devices support this!
+     * 
      * @return the integer value
+     * @since
      */
     public String getProduct_string()
     {
@@ -95,7 +124,9 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device usage page (Windows/Mac only).
+     * 
      * @return the integer value
+     * @since 1.0
      */
     public int getUsage_page()
     {
@@ -104,7 +135,9 @@ public class HIDDeviceInfo
     
     /** 
      * Get the device usage (Windows/Mac only).
+     * 
      * @return the integer value
+     * @since 1.0
      */
     public int getUsage()
     {
@@ -112,11 +145,14 @@ public class HIDDeviceInfo
     }
     
     /**
-     * Get the USB interface which this logical device
-     * represents. Valid on both Linux implementations in all cases,
+     * Get the USB interface which this logical device represents. 
+     * 
+     * Valid on both Linux implementations in all cases,
      * and valid on the Windows implementation only if the device
      * contains more than one interface.
+     * 
      * @return the integer value
+     * @since 1.0
      */
     public int getInterface_number()
     {
@@ -129,13 +165,15 @@ public class HIDDeviceInfo
      *
      * @return return a reference to the <code>HIDDevice<code> object
      * @throws IOException
+     * @since 1.0
      */
     public native HIDDevice open() throws IOException;
     
     /**
-     *  Override method for conversion this object to <code>String<code> object.
+     * Override method for conversion this object to <code>java.lang.String<code> object.
      *
      * @return return a reference to the <code>String<code> object
+     * @since 1.0
      */
     @Override
     public String toString()
@@ -165,15 +203,36 @@ public class HIDDeviceInfo
         return builder.toString();
     }
 
+    /**
+     * Override of the hashcode method from <code>java.lang.Object</code>.
+     * 
+     * The hashcode is calculated out of path, vendor id, product id and serial 
+     * number. The path alone could have been enough, but might be null, so the others have
+     * been included as well.
+     * 
+     * @return the hashcode calculated out of path, vendor id, product id and serial number.
+     * @since 1.1 new method added by Mirko Jahn
+     */
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 11 * hash + (this.path != null ? this.path.hashCode() : 0);
         hash = 11 * hash + this.vendor_id;
         hash = 11 * hash + this.product_id;
+        hash = 11 * hash + (this.serial_number != null ? this.serial_number.hashCode() : 0);
         return hash;
     }
 
+    /**
+     * Override of the equals method from <code>java.lang.Object</code>.
+     * 
+     * Similar to the <code>#hashcode()</code> method, the following parameter of
+     * the object are considered: path, vendor id, product id and serial number.
+     * 
+     * @param obj the object to compare to.
+     * @return true in case they are equal.
+     * @since 1.1 new method added by Mirko Jahn
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -183,6 +242,7 @@ public class HIDDeviceInfo
             return false;
         }
         final HIDDeviceInfo other = (HIDDeviceInfo) obj;
+        // might be null, so make sure this doesn't crash
         if ((this.path == null) ? (other.path != null) : !this.path.equals(other.path)) {
             return false;
         }
@@ -190,6 +250,10 @@ public class HIDDeviceInfo
             return false;
         }
         if (this.product_id != other.product_id) {
+            return false;
+        }
+        // might be null, so make sure this doesn't crash
+        if ((this.serial_number == null) ? (other.serial_number != null) : !this.serial_number.equals(other.serial_number)) {
             return false;
         }
         return true;
