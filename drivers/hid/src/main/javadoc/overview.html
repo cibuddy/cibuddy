@@ -1,0 +1,49 @@
+<html>
+    <body>
+        A <a title="javahidapi homepage" href="http://code.google.com/p/javahidapi/">javahidapi project</a> bundle wrapper making HID USB devices available in OSGi.
+        
+        <p>
+            This bundle provides a very simple integration of HID USB devices in
+            your OSGi environment. The native drivers are loaded depending on your
+            OS automatically. Each device is expose as an OSGi Service as a
+            {@link com.codeminders.hidapi.HIDDeviceInfo } class. The service is
+            annotated with properties found in the {@link com.cibuddy.hid.HIDServiceConstants }
+            class. For more details, please refer to the {@link com.codeminders.hidapi } 
+            and {@link com.cibuddy.hid } packages and its content.
+        </p>
+        
+        <h3>Supported Operating systems:</h3>
+        <table border="1" cellpadding="3" cellspacing="0">
+            <tbody>
+            <tr>
+                <th>OS</th>
+                <th>Architecture</th>
+                <th>bit</th>
+            </tr>
+            <tr>
+                <td>Windows</td>
+                <td>x86</td>
+                <td>32 and 64 bit</td>
+            </tr>
+            <tr>
+                <td>Mac OS X</td>
+                <td>x86</td>
+                <td>32 and 64 bit</td>
+            </tr>
+            <tr>
+                <td>Linux</td>
+                <td>x86</td>
+                <td>32 and 64 bit</td>
+            </tr>
+            </tbody>
+        </table>
+        
+        <p>
+            For a tested and more detailed compatibility list, please refer to the 
+            project page on github: <a href="https://github.com/cibuddy/cibuddy/tree/master/drivers/hid">HID Driver Project Page</a>
+        </p>
+        @since 1.0.0 of the <a href="https://github.com/cibuddy/cibuddy/">CIBuddy</a> project.
+        @author Mirko Jahn (wrapping, everything else was written by the <a title="javahidapi homepage" href="http://code.google.com/p/javahidapi/">javahidapi project</a>
+        @version 1.0
+    </body>
+</html>

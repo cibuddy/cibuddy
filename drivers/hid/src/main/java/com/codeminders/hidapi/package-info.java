@@ -1,5 +1,5 @@
 /**
- * This package is copied (and slightly modified) from the <a title="javahidapi homepage" src="http://code.google.com/p/javahidapi/">javahidapi project</a>.
+ * This package is copied (and slightly modified) from the <a title="javahidapi homepage" href="http://code.google.com/p/javahidapi/">javahidapi project</a>.
  * 
  * <p>
  * The main differences between this and the javahidapi project are that not all
@@ -20,9 +20,9 @@
  * be good to go. However on Linux libusb and others in a specific version are
  * required. Check these links to ensure everything works as expected:
  * <ul>
- *  <li><a title="javahidapi homepage" src="http://code.google.com/p/javahidapi/">javahidapi project</a></li>
- *  <li><a title="libusb homepage" src="http://www.libusb.org/"></a></li>
- *  <li><a title="libusb github page" src="https://github.com/signal11/hidapi"></a></li>
+ *  <li><a title="javahidapi homepage" href="http://code.google.com/p/javahidapi/">javahidapi project</a></li>
+ *  <li><a title="libusb homepage" href="http://www.libusb.org/">libusb homepage</a></li>
+ *  <li><a title="libusb github page" href="https://github.com/signal11/hidapi">libusb github page</a></li>
  * </ul>
  * </p>
  * @version 1.1
