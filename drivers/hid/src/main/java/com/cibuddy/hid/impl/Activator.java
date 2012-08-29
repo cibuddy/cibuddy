@@ -28,17 +28,19 @@ public class Activator implements BundleActivator {
             LOG.info("Loading native HID libraries. This can't be undone, until the JVM got bounced.");
             System.loadLibrary("hidapi-jni");
             LOG.debug("Done loading native libraries. Don't even think about calling update on this bundle with ID: "+bc.getBundle().getBundleId());
-            manager = new HIDManagerImpl();
-            manager.updateDeviceList();
-            usbDeviceUpdateTimer = new Timer();
-            usbDeviceUpdateTimer.schedule(manager, EXECUTION_DELAY, UPDATE_INTERVAL);
-            LOG.info("Finished exposing HID devices as services.");
+            
         } catch (Throwable e) {
             LOG.warn("Huston we have a problem. Loading of the hid driver failed.",e);
             System.out.println("Huston we have a problem. Loading of the hid driver failed: "+e.getMessage());
             e.printStackTrace(System.out);
             throw new Exception("Start Problem with bundle "+bc.getBundle().getBundleId(),e);
         }
+        manager = new HIDManagerImpl();
+        // use the method that is not throwing any exceptions here!
+        manager.run();
+        usbDeviceUpdateTimer = new Timer();
+        usbDeviceUpdateTimer.schedule(manager, EXECUTION_DELAY, UPDATE_INTERVAL);
+        LOG.info("Finished exposing HID devices as services.");
     }
 
     @Override
