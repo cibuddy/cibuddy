@@ -1,6 +1,5 @@
 package com.cibuddy.hid.impl;
 
-import com.codeminders.hidapi.HIDManager;
 import java.util.Timer;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -8,7 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * The Bundle Activator.
+ * 
+ * Initiate the native code loading and starting the Timer for updating the USB
+ * device list and exposing them as OSGi Services of type <code>com.codeminders.hidapi.HIDDeviceInfo</code>.
+ * 
  * "Mirko Jahn" <mirkojahn@gmail.com>
  * @version 1.0
  */
@@ -21,6 +24,11 @@ public class Activator implements BundleActivator {
     private final long UPDATE_INTERVAL = 5*1000; // 5 seconds
     private static final Logger LOG = LoggerFactory.getLogger(Activator.class);
     
+    /**
+     * {@inheritDoc}
+     * 
+     * @since 1.0
+     */
     @Override
     public void start(BundleContext bc) throws Exception {
         bctx = bc;
@@ -43,6 +51,11 @@ public class Activator implements BundleActivator {
         LOG.info("Finished exposing HID devices as services.");
     }
 
+    /**
+     * {@inheritDoc}
+     * 
+     * @since 1.0
+     */
     @Override
     public void stop(BundleContext bc) throws Exception {
         LOG.info("Do not try to reinstall this Bundle! You will fail horrobly! BundleId: "+bc.getBundle().getBundleId());
@@ -57,6 +70,14 @@ public class Activator implements BundleActivator {
         }
     }
     
+    /**
+     * Provide the current BundleContext of the bundle.
+     * 
+     * This might be null in case the bundle was not started yet.
+     * @return the BundleContext.
+     * 
+     * @since 1.0
+     */
     protected static BundleContext getContext(){
         return bctx;
     }

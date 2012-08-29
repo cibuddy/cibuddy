@@ -17,6 +17,16 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Main class for handling USB devices.
+ * 
+ * You should never ever have to interact with this class. Instead, you should
+ * be using the exposed <code>com.codeminders.hidapi.HIDDeviceInfo</code> OSGi
+ * services exposed by this class.
+ * 
+ * @author Mirko Jahn <mirkojahn@gmail.com>
+ * @version 1.0
+ */
 public class HIDManagerImpl extends TimerTask{
     
     private static final Logger LOG = LoggerFactory.getLogger(HIDManagerImpl.class);
@@ -29,16 +39,29 @@ public class HIDManagerImpl extends TimerTask{
     
     /**
      * Creates a new <code>HIDManagerImpl</code> object.
+     * 
+     * @since 1.0
      */
     public HIDManagerImpl() throws IOException {
         manager = HIDManager.getInstance();
     }
     
-    public synchronized void updateDeviceList() throws IOException{
+    /**
+     * Updates the internal list of exposed USB devices.
+     * 
+     * It is safe to call this method several times. In fact, it is called 
+     * internally by a timer on a regular basis.
+     * 
+     * @throws IOException In case access to the usb driver (the USB devices
+     *      in particular) doesn't work, an Exception is propagated.
+     * 
+     * @since 1.0
+     */
+    public synchronized void updateDeviceList() throws IOException {
         HIDDeviceInfo[] newdevs = manager.listDevices();
         // some logging
         if(newdevs != null) {
-            LOG.debug("Found " + newdevs.length + " devices:");
+            LOG.debug("Found {} devices:", newdevs.length);
         } else {
             LOG.debug("Found 0 devices:");
         }
@@ -78,6 +101,13 @@ public class HIDManagerImpl extends TimerTask{
         hidInfodevices = newDevices;
     }
     
+    /**
+     * Helper method that exposes a given device as an OSGi service.
+     * 
+     * @param dev the device to expose as a service
+     * 
+     * @since 1.0
+     */
     private void exposeDevice(HIDDeviceInfo dev) {
         if(enabled){
             synchronized(guard){
@@ -99,6 +129,15 @@ public class HIDManagerImpl extends TimerTask{
         }
     }
     
+    /**
+     * Null safe Helper method for setting properties.
+     * 
+     * @param dict Dictionary to put properties to.
+     * @param key The key to use
+     * @param value The value to use
+     * 
+     * @since 1.0
+     */
     private void safePut(Dictionary dict, String key, Object value) {
         if(key != null && value != null){
             dict.put(key, value);
@@ -126,8 +165,10 @@ public class HIDManagerImpl extends TimerTask{
      *
      * @param dev Reference to the <code>HIDDeviceInfo</code> object.
      * @throws IOException
+     * 
+     * @since 1.0
      */
-    public void deviceAdded( HIDDeviceInfo dev )
+    protected void deviceAdded( HIDDeviceInfo dev )
     {
        System.out.print("HID - Added:" + "\n" + dev + "\n");
        exposeDevice(dev);
@@ -139,14 +180,23 @@ public class HIDManagerImpl extends TimerTask{
      *
      * @param dev Reference to the <code>HIDDeviceInfo</code> object.
      * @throws IOException
+     * 
+     * @since 1.0
      */
-    public void deviceRemoved( HIDDeviceInfo dev)
+    protected void deviceRemoved( HIDDeviceInfo dev)
     {
         System.out.print("HID - Removal:" + "\n" + dev + "\n");
         withdrawDevice(dev);
     }
     
-    public void shutdown() {
+    /**
+     * Removes all exposed devices and released obtained resources.
+     * 
+     * This method is called by the OSGi environment (through the Activator, so 
+     * you do not have to interact with this one).
+     * @since 1.0
+     */
+    protected void shutdown() {
         if(enabled){
             enabled = false;
             Iterator<ServiceRegistration> iter = devices.values().iterator();
@@ -160,6 +210,11 @@ public class HIDManagerImpl extends TimerTask{
         }
     }
 
+    /**
+     * Updates the list of USB devices.
+     * 
+     * @since 1.0
+     */
     @Override
     public void run() {
         try {
