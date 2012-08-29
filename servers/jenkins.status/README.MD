@@ -3,17 +3,19 @@
 This bundle is capable of gathering information about given Jenkins servers.
 
 ## Configuration
-A simple *.jenkins file with a property list of available Jenkins Servers is 
+A simple `*.jenkins` file with a property list of available Jenkins Servers is 
 sufficient for bootstrapping a Jenkins Server list in the system. The file content
 must follow the syntax below:
+```
 <server alias>=<server url>
-
+```
 The contents of a configuration file could look like this for instance:
+```
 localhost.tests=http://localhost:8080
 integration.tests=http://example.com/jenkins/
-
+```
 The file will be picked up for a watched directory by the `felix.fileinstall` bundle.
-In the current assemblies, this will be the "deploy" folder in the root of the 
+In the current assemblies, this will be the `./deploy` folder in the root of the 
 assembly. Successfully queried servers will be made available as services in the 
 OSGi runtime, using the `com.cibuddy.core.build.servers.IServer` interface. Removal
 of the file or updates will be picked-up and the configuration of the IServer 
