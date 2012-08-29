@@ -44,8 +44,9 @@ public class HIDManagerImpl extends TimerTask{
         }
         // now sorting through the result
         Set<HIDDeviceInfo> newDevices = new HashSet<HIDDeviceInfo>();
-        newDevices.addAll(new ArrayList<HIDDeviceInfo>(Arrays.asList(newdevs)));
-        
+        if(newdevs != null){
+            newDevices.addAll(new ArrayList<HIDDeviceInfo>(Arrays.asList(newdevs)));
+        }
         // first quickly check if something changed at all...
         if(hidInfodevices.equals(newDevices)){
             // nothing to do...
