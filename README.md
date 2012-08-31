@@ -1,7 +1,7 @@
 ![10]
 
 The CIBuddy project intends to provide a framework to better live monitor your
-continuous environment. This is accomplished by several hard and software connectors providing you with quick visual feedback about what's going on in your build environment. [![Build Status](https://secure.travis-ci.org/cibuddy/cibuddy.png)](http://travis-ci.org/cibuddy/cibuddy)
+continuous integration environment. This is accomplished by several hard and software connectors providing you with quick visual feedback about what's going on in your build environment. [![Build Status](https://secure.travis-ci.org/cibuddy/cibuddy.png)](http://travis-ci.org/cibuddy/cibuddy)
 
 ## Hardware Light Integration
 
