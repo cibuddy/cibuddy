@@ -1,7 +1,7 @@
-# CIBuddy ![Build Status](https://secure.travis-ci.org/cibuddy/cibuddy.png)
+![10]
 
 The CIBuddy project intends to provide a framework to better live monitor your
-continuous environment. This is accomplished by several hard and software connectors providing you with quick visual feedback about what's going on in your build environment.
+continuous environment. This is accomplished by several hard and software connectors providing you with quick visual feedback about what's going on in your build environment. [![Build Status](https://secure.travis-ci.org/cibuddy/cibuddy.png)](http://travis-ci.org/cibuddy/cibuddy)
 
 ## Hardware Light Integration
 
@@ -69,3 +69,4 @@ As mentioned before, this is the early alpha phase of the project and very likel
 [7]: https://github.com/cibuddy/cibuddy/issues "CIBuddy Open Issues"
 [8]: http://www.idealo.de/preisvergleich/OffersOfProduct/1608018_-usb-messenger-i-buddy.html "Idealo Preisvergleich - i-buddy"
 [9]: http://cibuddy.com/cibuddy/pics/cibuddy_groupOfIndicators_small.jpg "CIBuddies in Action - all good :-)"
+[10]: https://raw.github.com/cibuddy/cibuddy.github.com/master/cibuddy_logo.png "CIBuddy Logo"
