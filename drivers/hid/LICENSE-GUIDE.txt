@@ -1,0 +1,7 @@
+This project is based and the javahidapi project, which is licensed under 3 
+different licenses. The license chosen in case of CIBuddy was the most liberal
+one (found in LICENSE-HIDAP-orig.txt). This license only applies to the artifacts
+taken from javahidapi (which are the native binaries located underneath the 
+src/main/resources/lib folder and the classes found in the com.codeminders.hidapi).
+However, as long as you're only using this bundle in a binary format, the CIBuddy 
+project license is the one relevant for you.
