@@ -96,6 +96,9 @@
             ,lib/linux/x86_32/libhidapi-jni.so;
                 osname=Linux;
                 processor=x86
+            ,lib/linux/arm7/libhidapi-jni.so;
+                processor=arm;
+                osname=Linux
         </osgi.native.code>
         <osgi.import.pkg>
             org.osgi.framework;version=[1.3.0','2.0.0),
