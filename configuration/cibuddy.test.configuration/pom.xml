@@ -1,0 +1,52 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cibuddy.test.configuration</artifactId>
+    <packaging>bundle</packaging>
+    <description>Bundle providing basic Open Source Server configurations</description>
+    
+    <name>${application.domain}.${project.artifactId}</name>
+    
+    <parent>
+        <groupId>com.cibuddy</groupId>
+        <artifactId>configuration</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <properties>
+        <!-- osgi directives used in the maven-bundle-plugin, defined in the root pom -->
+        <bundle.symbolicNameDirective>singleton:=true</bundle.symbolicNameDirective>
+        <bundle.symbolicName>${project.name};${bundle.symbolicNameDirective}</bundle.symbolicName>
+        <bundle.namespace>${project.name}</bundle.namespace>
+        <osgi.private.pkg>${project.name}*</osgi.private.pkg>
+        <cibuddy.configuration>/cibuddy-test-conf.xml</cibuddy.configuration>
+    </properties>
+  
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>project.configuration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <!-- plugins used -->
+        <plugins>
+            <!-- attach obsolete artifacts for sonatypes oss (also for 'package' phase) -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <!-- enable it being an osgi bundle -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

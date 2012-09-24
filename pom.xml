@@ -97,6 +97,9 @@
         
         <!-- project dependency versions -->
         <karaf.version>2.2.9</karaf.version>
+
+        <!-- addtional configuration options -->
+        <cibuddy.configuration />
     </properties>
 
 
@@ -111,6 +114,7 @@
         <module>distributions</module>
         <module>servers</module>
         <module>ui</module>
+        <module>configuration</module>
     </modules>
 
     <dependencyManagement>
