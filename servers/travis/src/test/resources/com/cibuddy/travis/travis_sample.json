@@ -1,0 +1,14 @@
+{
+  "public_key": "-----BEGIN RSA PUBLIC KEY-----\nMIGJAoGBANpQDMQYI+uplggbgzNgRuGVkqVbDAuoE3VJPNc8Pf/L4iAqc+oBhr7U\nW7uBPcuV8elqiociYukRzwVVC7VcjUIVPIXel5y6uHyle9WC6ryGhQLmv8ZBLvT0\n0FR8Jo3FOhbYvBC9moYlL/WaiNYdcAJgV7nIDopFu7Xj39ymgw+fAgMBAAE=\n-----END RSA PUBLIC KEY-----\n",
+  "slug": "cibuddy/cibuddy",
+  "last_build_id": 2374816,
+  "last_build_started_at": "2012-09-07T23:00:29Z",
+  "last_build_status": 0,
+  "last_build_duration": 372,
+  "last_build_result": 0,
+  "last_build_number": "32",
+  "id": 9440,
+  "description": "Visualization Project for Continuous Integration Servers",
+  "last_build_language": null,
+  "last_build_finished_at": "2012-09-07T23:39:48Z"
+}

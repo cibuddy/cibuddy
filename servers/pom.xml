@@ -16,6 +16,7 @@
     </parent>
     
     <modules>
+        <module>travis</module>
         <module>jenkins</module>
     </modules>
 </project>
