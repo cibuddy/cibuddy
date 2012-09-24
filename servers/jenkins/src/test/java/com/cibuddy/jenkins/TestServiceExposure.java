@@ -73,7 +73,7 @@ public class TestServiceExposure {
             Assert.assertNotNull("The server version is not as expected!",server.getBuildServerVersion());
             Assert.assertTrue("Version string doesn't contain a dot as expected. Might have changed though...", server.getBuildServerVersion().contains("."));
             //Assert.assertEquals("The server version is not as expected! (they might have upgraded ;-))","1.480",server.getBuildServerVersion());
-            Assert.assertEquals("The server source is not as expected!",jenkinsConfigFile.getAbsolutePath(),server.getBuildServerSource());
+            Assert.assertEquals("The server source is not as expected!",jenkinsConfigFile.toURI().toURL().getFile(),server.getBuildServerSource());
             
             // this might fail at any point... do it just because of curiosity 
             // FIXME: only test this with a specific variable set!!!

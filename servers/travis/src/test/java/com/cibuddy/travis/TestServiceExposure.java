@@ -71,7 +71,7 @@ public class TestServiceExposure {
             Assert.assertEquals("The server type is not identical to the one expected.", IServer.TYPE_TRAVIS_CI_SERVER, server.getBuildServerType());
             Assert.assertEquals("The server URL is not identical to the one set in the configuration file.",new URI("http://www.travis-ci.org"),server.getBuildServerURL());
             Assert.assertEquals("The server version is not as expected!","unknown",server.getBuildServerVersion());
-            Assert.assertEquals("The server source is not as expected!",travisConfigFile.getAbsolutePath(),server.getBuildServerSource());
+            Assert.assertEquals("The server source is not as expected!",travisConfigFile.toURI().toURL().getFile(),server.getBuildServerSource());
             
             // this might fail at any point... do it just because of curiosity 
             // FIXME: only test this with a specific variable set!!!
