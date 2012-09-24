@@ -6,8 +6,10 @@
         <!-- the main bundles -->
         <bundle>mvn:com.cibuddy/core/${project.version}</bundle>
         <bundle>mvn:com.cibuddy/project.configuration/${project.version}</bundle> 
-        <!-- extension to monitor jenkins servers -->
-        <bundle>mvn:com.cibuddy/jenkins.status/${project.version}</bundle>
+        <!-- extension to monitor jenkins-ci servers -->
+        <bundle>mvn:com.cibuddy/jenkins/${project.version}</bundle>
+        <!-- extension to monitor travis-ci servers -->
+        <bundle>mvn:com.cibuddy/travis/${project.version}</bundle>
         <!-- usb driver wrapper (native) -->
         <bundle>mvn:com.cibuddy/hid/${project.version}</bundle> 
         <!-- device connectors -->
@@ -16,11 +18,24 @@
         <!-- 3rd party dependencies -->
         <bundle>mvn:org.apache.httpcomponents/httpclient-osgi/4.2.1</bundle>
         <bundle>mvn:org.apache.httpcomponents/httpcore-osgi/4.2.1</bundle>
+        <bundle>mvn:com.google.code.gson/gson/2.2.2</bundle>
     </feature>  
     <feature name="cibuddy-test" version="${project.version}" resolver="(obr)">
         <!-- depends on the main cibuddy feature -->
         <feature>cibuddy-main</feature>
         <!-- swing based, physical light emulator -->
         <bundle>mvn:com.cibuddy/demo.light/${project.version}</bundle> 
-    </feature> 
+    </feature>
+    <feature name="cibuddy-oss-conf" description="Provisioning basic OSS servers like apache.org and travis-ci.org" version="${project.version}" resolver="(obr)">
+        <!-- depends on the main cibuddy feature -->
+        <feature>cibuddy-main</feature>
+        <!-- basic OSS server configurations -->
+        <bundle>mvn:com.cibuddy/oss.configuration/${project.version}</bundle> 
+    </feature>
+    <feature name="cibuddy-test-conf" description="travis-ci.org test setup for cibuddy/cibuddy project" version="${project.version}" resolver="(obr)">
+        <!-- depends on the main cibuddy feature -->
+        <feature>cibuddy-main</feature>
+        <!-- sample test configuration to monitor cibuddy with/on travis-ci -->
+        <bundle>mvn:com.cibuddy/cibuddy.test.configuration/${project.version}</bundle> 
+    </feature>
 </features>

@@ -30,7 +30,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jenkins.status</artifactId>
+            <artifactId>jenkins</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>travis</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -46,6 +51,16 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>delcom.lights</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>oss.configuration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cibuddy.test.configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

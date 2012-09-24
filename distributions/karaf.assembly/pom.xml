@@ -123,6 +123,7 @@
                             <descriptors>
                                 <descriptor>src/main/descriptors/bin.xml</descriptor>
                             </descriptors>
+                            <!--finalName>cibuddy-app-${project.version}_gitRev_${buildNumber}</finalName-->
                             <appendAssemblyId>false</appendAssemblyId>
                             <tarLongFileMode>gnu</tarLongFileMode>
                         </configuration>
