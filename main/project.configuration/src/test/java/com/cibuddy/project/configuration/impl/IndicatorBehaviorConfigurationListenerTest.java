@@ -36,13 +36,12 @@ public class IndicatorBehaviorConfigurationListenerTest extends AbstractOSGIEnvB
      */
     @Test
     public void test() throws Exception {
-        Assert.assertTrue(true);
         Assert.assertNotNull("BundleContext is not set.", Activator.getBundleContext());
         
         ServiceReference[] srs = getRegistry().getServiceReferences(ArtifactInstaller.class.getName(), filterString);
         Assert.assertNotNull(srs);
         // there should be just one in our test
-        Assert.assertTrue(srs.length == 1);
+        Assert.assertEquals("The expectation is to find only the service we just registered", 1, srs.length);
         // get the service
         ArtifactInstaller ai = (ArtifactInstaller)getRegistry().getService(srs[0]);
         Assert.assertTrue("File does not exist! Check path and setup!", behaviorConfigFile.exists());
