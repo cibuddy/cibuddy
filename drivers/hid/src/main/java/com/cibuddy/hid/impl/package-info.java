@@ -8,5 +8,6 @@
  * 
  * @author Mirko Jahn
  * @version 1.0
+ * @since 1.0
  */
 package com.cibuddy.hid.impl;

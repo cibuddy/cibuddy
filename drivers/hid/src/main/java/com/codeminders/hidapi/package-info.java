@@ -25,6 +25,13 @@
  *  <li><a title="libusb github page" href="https://github.com/signal11/hidapi">libusb github page</a></li>
  * </ul>
  * </p>
- * @version 1.1
+ * @version 1.1 Changed various internal details like the way how notifications
+ *          of USB device connect and disconnects are propagated. All changes are
+ *          basically introduced by the redesign of the javahidapi project code.
+ *          CIBuddy never had an official release in till version 1.1, but to reflect
+ *          the changes that happened here, the version bump of the package was 
+ *          introduced. Chances are equal to zero that your effect by that when 
+ *          reading this.
+ * @since 1.0
  */
 package com.codeminders.hidapi;
