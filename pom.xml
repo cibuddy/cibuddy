@@ -83,7 +83,7 @@
         <osgi.spring.context />
         <osgi.native.code/>
         <eclipse.supplement.bundle />
-        <osgi.execution.env>J2SE-1.5, JavaSE-1.6</osgi.execution.env>
+        <osgi.execution.env>JavaSE-1.6, JavaSE-1.7</osgi.execution.env>
         <osgi.bundle.vendor>com.cibuddy</osgi.bundle.vendor>
         <osgi.bundle.license>Apache License, Version 2.0;url=http://www.apache.org/licenses/LICENSE-2.0;description=OpenSource license provided by the Apache foundation</osgi.bundle.license>
         <osgi.bundle.category>tools</osgi.bundle.category>
