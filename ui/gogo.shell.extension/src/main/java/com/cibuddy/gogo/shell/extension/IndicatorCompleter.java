@@ -15,19 +15,30 @@
  */
 package com.cibuddy.gogo.shell.extension;
 
+import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
+import java.util.Iterator;
 import java.util.List;
 import org.apache.karaf.shell.console.Completer;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
 
 /**
- * A very simple completer for eXtreme Feedback Device actions.
+ * A completer that provides the list of available eXtreme Feedback Devices.
  * 
  * @author Mirko Jahn <mirkojahn@gmail.com>
  * @version 1.0
  * @since 1.0
  */
-public class ActionCompleter implements Completer {
+public class IndicatorCompleter implements Completer {
+    
+    private List indicators;
 
+    public List getIndicators() {
+        return indicators;
+    }
+
+    public void setIndicators(List indicators) {
+        this.indicators = indicators;
+    }
     /**
      * Main method of the completer.
      * 
@@ -41,11 +52,14 @@ public class ActionCompleter implements Completer {
     @Override
     public int complete(String buffer, int cursor, List candidates) {
         StringsCompleter delegate = new StringsCompleter();
-        delegate.getStrings().add("success");
-        delegate.getStrings().add("failure");
-        delegate.getStrings().add("warning");
-        delegate.getStrings().add("building");
-        delegate.getStrings().add("off");
+        Iterator iter = indicators.iterator();
+        int i = -1;
+        while(iter.hasNext()){
+            i++;
+            IBuildStatusIndicator ibsi = (IBuildStatusIndicator) iter.next();
+            // we only need the id for this one
+            delegate.getStrings().add(String.valueOf(i));
+        }
         return delegate.complete(buffer, cursor, candidates);
     }
 }

@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
-@Command(scope = "cibuddy", name = "server-list", description = "Display the list of configured servers to check for build projects.")
+@Command(scope = "cib", name = "list-server", description = "Display the list of configured servers to check for build projects.")
 public class ServerListCommand extends OsgiCommandSupport {
 
     private List servers;
@@ -34,6 +34,15 @@ public class ServerListCommand extends OsgiCommandSupport {
         this.servers = serverList;
     }
     
+    /**
+     * Main method triggered by the console.
+     * 
+     * This method is triggered by the console after hitting the command in the 
+     * "bash". 
+     * 
+     * @return currently only null
+     * @throws Exception in case something went downhill - nothing forseen so far.
+     */
     @Override
     protected Object doExecute() throws Exception {
         Iterator iter = servers.iterator();

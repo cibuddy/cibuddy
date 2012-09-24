@@ -16,13 +16,34 @@
 package com.cibuddy.gogo.shell.extension;
 
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
+import com.cibuddy.core.build.indicator.StatusAction;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
-@Command(scope = "cibuddy", name = "indicator-test", description = "Activate a distinct indicator.")
+/**
+ * eXtreme Feedback Device console test tool.
+ * 
+ * <p>
+ * With this class it is very convenient to test the various devices by just
+ * executing one command. Try calling: 
+ * </p>
+ * <p>
+ * <code>cib:test-efd</code>
+ * </p>
+ * <p>
+ * This will go through all available devices and indicate all possible actions,
+ * one by one, so you could easily identify which device belongs to what id for
+ * instance.
+ * </p>
+ * 
+ * @author Mirko Jahn <mirkojahn@gmail.com>
+ * @version 1.0
+ * @since 1.0
+ */
+@Command(scope = "cib", name = "test-efd", description = "Activate and test indicators. Omitting a parameter automatically tests the array of options.")
 public class IndicatorTestCommand extends OsgiCommandSupport {
 
     private List indicators;
@@ -34,13 +55,22 @@ public class IndicatorTestCommand extends OsgiCommandSupport {
     public void setIndicators(List indicators) {
         this.indicators = indicators;
     }
-    
-    @Argument(index = 0, name = "action", description = "The action to indicate.", required = true, multiValued = false)
-    String action = null;
-
-    @Argument(index = 1, name = "arg", description = "The id of the indicator to activate.", required = true, multiValued = false)
+    @Argument(index = 0, name = "arg", description = "The id of the eXtreme Feedback Devices to activate.", required = false, multiValued = false)
     String arg = null;
 
+    @Argument(index = 1, name = "action", description = "The action to indicate through the eXtreme Feedback Device.", required = false, multiValued = false)
+    String action = null;
+
+    
+    /**
+     * Main method triggered by the console.
+     * 
+     * This method is triggered by the console after hitting the command in the 
+     * "bash". 
+     * 
+     * @return currently only null
+     * @throws Exception in case something went downhill - nothing forseen so far.
+     */
     @Override
     protected Object doExecute() throws Exception {
         Iterator iter = indicators.iterator();

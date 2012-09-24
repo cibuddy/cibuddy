@@ -15,17 +15,14 @@
  */
 package com.cibuddy.gogo.shell.extension;
 
-import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
-import com.cibuddy.core.build.server.IBuildProject;
 import com.cibuddy.core.build.server.IServer;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
-@Command(scope = "cibuddy", name = "server-details", description = "Show details about the given server. Use \"list-servers\" to find the id of the server you're looking for.")
+@Command(scope = "cib", name = "server-details", description = "Show details about the given server. Use \"list-servers\" to find the id of the server you're looking for.")
 public class ServerDetailsCommand extends OsgiCommandSupport {
 
     private List servers;
@@ -41,6 +38,16 @@ public class ServerDetailsCommand extends OsgiCommandSupport {
     @Argument(index = 0, name = "arg", description = "The id of the server to look into.", required = true, multiValued = false)
     String arg = null;
 
+    /**
+     * Main method triggered by the console.
+     * 
+     * This method is triggered by the console after hitting the command in the 
+     * "bash". 
+     * 
+     * @return currently only null
+     * @throws Exception in case something went downhill - nothing forseen so far.
+     */
+    @Override
     protected Object doExecute() throws Exception {
         Iterator iter = servers.iterator();
         int i = -1;

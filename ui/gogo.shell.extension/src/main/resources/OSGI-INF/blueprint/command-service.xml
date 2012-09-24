@@ -29,39 +29,49 @@
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         
         <!-- Lights/Indicator management -->
-        <command name="cibuddy/indicator-list">
+        <command name="cib/list-efds">
             <action
                 class="com.cibuddy.gogo.shell.extension.IndicatorListCommand">
                     <property name="indicators" ref="lights"/>
             </action>
         </command>
-        <command name="cibuddy/indicator-test">
+        <command name="cib/test-efd">
             <action
                 class="com.cibuddy.gogo.shell.extension.IndicatorTestCommand">
                     <property name="indicators" ref="lights"/>
             </action>
             <completers>
+                <ref component-id="indicatorCompleter"/>
                 <ref component-id="actionCompleter"/>
                 <null/>
             </completers>
         </command>
         
         <!-- Server management -->
-        <command name="cibuddy/server-list">
+        <command name="cib/list-server">
             <action
                 class="com.cibuddy.gogo.shell.extension.ServerListCommand">
                     <property name="servers" ref="servers"/>
             </action>
         </command>
-        <command name="cibuddy/server-details">
+        <command name="cib/server-details">
             <action
                 class="com.cibuddy.gogo.shell.extension.ServerDetailsCommand">
                     <property name="servers" ref="servers"/>
+            </action>
+        </command>
+        <!-- system info -->
+        <command name="cib/whoAmI">
+            <action
+                class="com.cibuddy.gogo.shell.extension.ItsMeCommand">
             </action>
         </command>
         
     </command-bundle>
     
     <bean id="actionCompleter" class="com.cibuddy.gogo.shell.extension.ActionCompleter"/>
+    <bean id="indicatorCompleter" class="com.cibuddy.gogo.shell.extension.IndicatorCompleter">
+        <property name="indicators" ref="lights"/>
+    </bean>
     
 </blueprint>

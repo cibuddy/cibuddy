@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
-@Command(scope = "cibuddy", name = "indicator-list", description = "Display a list of all connected indicators.")
+@Command(scope = "cib", name = "list-efds", description = "Display a list of all connected eXtreme Feedback Devices.")
 public class IndicatorListCommand extends OsgiCommandSupport {
 
     private List indicators;
@@ -34,6 +34,15 @@ public class IndicatorListCommand extends OsgiCommandSupport {
         this.indicators = indicators;
     }
     
+    /**
+     * Main method triggered by the console.
+     * 
+     * This method is triggered by the console after hitting the command in the 
+     * "bash". 
+     * 
+     * @return currently only null
+     * @throws Exception in case something went downhill - nothing forseen so far.
+     */
     @Override
     protected Object doExecute() throws Exception {
         Iterator iter = indicators.iterator();
@@ -42,10 +51,10 @@ public class IndicatorListCommand extends OsgiCommandSupport {
             i++;
             
             IBuildStatusIndicator ibsi = (IBuildStatusIndicator) iter.next();
-            System.out.println("Indicator : ["+i+"] "+ibsi.getComponentId() + ":" + ibsi.getIndicatorId());
+            System.out.println("eXtreme Feedback Device : ["+i+"] "+ibsi.getComponentId() + ":" + ibsi.getIndicatorId());
         }
         if(i<0){
-            System.out.println("No indicators found." );
+            System.out.println("No eXtreme Feedback Device found." );
         }
         return null;
     }
