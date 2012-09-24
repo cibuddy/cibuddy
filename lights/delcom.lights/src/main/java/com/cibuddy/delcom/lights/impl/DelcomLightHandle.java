@@ -47,7 +47,7 @@ public class DelcomLightHandle implements IBuildStatusIndicator {
         dict.put("DeviceInfoProperties", deviceInfo);
         sr = Activator.getBundleContext().registerService(IBuildStatusIndicator.class.getName(),this, dict);
         if(sr != null){
-            System.out.println("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
+            //System.out.println("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
             LOG.info("Exposed delcom light: "+getComponentId()+":"+getIndicatorId());
             return true;
         } else {
