@@ -1,5 +1,6 @@
 package com.cibuddy.demo.light;
 
+import com.cibuddy.core.build.indicator.AbstractBuildStatusIndicator;
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -13,7 +14,7 @@ import org.osgi.framework.ServiceRegistration;
  *
  * @version 1.0
  */
-public class Activator implements BundleActivator, IBuildStatusIndicator {
+public class Activator extends AbstractBuildStatusIndicator implements BundleActivator {
 
     private DemoLight dl = null;
     private static BundleContext ctx;

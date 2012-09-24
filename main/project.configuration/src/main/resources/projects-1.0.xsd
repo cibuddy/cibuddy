@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:this="http://com.cibuddy.project.configuration/schema/projects/v1-0"
+           targetNamespace="http://com.cibuddy.project.configuration/schema/projects/v1-0"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:appinfo>
+            <jaxb:schemaBindings>
+                <jaxb:package name="com.cibuddy.project.configuration.jaxb.v1_0.setup"/>
+            </jaxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+    
+    <xs:element name="setup">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="xfd" type="this:ExtremeFeedbackDeviceType" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ExtremeFeedbackDeviceType">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:class name="Xfd"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="project" type="this:ProjectType" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="server" type="xs:string" use="optional"/>
+        <xs:attribute name="config" type="xs:string" use="optional" default="default" />
+        <xs:attribute name="indicatorId" type="xs:string" use="optional" default="0" />
+    </xs:complexType>
+    <xs:complexType name="ProjectType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="server" type="xs:string" use="optional"/>
+    </xs:complexType>
+</xs:schema>

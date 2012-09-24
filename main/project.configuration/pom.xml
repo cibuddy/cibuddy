@@ -7,6 +7,7 @@
     <packaging>bundle</packaging>
 
     <name>${application.domain}.${project.artifactId}</name>
+    <description>Bundle responsible for wiring all together. Build indicators, servers and other configurations.</description>
     
     <parent>
         <groupId>com.cibuddy</groupId>
@@ -28,6 +29,7 @@
         <!--osgi.export.pkg>
             ${project.name};version="1.0.0"
         </osgi.export.pkg-->
+        <cibuddy.configuration>/default-behavior-conf.xml</cibuddy.configuration>
     </properties>
   
     <dependencies>
@@ -59,6 +61,15 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.pojosr</groupId>
+            <artifactId>de.kalpatec.pojosr.framework</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
     </dependencies>
     
     <build>
@@ -68,10 +79,40 @@
             <plugin>
                 <groupId>com.sun.tools.xjc.maven2</groupId>
                 <artifactId>maven-jaxb-plugin</artifactId>
-                <configuration>
-                    <generatePackage>${project.name}.schema</generatePackage>
-                </configuration>
             </plugin>
+            <!--plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-xjc-plugin</artifactId>
+                <version>2.3.0</version>
+                <configuration>
+                    <extensions>
+                        <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:2.3.0</extension>
+                        <extension>org.apache.cxf.xjcplugins:cxf-xjc-ts:2.3.0</extension>
+                    </extensions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>xsdtojava</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+                            <xsdOptions>
+                                <xsdOption>
+                                    <xsd>src/main/resources/indicator-1.0.xsd</xsd>
+                                    <extensionArgs>
+                                        <arg>-Xts:style:multiline</arg>
+                                        <arg>-Xdv</arg>
+                                    </extensionArgs>
+                                </xsdOption>
+                            </xsdOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin-->
+            
             <!-- compile code against java 1.6 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

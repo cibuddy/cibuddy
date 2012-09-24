@@ -3,6 +3,7 @@
  */
 package com.cibuddy.ibuddy.impl;
 
+import com.cibuddy.core.build.indicator.AbstractBuildStatusIndicator;
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
 import com.cibuddy.ibuddy.*;
 import com.codeminders.hidapi.HIDDeviceInfo;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author mirkojahn
  */
-public class IBuddyLightHandle implements IBuildStatusIndicator {
+public class IBuddyLightHandle extends AbstractBuildStatusIndicator {
     
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyLightHandle.class);
     private final ServiceReference hidDriverService;

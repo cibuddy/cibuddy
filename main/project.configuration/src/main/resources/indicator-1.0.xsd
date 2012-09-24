@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:this="http://com.cibuddy.project.configuration/schema/behavior/v1-0"
+           targetNamespace="http://com.cibuddy.project.configuration/schema/behavior/v1-0"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0" 
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:appinfo>
+            <jaxb:schemaBindings>
+                <jaxb:package name="com.cibuddy.project.configuration.jaxb.v1_0.indicator"/>
+            </jaxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+
+    <!-- the root of all XML evil -->
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="action" type="this:ColorIndicatorType" minOccurs="1" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <xs:description>An alias identifying this particular configuration. Should be unique, but is not enforced.</xs:description>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" />
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="ColorIndicatorType">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:class name="ColorIndicator"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="status" minOccurs="0" maxOccurs="15">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <!-- Jenkins and Hudson values -->
+                        <xs:enumeration value="red"/>
+                        <xs:enumeration value="red_anime"/>
+                        <xs:enumeration value="yellow"/>
+                        <xs:enumeration value="yellow_anime"/>
+                        <xs:enumeration value="blue"/>
+                        <xs:enumeration value="blue_anime"/>
+                        <xs:enumeration value="grey"/>
+                        <xs:enumeration value="grey_anime"/>
+                        <xs:enumeration value="disabled"/>
+                        <xs:enumeration value="disabled_anime"/>
+                        <xs:enumeration value="aborted"/>
+                        <xs:enumeration value="aborted_anime"/>
+                        <xs:enumeration value="notbuilt"/>
+                        <xs:enumeration value="notbuilt_anime"/>
+                        <!-- Travis-CI established values -->
+                        <xs:enumeration value="0"/> <!-- success -->
+                        <xs:enumeration value="1"/> <!-- failure -->
+                        
+                        <!-- special status for "catch all" -->
+                        <xs:enumeration value="default"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="indicate" minOccurs="1" maxOccurs="1" default="off">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="success"/>
+                        <xs:enumeration value="warning"/>
+                        <xs:enumeration value="failure"/>
+                        <xs:enumeration value="building"/>
+                        <xs:enumeration value="off"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="condition" default="all">
+            <xs:annotation>
+                <xs:documentation>
+                    <xs:description>
+                        A condition specifies what exactly has to be true. Does
+                        all builds have to match the indicators or just one or
+                        just a percentage? The syntax is like that:
+                        - "all": every project in this configuration has to match at least one of the stati.
+                        - "n:*": n as int, that represents the (minimum) number of matching projects.
+                        - "n:m": n,m as int, that represent a fraction that should at least match.
+                        - "default": catch all. After this the processing always stops and activates the given indicator
+                    </xs:description>
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup  xmlns="http://com.cibuddy.project.configuration/schema/projects/v1-0" 
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/projects/v1-0 ../../main/resources/projects-1.0.xsd'>
+    
+    <!-- config, server and indicator attribute are optional -->
+    <xfd name="some name" config="default" indicatorId="0" server="travis-ci">
+        <project server="travis-ci" id="Felix-FileInstall"/>
+    </xfd>
+</setup>

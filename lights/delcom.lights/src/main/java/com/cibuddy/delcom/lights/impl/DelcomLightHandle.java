@@ -1,5 +1,6 @@
 package com.cibuddy.delcom.lights.impl;
 
+import com.cibuddy.core.build.indicator.AbstractBuildStatusIndicator;
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
 import com.cibuddy.delcom.lights.Color;
 import com.cibuddy.delcom.lights.DeviceType;
@@ -16,7 +17,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author mirkojahn
  */
-public class DelcomLightHandle implements IBuildStatusIndicator {
+public class DelcomLightHandle extends AbstractBuildStatusIndicator {
     
     private static final Logger LOG = LoggerFactory.getLogger(DelcomLightHandle.class);
     private final ServiceReference hidDriverService;

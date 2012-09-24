@@ -40,21 +40,10 @@ public class ServerDetailsCommand extends OsgiCommandSupport {
                 System.out.println("Server : ["+i+"] " 
                         + server.getBuildServerAlias() 
                         + "=" + server.getBuildServerURL() 
-                        + " ["+ server.getBuildServerSource() 
-                        + " " + server.getBuildServerType() 
-                        + " " + server.getBuildServerVersion() 
+                        + " [config source: "+ server.getBuildServerSource() 
+                        + " | server type: " + server.getBuildServerType() 
+                        + " | version: " + server.getBuildServerVersion() 
                         + "]");
-                Collection<IBuildProject> buildProjects = server.getBuildProjects();
-                Iterator<IBuildProject> projectIter = buildProjects.iterator();
-                while(projectIter.hasNext()){
-                    IBuildProject project = projectIter.next();
-                    System.out.println("Project: " 
-                        + project.getProjectName() 
-                        + " [status="+ project.getBuildStatus() 
-                        + " color=" + project.getProjectColor() 
-                        + " url=" + project.getRootURI() 
-                        + "]");
-                }
             }
         }
         if(!hasMatch){

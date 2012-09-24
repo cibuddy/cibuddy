@@ -15,10 +15,11 @@ public enum BuildStatus {
     red("red"), red_anime("red_anime"),
     yellow("yellow"), yellow_anime("yellow_anime"),
     blue("blue"), blue_anime("blue_anime"),
-    grey("grey"), grey_anime("grey_anime"),
-    disabled("disabled"), disabled_anime("disabled_anime"),
-    aborted("aborted"), aborted_anime("aborted_anime"),
-    notbuilt("notbuilt"), notbuilt_anime("notbuilt_anime"),
+// make it easier (those are not necessary in 99.999% of all use cases)
+//    grey("grey"), grey_anime("grey_anime"),
+//    disabled("disabled"), disabled_anime("disabled_anime"),
+//    aborted("aborted"), aborted_anime("aborted_anime"),
+//    notbuilt("notbuilt"), notbuilt_anime("notbuilt_anime"),
     unknown("unknown");
     
     private static final Map<String, BuildStatus> lookup = new HashMap<String, BuildStatus>();

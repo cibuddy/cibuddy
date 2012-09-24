@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config  xmlns="http://com.cibuddy.project.configuration/schema/behavior/v1-0" 
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/behavior/v1-0 ../../main/resources/indicator-1.0.xsd'
+         name="default">
+    <action condition="all">
+        <status>blue</status>
+        <status>blue_anime</status>
+        <indicate>success</indicate>
+    </action>
+    <action condition="1:*"><!-- at least one -->
+        <status>red</status>
+        <status>red_anime</status>
+        <indicate>failure</indicate>
+    </action>
+    <action condition="1:*"><!-- at least one -->
+        <status>yellow</status>
+        <status>yellow_anime</status>
+        <indicate>warning</indicate>
+    </action>
+    <action condition="default"><!-- catch all -->
+        <indicate>off</indicate>
+    </action>
+</config>
