@@ -89,9 +89,9 @@ public class TestServiceExposure {
             Assert.assertEquals("The server source is not as expected!",travisConfigFile.toURI().toURL().getFile(),server.getBuildServerSource());
             
             // this might fail at any point... do it just because of curiosity 
-            // FIXME: only test this with a specific variable set!!!
-            IProjectState ibp = server.getProjectState("cibuddy/cibuddy");
-            Assert.assertNotNull("No cibuddy project found on travis - we have internet access???",ibp);
+            // FIXME: only test this with a specific variable set and not with a network look-up!!!
+//            IProjectState ibp = server.getProjectState("cibuddy/cibuddy");
+//            Assert.assertNotNull("No cibuddy project found on travis - we have internet access???",ibp);
         } else {
             Assert.fail("Expected only one service exposed coming from this bundle.");
         }
