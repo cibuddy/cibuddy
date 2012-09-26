@@ -91,11 +91,11 @@ public class TestServiceExposure {
             Assert.assertEquals("The server source is not as expected!",jenkinsConfigFile.toURI().toURL().getFile(),server.getBuildServerSource());
             
             // this might fail at any point... do it just because of curiosity 
-            // FIXME: only test this with a specific variable set!!!
-            IProjectState ibp = server.getProjectState("Karaf");
-            Assert.assertNotNull("No such project found on server - do we have internet access???",ibp);
-            Assert.assertNotNull("No build status available, but should be.",ibp.getBuildStatus());
-            Assert.assertNotNull("No build status received.",ibp.getProjectColor());
+            // FIXME: only test this with a specific variable set and not with a network look-up!!!
+//            IProjectState ibp = server.getProjectState("Karaf");
+//            Assert.assertNotNull("No such project found on server - do we have internet access???",ibp);
+//            Assert.assertNotNull("No build status available, but should be.",ibp.getBuildStatus());
+//            Assert.assertNotNull("No build status received.",ibp.getProjectColor());
         } else {
             Assert.fail("Expected only one service exposed coming from this bundle.");
         }
