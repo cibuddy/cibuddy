@@ -37,19 +37,19 @@
         <bundle>mvn:org.apache.httpcomponents/httpcore-osgi/4.2.1</bundle>
         <bundle>mvn:com.google.code.gson/gson/2.2.2</bundle>
     </feature>  
-    <feature name="cibuddy-test" version="${project.version}" resolver="(obr)">
+    <feature name="cibuddy-swing-xfd" version="${project.version}"  description="Simple Swing application acting as an XFD." resolver="(obr)">
         <!-- depends on the main cibuddy feature -->
         <feature>cibuddy-main</feature>
         <!-- swing based, physical light emulator -->
         <bundle>mvn:com.cibuddy/demo.light/${project.version}</bundle> 
     </feature>
-    <feature name="cibuddy-oss-conf" description="Provisioning basic OSS servers like apache.org and travis-ci.org" version="${project.version}" resolver="(obr)">
+    <feature name="cibuddy-oss-conf" description="Provisioning cibuddy with OSS servers." version="${project.version}" resolver="(obr)">
         <!-- depends on the main cibuddy feature -->
         <feature>cibuddy-main</feature>
         <!-- basic OSS server configurations -->
         <bundle>mvn:com.cibuddy/oss.configuration/${project.version}</bundle> 
     </feature>
-    <feature name="cibuddy-test-conf" description="travis-ci.org test setup for cibuddy/cibuddy project" version="${project.version}" resolver="(obr)">
+    <feature name="cibuddy-test-conf" description="sample test setup of cibuddy itself" version="${project.version}" resolver="(obr)">
         <!-- depends on the main cibuddy feature -->
         <feature>cibuddy-main</feature>
         <!-- sample test configuration to monitor cibuddy with/on travis-ci -->

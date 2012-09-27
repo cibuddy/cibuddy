@@ -65,4 +65,4 @@ feature:list-url = { features:listurl $args } ;
 feature:list-version = { features:listversions $args } ;
 
 // cibuddy shortcuts
-cibuddy:test = { features:install cibuddy-test };
+
