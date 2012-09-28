@@ -121,7 +121,7 @@ public class JenkinsServer implements IServer {
             } catch (URISyntaxException ex) {
                 java.util.logging.Logger.getLogger(JenkinsServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException e) {
-                LOG.info("Problem occured while checking Jenkins Server",e);
+                LOG.info("Problem occured while checking Jenkins Server:"+requestURI,e);
             }
             
         } catch (UnsupportedEncodingException ex) {
