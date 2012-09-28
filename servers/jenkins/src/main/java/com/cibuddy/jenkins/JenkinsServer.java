@@ -82,7 +82,7 @@ public class JenkinsServer implements IServer {
     
     private static void checkResult(int i) throws IOException {
         if(i/100!=2){
-            throw new IOException();
+            throw new IOException("Server didn't respond with a status indicating success. Aborting now due to status: "+i);
         }
     }
     
