@@ -142,14 +142,14 @@ public class JenkinsServer implements IServer {
         return source;
     }
     
-    private static String getURLStringforProjectName(String projectName, IServer server) throws UnsupportedEncodingException, MalformedURLException{
-        String serverURIstring = server.getBuildServerURL().toString();
+    static String getURLStringforProjectName(String projectName, IServer server) throws UnsupportedEncodingException, MalformedURLException{
+        String serverURIstring = server.getBuildServerURL().toURL().toExternalForm();
         if(!serverURIstring.endsWith("/")){
             serverURIstring = serverURIstring+"/";
          }
         // url encode name
         String projectNameEncoded = URLEncoder.encode(projectName, "UTF-8").replace("+", "%20");
-        String projectString = new URL(new URL(serverURIstring),"/job/"+projectNameEncoded).toString();
+        String projectString = new URL(serverURIstring+"job/"+projectNameEncoded).toString();
         return projectString;
     }
 
