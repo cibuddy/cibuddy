@@ -61,7 +61,7 @@ public class ServerDetailsCommand extends OsgiCommandSupport {
                 hasMatch = true;
                 System.out.println("Server : ["+i+"] " 
                         + server.getBuildServerAlias() 
-                        + "=" + server.getBuildServerURL() 
+                        + "=" + server.getBuildServerURI() 
                         + " [config source: "+ server.getBuildServerSource() 
                         + " | server type: " + server.getBuildServerType() 
                         + " | version: " + server.getBuildServerVersion() 

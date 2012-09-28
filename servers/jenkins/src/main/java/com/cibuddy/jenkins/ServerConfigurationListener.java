@@ -177,7 +177,7 @@ public class ServerConfigurationListener implements ArtifactInstaller, IConfigur
 
     private ServiceRegistration registerServer(JenkinsServer js, BundleContext bc) {
         Dictionary dict = new Hashtable();
-        safePut(dict,IServer.SP_SERVER_URL, js.getBuildServerURL());
+        safePut(dict,IServer.SP_SERVER_URL, js.getBuildServerURI());
         safePut(dict,IServer.SP_SERVER_ALIAS, js.getBuildServerAlias());
         safePut(dict,IServer.SP_SERVER_TYPE, js.getBuildServerType());
         safePut(dict,IServer.SP_SERVER_VERSION, js.getBuildServerVersion());

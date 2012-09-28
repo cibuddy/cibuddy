@@ -53,10 +53,9 @@ public class ServerListCommand extends OsgiCommandSupport {
             IServer server = (IServer) iter.next();
             System.out.println("Server : ["+i+"] " 
                     + server.getBuildServerAlias() 
-                    + "=" + server.getBuildServerURL() 
-                    + " ["+ server.getBuildServerSource() 
-                    + " " + server.getBuildServerType() 
-                    + " " + server.getBuildServerVersion() 
+                    + "=" + server.getBuildServerURI() 
+                    + " type: " + server.getBuildServerType() 
+                    + " version: " + server.getBuildServerVersion() 
                     + "]");
         }
         if(i<0){

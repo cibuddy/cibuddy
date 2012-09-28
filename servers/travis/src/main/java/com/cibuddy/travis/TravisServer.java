@@ -57,7 +57,7 @@ public class TravisServer implements IServer {
     }
     
     @Override
-    public URI getBuildServerURL() {
+    public URI getBuildServerURI() {
         return serveruri;
     }
 

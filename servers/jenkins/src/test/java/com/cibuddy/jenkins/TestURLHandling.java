@@ -135,7 +135,7 @@ public class TestURLHandling {
         }
 
         @Override
-        public URI getBuildServerURL() {
+        public URI getBuildServerURI() {
             return serverURI;
         }
 

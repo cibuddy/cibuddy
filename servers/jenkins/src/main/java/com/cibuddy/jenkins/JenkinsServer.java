@@ -87,7 +87,7 @@ public class JenkinsServer implements IServer {
     }
     
     @Override
-    public URI getBuildServerURL() {
+    public URI getBuildServerURI() {
         return serverUri;
     }
 
@@ -143,7 +143,7 @@ public class JenkinsServer implements IServer {
     }
     
     static String getURLStringforProjectName(String projectName, IServer server) throws UnsupportedEncodingException, MalformedURLException{
-        String serverURIstring = server.getBuildServerURL().toURL().toExternalForm();
+        String serverURIstring = server.getBuildServerURI().toURL().toExternalForm();
         if(!serverURIstring.endsWith("/")){
             serverURIstring = serverURIstring+"/";
          }

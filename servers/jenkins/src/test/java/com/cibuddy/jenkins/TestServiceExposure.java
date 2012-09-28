@@ -84,7 +84,7 @@ public class TestServiceExposure {
             // do a very very simple server configuration comparison
             Assert.assertEquals("The server alias is not identical to the one set in the configuration file.", "org.apache", server.getBuildServerAlias());
             Assert.assertEquals("The server type is not identical to the one expected.", IServer.TYPE_JENKINS_SERVER, server.getBuildServerType());
-            Assert.assertEquals("The server URL is not identical to the one set in the configuration file.",new URI("https://builds.apache.org/"),server.getBuildServerURL());
+            Assert.assertEquals("The server URL is not identical to the one set in the configuration file.",new URI("https://builds.apache.org/"),server.getBuildServerURI());
             Assert.assertNotNull("The server version is not as expected!",server.getBuildServerVersion());
             Assert.assertTrue("Version string doesn't contain a dot as expected. Might have changed though...", server.getBuildServerVersion().contains("."));
             //Assert.assertEquals("The server version is not as expected! (they might have upgraded ;-))","1.480",server.getBuildServerVersion());

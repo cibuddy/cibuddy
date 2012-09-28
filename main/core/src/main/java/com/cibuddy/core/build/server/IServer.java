@@ -16,7 +16,6 @@
 package com.cibuddy.core.build.server;
 
 import com.cibuddy.core.security.AuthenticationException;
-import com.cibuddy.core.security.AuthenticationToken;
 import java.net.URI;
 
 /**
@@ -43,7 +42,7 @@ public interface IServer {
     String TYPE_TEAM_CITY_SERVER = "TeamCity";
     String TYPE_BAMBOO_SERVER = "Bamboo";
     
-    URI getBuildServerURL();
+    URI getBuildServerURI();
     
     String getBuildServerType();
     

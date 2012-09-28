@@ -19,7 +19,6 @@ import com.cibuddy.core.build.configuration.IConfigurationInstaller;
 import com.cibuddy.core.build.server.IServer;
 import com.cibuddy.core.service.util.ServerBucket;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -31,7 +30,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.logging.Level;
 import org.apache.felix.fileinstall.ArtifactInstaller;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -177,7 +175,7 @@ public class ServerConfigurationListener implements ArtifactInstaller, IConfigur
 
     private ServiceRegistration registerServer(IServer server, BundleContext bc) {
         Dictionary dict = new Hashtable();
-        safePut(dict,IServer.SP_SERVER_URL, server.getBuildServerURL());
+        safePut(dict,IServer.SP_SERVER_URL, server.getBuildServerURI());
         safePut(dict,IServer.SP_SERVER_ALIAS, server.getBuildServerAlias());
         safePut(dict,IServer.SP_SERVER_TYPE, server.getBuildServerType());
         safePut(dict,IServer.SP_SERVER_VERSION, server.getBuildServerVersion());
