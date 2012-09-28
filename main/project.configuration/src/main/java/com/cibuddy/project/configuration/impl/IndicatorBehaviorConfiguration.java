@@ -51,6 +51,7 @@ public class IndicatorBehaviorConfiguration implements IIndicatorBehaviorConfigu
         // this for loop is a bit different than usual...
         for (int i=0; projectIter.hasNext(); i++) {
             // think about breaking this down to avoid problems with exceptions for instance
+            // FIXME: this might cause NPE's, be more robust here
             result[i] = projectIter.next().obtainProjectState().getProjectColor();
         }
         Iterator<ColorIndicator> ciIterator = indicatorXMLConfig.getAction().iterator();
