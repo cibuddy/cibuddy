@@ -72,7 +72,9 @@
                             </descriptors>
                             <features>
                                 <feature>cibuddy-main</feature>
-                                <feature>cibuddy-test</feature>
+                                <feature>cibuddy-swing-xfd</feature>
+                                <feature>cibuddy-oss-conf</feature>
+                                <feature>cibuddy-test-conf</feature>
                             </features>
                             <repository>${project.build.directory}/features-repo</repository>
                         </configuration>
