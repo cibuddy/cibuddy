@@ -36,16 +36,17 @@ import org.slf4j.LoggerFactory;
 public class IBuddyLightHandle extends AbstractBuildStatusIndicator {
     
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyLightHandle.class);
-    private final ServiceReference hidDriverService;
     private final IBuddyDefault buddyFigure;
     private final HIDDeviceInfo deviceInfo;
     private ServiceRegistration sr;
     private final String figure;
     
     public IBuddyLightHandle(ServiceReference hidServiceRef) throws IOException {
-        hidDriverService = hidServiceRef;
         deviceInfo = (HIDDeviceInfo) Activator.getBundleContext().getService(hidServiceRef);
-        if(deviceInfo.getProduct_id() == FigureType.IBUDDY_GENERATION_2.getType()){
+        if(deviceInfo.getProduct_id() == FigureType.IBUDDY_GENERATION_1.getType()){
+            buddyFigure = new IBuddyFirstGen(deviceInfo);
+            figure = "iBuddyG1";
+        } else if(deviceInfo.getProduct_id() == FigureType.IBUDDY_GENERATION_2.getType()){
             buddyFigure = new IBuddyDefault(deviceInfo);
             figure = "iBuddyG2";
         } else if (deviceInfo.getProduct_id() == FigureType.DEVIL.getType()){
