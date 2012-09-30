@@ -56,8 +56,9 @@ public class IBuddyLightHandle extends AbstractBuildStatusIndicator {
             buddyFigure = new IBuddyQueen(deviceInfo);
             figure = "iBuddyQueen";
         } else {
-            LOG.info("unsupported i-Buddy device: "+deviceInfo);
-            throw new IOException("Unsupported i-Buddy device.");
+            LOG.warn("unsupported i-Buddy device. Falling back to default G2-Buddy for this details: "+deviceInfo);
+            buddyFigure = new IBuddyDefault(deviceInfo);
+            figure = "unknown iBuddy - handle as G2 device.";
         }
         buddyFigure.open();
     }
