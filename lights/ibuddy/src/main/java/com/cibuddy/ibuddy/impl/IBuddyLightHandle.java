@@ -20,7 +20,15 @@ package com.cibuddy.ibuddy.impl;
 
 import com.cibuddy.core.build.indicator.AbstractBuildStatusIndicator;
 import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
-import com.cibuddy.ibuddy.*;
+import com.cibuddy.ibuddy.Color;
+import com.cibuddy.ibuddy.FigureType;
+import com.cibuddy.ibuddy.IBuddyBlack;
+import com.cibuddy.ibuddy.IBuddyDefault;
+import com.cibuddy.ibuddy.IBuddyDevil;
+import com.cibuddy.ibuddy.IBuddyFirstGen;
+import com.cibuddy.ibuddy.IBuddyGeneric;
+import com.cibuddy.ibuddy.IBuddyQueen;
+import com.cibuddy.ibuddy.IBuddySecondGen;
 import com.codeminders.hidapi.HIDDeviceInfo;
 import java.io.IOException;
 import java.util.Dictionary;
@@ -39,26 +47,22 @@ public class IBuddyLightHandle extends AbstractBuildStatusIndicator {
     private final IBuddyDefault buddyFigure;
     private final HIDDeviceInfo deviceInfo;
     private ServiceRegistration sr;
-    private final String figure;
     
     public IBuddyLightHandle(ServiceReference hidServiceRef) throws IOException {
         deviceInfo = (HIDDeviceInfo) Activator.getBundleContext().getService(hidServiceRef);
         if(deviceInfo.getProduct_id() == FigureType.IBUDDY_GENERATION_1.getType()){
             buddyFigure = new IBuddyFirstGen(deviceInfo);
-            figure = "iBuddyG1";
         } else if(deviceInfo.getProduct_id() == FigureType.IBUDDY_GENERATION_2.getType()){
-            buddyFigure = new IBuddyDefault(deviceInfo);
-            figure = "iBuddyG2";
+            buddyFigure = new IBuddySecondGen(deviceInfo);
+        } else if(deviceInfo.getProduct_id() == FigureType.IBUDDY_BLACK.getType()){
+            buddyFigure = new IBuddyBlack(deviceInfo);
         } else if (deviceInfo.getProduct_id() == FigureType.DEVIL.getType()){
             buddyFigure = new IBuddyDevil(deviceInfo);
-            figure = "iBuddyDevil";
         } else if (deviceInfo.getProduct_id() == FigureType.QUEEN.getType()){
             buddyFigure = new IBuddyQueen(deviceInfo);
-            figure = "iBuddyQueen";
         } else {
             LOG.warn("unsupported i-Buddy device. Falling back to default G2-Buddy for this details: "+deviceInfo);
-            buddyFigure = new IBuddyDefault(deviceInfo);
-            figure = "unknown iBuddy - handle as G2 device.";
+            buddyFigure = new IBuddyGeneric(deviceInfo, "unknown iBuddy - handle as G2 device.");
         }
         buddyFigure.open();
     }
@@ -95,7 +99,7 @@ public class IBuddyLightHandle extends AbstractBuildStatusIndicator {
     @Override
     public String getIndicatorId() {
         // FIXME: for more than one instance use the unique id
-        return figure;
+        return buddyFigure.getName();
     }
 
     @Override

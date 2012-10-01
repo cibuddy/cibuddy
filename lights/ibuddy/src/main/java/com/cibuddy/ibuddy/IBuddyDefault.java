@@ -28,12 +28,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author mirkojahn
  */
-public class IBuddyDefault extends TimerTask implements IBuddyFigure {
+public abstract class IBuddyDefault extends TimerTask implements IBuddyFigure {
 
     private static final Logger LOG = LoggerFactory.getLogger(IBuddyDefault.class);
-    public static final short DEVICE_PRODUCT = 0x0002;
+    public static short DEVICE_PRODUCT = 0x0000;
     private static final long UPDATE_INTERVAL = 500L; // in ms
     private final HIDDeviceInfo deviceInfo;
+    private final String name;
     private HIDDevice device;
     
     // default values for the hardware state(s)
@@ -51,13 +52,17 @@ public class IBuddyDefault extends TimerTask implements IBuddyFigure {
     private final Object guard = new Object();
     private volatile boolean update = false;
     private volatile boolean enabled = false;
-    
+
     private final Timer timer = new Timer();
     private final long EXECUTION_DELAY = 1000; // 1 Seconds
     
-    public IBuddyDefault(HIDDeviceInfo devInfo) {
+    public IBuddyDefault(HIDDeviceInfo devInfo, String productId) {
         deviceInfo = devInfo;
-        
+        name = productId;
+    }
+    
+    public String getName(){
+        return name;
     }
 
     @Override

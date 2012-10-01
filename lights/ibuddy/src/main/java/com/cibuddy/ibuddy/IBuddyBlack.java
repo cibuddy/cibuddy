@@ -21,13 +21,13 @@ import com.codeminders.hidapi.HIDDeviceInfo;
  *
  * @author mirkojahn
  */
-public class IBuddyFirstGen extends IBuddyDefault {
+public class IBuddyBlack extends IBuddyDefault {
     
     static {
-        DEVICE_PRODUCT = 0x0001;
+        DEVICE_PRODUCT = 0x0003;
     }
     
-    public IBuddyFirstGen (HIDDeviceInfo devInfo){
-        super(devInfo, "iBuddyFirstGen");
+    public IBuddyBlack (HIDDeviceInfo devInfo){
+        super(devInfo, "iBuddyBlack");
     }
 }

@@ -21,13 +21,11 @@ import com.codeminders.hidapi.HIDDeviceInfo;
  *
  * @author mirkojahn
  */
-public class IBuddyFirstGen extends IBuddyDefault {
+public class IBuddyGeneric extends IBuddyDefault {
     
-    static {
-        DEVICE_PRODUCT = 0x0001;
-    }
     
-    public IBuddyFirstGen (HIDDeviceInfo devInfo){
-        super(devInfo, "iBuddyFirstGen");
+    public IBuddyGeneric (HIDDeviceInfo devInfo, String productIdString){
+        super(devInfo, productIdString);
+        DEVICE_PRODUCT = (short)devInfo.getProduct_id();
     }
 }

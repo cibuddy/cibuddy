@@ -23,9 +23,11 @@ import com.codeminders.hidapi.HIDDeviceInfo;
  */
 public class IBuddyDevil extends IBuddyDefault {
     
-    public static final short DEVICE_PRODUCT = 0x0005;
+    static {
+        DEVICE_PRODUCT = 0x0005;
+    }
     
     public IBuddyDevil (HIDDeviceInfo devInfo){
-        super(devInfo);
+        super(devInfo, "iBuddyDevil");
     }
 }
