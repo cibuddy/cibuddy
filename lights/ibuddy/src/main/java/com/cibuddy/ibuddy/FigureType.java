@@ -16,12 +16,20 @@
 package com.cibuddy.ibuddy;
 
 /**
- *
+ * Class providing type information for the different i-Buddies.
+ * 
+ * Each i-Buddy type is encoded with a unique ProductId when connected to the 
+ * USB. This id is then exposed in the HID and taken for comparison. All tested
+ * values are encoded in this class (others might certainly be possible, but are
+ * not tested - as mentioned).
+ * 
  * @author mirkojahn
+ * @since 1.0
+ * @version 1.0
  */
 public enum FigureType {
     
-    IBUDDY_GENERATION_1(1), IBUDDY_GENERATION_2(2), DEVIL(5), QUEEN(6);
+    IBUDDY_GENERATION_1(1), IBUDDY_GENERATION_2(2), IBUDDY_BLACK(3), DEVIL(5), QUEEN(6);
     private int type;
 
     private FigureType(int t) {
