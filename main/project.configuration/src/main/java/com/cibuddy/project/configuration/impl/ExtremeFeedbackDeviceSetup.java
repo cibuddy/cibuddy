@@ -70,9 +70,13 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
             // FIXME: incorporate a better configuration of indicators
 //            IProjectIndicator ipi = getProjectIndicator(xfd.getIndicatorId());
             if(psec != null){
-                StatusAction sa = psec.evaluate(this);
-                if(sa != null) {
-                    ibsi.indicate(sa);
+                if(ibsi != null){
+                    StatusAction sa = psec.evaluate(this);
+                    if(sa != null) {
+                        ibsi.indicate(sa);
+                    }
+                } else {
+                    LOG.info("no indicator found - I can't indicate anything without that one ");
                 }
             } else {
                 LOG.info("no behavior configuration service found - I can't indicate anything without that one");
@@ -90,10 +94,14 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
         Iterator<ProjectType> iter = xfd.getProject().iterator();
         while(iter.hasNext()){
             ProjectType pt = iter.next();
+            IProject tempProject = null;
             if(pt.getServer() != null) {
-                projects.add(getProject(pt.getServer(),pt));
+                tempProject = getProject(pt.getServer(),pt);
             } else {
-                projects.add(getProject(xfd.getServer(),pt));
+                tempProject = getProject(xfd.getServer(),pt);
+            }
+            if(tempProject != null){
+                projects.add(tempProject);
             }
         }
         return projects;

@@ -15,7 +15,7 @@
  */
 package com.cibuddy.core.build.server;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Assert;
 import org.junit.Test;
 /**
  * VERY simple test for the BuildStatus class.
@@ -37,10 +37,11 @@ public class BuildStatusTest {
      */
     @Test
     public void testStringParsing() throws Exception {
-        assertTrue(BuildStatus.get("blue").equals(BuildStatus.blue));
-        assertTrue(BuildStatus.get("red").equals(BuildStatus.red));
+        Assert.assertEquals("Blue wasn't matched as string for the status.",BuildStatus.valueOf("blue"),BuildStatus.blue);
+        Assert.assertEquals("Blue wasn't matched as string for the status.",BuildStatus.valueOf("red"),BuildStatus.red);
         // just make sure it is not always returning true.
-        assertTrue(!BuildStatus.get("red").equals(BuildStatus.blue));
+        Assert.assertTrue(!BuildStatus.valueOf("red").equals(BuildStatus.blue));
+        Assert.assertTrue(!BuildStatus.valueOf("red").equals(BuildStatus.unknown));
     }
     
 }

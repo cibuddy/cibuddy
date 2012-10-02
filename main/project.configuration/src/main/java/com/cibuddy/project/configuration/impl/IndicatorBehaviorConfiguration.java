@@ -20,6 +20,7 @@ import com.cibuddy.core.build.configuration.IProjectSetup;
 import com.cibuddy.core.build.indicator.StatusAction;
 import com.cibuddy.core.build.server.BuildStatus;
 import com.cibuddy.core.build.server.IProject;
+import com.cibuddy.core.build.server.IProjectState;
 import com.cibuddy.project.configuration.jaxb.v1_0.indicator.ColorIndicator;
 import com.cibuddy.project.configuration.jaxb.v1_0.indicator.Config;
 import java.util.ArrayList;
@@ -52,7 +53,9 @@ public class IndicatorBehaviorConfiguration implements IIndicatorBehaviorConfigu
         for (int i=0; projectIter.hasNext(); i++) {
             // think about breaking this down to avoid problems with exceptions for instance
             // FIXME: this might cause NPE's, be more robust here
-            result[i] = projectIter.next().obtainProjectState().getProjectColor();
+            IProject pro = projectIter.next();
+            IProjectState proState = pro.obtainProjectState();
+            result[i] = proState.getProjectColor();
         }
         Iterator<ColorIndicator> ciIterator = indicatorXMLConfig.getAction().iterator();
         while (ciIterator.hasNext()) {

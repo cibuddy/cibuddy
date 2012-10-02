@@ -99,7 +99,11 @@ public class JenkinsProjectState implements IProjectState {
     public BuildStatus getProjectColor() {
         BuildStatus status;
         try {
-            status = BuildStatus.get(color);
+            status = BuildStatus.valueOf(color);
+            // the build status or unknown in case of null
+            if(status == null){
+                status = BuildStatus.unknown;
+            }
         } catch (Exception e) {
             status = BuildStatus.unknown;
         }
