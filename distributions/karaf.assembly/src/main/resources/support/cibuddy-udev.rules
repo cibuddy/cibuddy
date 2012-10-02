@@ -1,0 +1,28 @@
+################################################################################
+# This is a sample configuration file for udev in combination with libusb.
+#
+# For more details, take a look here: 
+# https://github.com/signal11/hidapi/blob/master/udev/99-hid.rules
+#
+################################################################################
+
+# udev config for the Delcom USB Light
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="0FC5", ATTRS{idProduct}=="B080", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="0FC5", ATTRS{idProduct}=="B080", MODE="0666"
+
+# udev configuration for the i-Buddies:
+# Gen1 i-Buddy (red/orange wings)
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0001", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0001", MODE="0666"
+# Gen2 i-Buddy (green/purple wings)
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0002", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0002", MODE="0666"
+# i-Buddy Black
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0003", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0003", MODE="0666"
+# i-Buddy Devil
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0005", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0005", MODE="0666"
+# i-Buddy Queen
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0005", MODE="0666"
+SUBSYSTEM=="usb_device", ATTRS{idVendor}=="4400", ATTRS{idProduct}=="0005", MODE="0666"
