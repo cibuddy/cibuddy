@@ -15,6 +15,7 @@
  */
 package com.cibuddy.core.build.configuration;
 
+import com.cibuddy.core.build.indicator.IBuildStatusIndicator;
 import com.cibuddy.core.build.server.IProject;
 import java.util.List;
 
