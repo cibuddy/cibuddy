@@ -57,8 +57,8 @@ public class DelcomLightG2 implements IDelcomLight{
         }
         byte[] buffer = SET_STRUCTURE.clone();
         buffer[SET_BYTE] = color.getCode();
-//        device.sendFeatureReport(buffer);
-        device.write(buffer);
+        device.sendFeatureReport(buffer);
+//        device.write(buffer);
         currentColor = color;
     }
 
