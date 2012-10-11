@@ -102,7 +102,7 @@ public class TravisServer implements IServer {
      * 
      * @param projectName in case of travis this is called slug ("owner/project")
      * @param etag if not null, a cache lookup will be done
-     * @return
+     * @return Project state for the Travis hosted project
      * @throws Exception 
      */
     public TravisProjectState getProject(String projectName, String etag) throws Exception {
