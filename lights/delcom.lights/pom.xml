@@ -65,6 +65,10 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.pojosr</groupId>
+            <artifactId>de.kalpatec.pojosr.framework</artifactId>
+        </dependency>
     </dependencies>
     
     <build>
@@ -85,6 +89,18 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <!-- 
+                We need access to the native lib in order to run the test.
+                Unfortunately, the access has to be absolute
+              -->
+              <!--configuration>
+                    os.name doesn't work, so make it specific for the os
+                  <argLine>-Djava.library.path=/Users/titan/cibuddy/drivers/hid/src/main/resources/lib/${os.name}/${os.arch}/</argLine>
+              </configuration-->
             </plugin>
         </plugins>
     </build>
