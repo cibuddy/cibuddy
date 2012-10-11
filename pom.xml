@@ -62,12 +62,40 @@
         </developer>
     </developers>
    
+    <issueManagement>
+        <system>GithHub Issues</system>
+        <url>https://github.com/cibuddy/cibuddy/issues</url>
+    </issueManagement>
     
+    <ciManagement>
+        <system>Travis-CI</system>
+        <url>https://travis-ci.org/#!/cibuddy/cibuddy</url>
+        <notifiers>
+            <notifier>
+                <configuration>
+                    <address>mirkojahn@gmail.com</address>
+                </configuration>
+                <sendOnError>true</sendOnError>
+                <sendOnFailure>true</sendOnFailure>
+                <type>mail</type>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+    
+    <distributionManagement>
+        <downloadUrl>https://github.com/cibuddy/cibuddy/downloads</downloadUrl>
+        <site>
+            <id>cibuddy.com</id>
+            <name>CIBuddy website hosted @GitHub</name>
+            <url>https://github.com/cibuddy/cibuddy.github.com</url>
+        </site>
+    </distributionManagement>
     <scm>
-      <connection>scm:git:git@github.com:cibuddy/cibuddy.git</connection>
-      <developerConnection>scm:git:git@github.com:cibuddy/cibuddy.git</developerConnection>
-      <url>git@github.com:cibuddy/cibuddy.git</url>
+        <connection>scm:git:git@github.com:cibuddy/cibuddy.git</connection>
+        <developerConnection>scm:git:git@github.com:cibuddy/cibuddy.git</developerConnection>
+        <url>git@github.com:cibuddy/cibuddy.git</url>
     </scm> 
+    
     <properties>
         <!-- Default OSGi Bundle Properties used by the maven-bundle-plugin -->
         <bundle.symbolicNameDirective />
