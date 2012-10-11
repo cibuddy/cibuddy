@@ -41,7 +41,7 @@ public class HIDDevice
     /**
      * Method to compare <code>HIDDevice</code> object instances.
      * 
-     * @param  obj <code>HIDDevice<code> object reference 
+     * @param  obj <code>HIDDevice</code> object reference 
      * @return <code>true</code> if the <code>HIDDevice</code> object represent the same value; <code>false</code> otherwise
      */
     public boolean equals(Object obj) 

@@ -30,7 +30,7 @@ public class HIDDeviceInfo
 
     /**
      * Protected constructor, used from JNI Allocates a new
-     * <code>HIDDeviceInfo<code> object.
+     * <code>HIDDeviceInfo</code> object.
      * 
      * @since 1.0
      */
@@ -163,14 +163,14 @@ public class HIDDeviceInfo
      *  Open a HID device using a path name from this class.  
      *  Used from JNI.
      *
-     * @return return a reference to the <code>HIDDevice<code> object
+     * @return return a reference to the <code>HIDDevice</code> object
      * @throws IOException
      * @since 1.0
      */
     public native HIDDevice open() throws IOException;
     
     /**
-     * Override method for conversion this object to <code>java.lang.String<code> object.
+     * Override method for conversion this object to <code>java.lang.String</code> object.
      *
      * @return return a reference to the <code>String<code> object
      * @since 1.0
