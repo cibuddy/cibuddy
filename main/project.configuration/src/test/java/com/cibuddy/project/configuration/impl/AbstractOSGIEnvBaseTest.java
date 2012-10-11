@@ -35,7 +35,7 @@ import org.junit.Before;
  * 
  * @author Mirko Jahn <mirkojahn@gmail.com>
  */
-public class AbstractOSGIEnvBaseTest {
+public abstract class AbstractOSGIEnvBaseTest {
     /* registry for OSGi services without OSGi */
     private PojoServiceRegistry registry;
     
