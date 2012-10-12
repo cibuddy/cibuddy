@@ -30,6 +30,9 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <maven.build.timestamp.format>MM/dd/yyyy</maven.build.timestamp.format>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -62,7 +65,7 @@
                 <executions>
                     <execution>
                         <id>add-features-to-repo</id>
-                        <phase>generate-resources</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>add-features-to-repo</goal>
                         </goals>
@@ -138,7 +141,7 @@
                 <artifactId>downloads-maven-plugin</artifactId>
                 <version>0.6</version>
                 <configuration>
-                    <description>${project.name} build based on Rev ${buildNumber} @: $(now)</description>
+                    <description>${project.name} build based on Rev ${buildNumber} @: $(maven.build.timestamp)</description>
                     <override>false</override>
                     <includeAttached>false</includeAttached>
                     <dryRun>false</dryRun>
