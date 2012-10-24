@@ -16,10 +16,13 @@
     limitations under the License.
 
 -->
-<servers  xmlns="http://com.cibuddy.project.configuration/schema/servers/v1-1" 
+<!-- 
+    this is just a sketch of a possible xml based configuration file for server configs
+-->
+<servers  xmlns="http://cibuddy.com/configuration/servers" 
          xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/servers/v1-1 ../../main/resources/servers-1.1.xsd'
+         xsi:schemaLocation='http://cibuddy.com/configuration/servers ../../main/resources/servers-1.1.xsd'
          name="project1">
     <server id="travis-ci" alias="travis-ci" rootURI="http://www.travis-ci.org/" kind="travis">
         <authentication type="usernamepassword">

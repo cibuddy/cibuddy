@@ -16,10 +16,9 @@
     limitations under the License.
 
 -->
-<config  xmlns="http://com.cibuddy.project.configuration/schema/behavior/v1-0" 
-         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+<config  xmlns="http://cibuddy.com/schema/configuration/behavior" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/behavior/v1-0 ../../main/resources/indicator-1.0.xsd'
+         xsi:schemaLocation='http://cibuddy.com/schema/configuration/behavior ../../main/resources/indicator-1.0.xsd'
          name="default">
     <action condition="all">
         <status>blue</status>

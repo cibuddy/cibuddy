@@ -16,10 +16,9 @@
     limitations under the License.
 
 -->
-<setup  xmlns="http://com.cibuddy.project.configuration/schema/projects/v1-0" 
-         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+<setup  xmlns="http://cibuddy.com/schema/configuration/projects" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation='http://com.cibuddy.project.configuration/schema/projects/v1-0 ../../main/resources/projects-1.0.xsd'>
+         xsi:schemaLocation='http://cibuddy.com/schema/configuration/projects http://cibuddy.com/schema/configuration/projects/projects-1.0.xsd'>
     
     <!-- config, server and indicator attribute are optional -->
     <xfd name="test-cibuddy-on-travis" server="travis-ci">
