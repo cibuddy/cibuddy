@@ -96,7 +96,7 @@
             ,lib/linux/x86_32/libhidapi-jni.so;
                 osname=Linux;
                 processor=x86
-            ,lib/linux/arm7/libhidapi-jni.so;
+            ,lib/linux/arm6/libhidapi-jni.so;
                 processor=arm;
                 osname=Linux
         </osgi.native.code>
