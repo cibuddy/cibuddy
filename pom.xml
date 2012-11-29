@@ -253,16 +253,29 @@
                     <executions>
                         <execution>
                             <phase>validate</phase>
+                            <id>create_buildNumber</id>
                             <goals>
                                 <goal>create</goal>
                             </goals>
+                            <configuration>
+                                <shortRevisionLength>7</shortRevisionLength>
+                                <doCheck>false</doCheck>
+                                <doUpdate>false</doUpdate>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <phase>deploy</phase>
+                            <id>ensure_checkins</id>
+                            <goals>
+                                <goal>create</goal>
+                            </goals>
+                            <configuration>
+                                <shortRevisionLength>7</shortRevisionLength>
+                                <doCheck>true</doCheck>
+                                <doUpdate>true</doUpdate>
+                            </configuration>
                         </execution>
                     </executions>
-                    <configuration>
-                        <shortRevisionLength>7</shortRevisionLength>
-                        <doCheck>false</doCheck>
-                        <doUpdate>false</doUpdate>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
