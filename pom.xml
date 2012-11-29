@@ -126,7 +126,7 @@
         <github.global.server>github</github.global.server>
         
         <!-- project dependency versions -->
-        <karaf.version>2.2.9</karaf.version>
+        <karaf.version>2.3.0</karaf.version>
 
         <!-- addtional configuration options -->
         <cibuddy.configuration />
