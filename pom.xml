@@ -444,8 +444,12 @@
                         </dependency>
                     </dependencies>
                     <configuration>
-                        <tag>${pom.version}_${buildNumber}</tag>
+                        <tag>${pom.version}</tag>
                         <connectionType>connection</connectionType>
+                        <addTimestamp>true</addTimestamp>
+                        <timestampFormat>yyyyMMdd</timestampFormat>
+                        <timestampPrefix>_</timestampPrefix>
+                        <message>Automatic tag done during deployment of Rev: ${buildNumber}</message>
                     </configuration>
                     <executions>
                         <execution>
@@ -463,6 +467,10 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
             </plugin>
         </plugins>
     </build>  
