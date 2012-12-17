@@ -15,6 +15,7 @@
  */
 package com.cibuddy.core.build.server;
 
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.security.AuthenticationException;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +47,14 @@ public class DefaultProjectImpl implements IProject {
         try {
             return server.getProjectState(projectId);
         } catch (AuthenticationException ex) {
-            LOG.warn("Authentication failed. Check your credentials for project: "+projectId+" on Server: "+server.getBuildServerAlias(), ex);
+            try {
+                LOG.warn("Authentication failed. Check your credentials for project: "+projectId+" on Server: "+server.getBuildServerAlias(), ex);
+            } catch (ProjectSetupException ex1) {
+                // this shouldn't happen.
+                LOG.warn("There has been some sort of configuration problem with this configuraiton source: "+server.getBuildServerSource()+ " and project: "+projectId, ex1);
+            }   
+        } catch (ProjectSetupException e) {
+            LOG.warn("There has been some sort of configuration problem with this configuraiton source: "+server.getBuildServerSource()+ " and project: "+projectId, e);
         }
         return null;
     }

@@ -15,6 +15,8 @@
  */
 package com.cibuddy.travis;
 
+import com.cibuddy.core.build.MissingProjectException;
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.server.DefaultProjectImpl;
 import com.cibuddy.core.build.server.IProject;
 import com.cibuddy.core.build.server.IProjectState;
@@ -88,14 +90,17 @@ public class TravisServer implements IServer {
      * @return The buildProject representation
      */
     @Override
-    public IProjectState getProjectState(String projectName) {
+    public IProjectState getProjectState(String projectName) throws ProjectSetupException{
         try {
             // http://travis-ci.org/cibuddy/cibuddy.json
             return getProject(projectName, null);
+        } catch (IOException ioe) {
+            LOG.warn("Problem occured while checking Travis Server:"+serveruri);
+                throw new MissingProjectException(projectName, ioe);
         } catch (Exception ex) {
-            LOG.warn("Trying to obtain "+projectName+" from "+serveruri.toString()+" failed.", ex);
+            LOG.warn("Trying to obtain "+projectName+" from "+serveruri.toString()+" failed.");
+            throw (RuntimeException)ex;
         }
-        return null;
     }
     
     /**

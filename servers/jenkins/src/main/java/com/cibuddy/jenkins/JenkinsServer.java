@@ -15,6 +15,8 @@
  */
 package com.cibuddy.jenkins;
 
+import com.cibuddy.core.build.MissingProjectException;
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.server.DefaultProjectImpl;
 import com.cibuddy.core.build.server.IProject;
 import com.cibuddy.core.build.server.IProjectState;
@@ -41,7 +43,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
  *
- * @author mirkojahn
+ * @author Mirko Jahn <mirkojahn@gmail.com>
+ * @version 1.0
+ * @since 1.0
  */
 public class JenkinsServer implements IServer {
     
@@ -102,7 +106,7 @@ public class JenkinsServer implements IServer {
     }
 
     @Override
-    public IProjectState getProjectState(String projectName) {
+    public IProjectState getProjectState(String projectName) throws ProjectSetupException {
         try {
             String requestURI = getURLStringforProjectName(projectName, this)+JENKINS_SERVER_JOB_JSON;
             // get the project
@@ -121,7 +125,8 @@ public class JenkinsServer implements IServer {
             } catch (URISyntaxException ex) {
                 java.util.logging.Logger.getLogger(JenkinsServer.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException e) {
-                LOG.info("Problem occured while checking Jenkins Server:"+requestURI,e);
+                LOG.warn("Problem occured while checking Jenkins Server:"+requestURI);
+                throw new MissingProjectException(projectName,e);
             }
             
         } catch (UnsupportedEncodingException ex) {
@@ -142,7 +147,7 @@ public class JenkinsServer implements IServer {
         return source;
     }
     
-    static String getURLStringforProjectName(String projectName, IServer server) throws UnsupportedEncodingException, MalformedURLException{
+    static String getURLStringforProjectName(String projectName, IServer server) throws UnsupportedEncodingException, MalformedURLException, ProjectSetupException{
         String serverURIstring = server.getBuildServerURI().toURL().toExternalForm();
         if(!serverURIstring.endsWith("/")){
             serverURIstring = serverURIstring+"/";

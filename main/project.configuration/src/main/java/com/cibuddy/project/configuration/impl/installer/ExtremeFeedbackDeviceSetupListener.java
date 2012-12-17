@@ -15,7 +15,7 @@
  */
 package com.cibuddy.project.configuration.impl.installer;
 
-import com.cibuddy.core.build.configuration.ConfigurationMaterializationException;
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.configuration.IProjectSetup;
 import com.cibuddy.core.build.configuration.Triggerable;
 import com.cibuddy.project.configuration.impl.Activator;
@@ -81,7 +81,7 @@ private static final Logger LOG = LoggerFactory.getLogger(IndicatorBehaviorConfi
                 } catch (Throwable t){
                     // anything could happen, so do not fail the rest of the execution
                 }
-            } catch (ConfigurationMaterializationException ex) {
+            } catch (ProjectSetupException ex) {
                 LOG.warn("Problems setting up configuration file.",ex);
             }
         }

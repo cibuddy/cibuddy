@@ -15,6 +15,7 @@
  */
 package com.cibuddy.travis;
 
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.configuration.IConfigurationInstaller;
 import com.cibuddy.core.build.server.IServer;
 import com.cibuddy.core.service.util.ServerBucket;
@@ -173,7 +174,7 @@ public class ServerConfigurationListener implements ArtifactInstaller, IConfigur
         return servers;
     }
 
-    private ServiceRegistration registerServer(IServer server, BundleContext bc) {
+    private ServiceRegistration registerServer(IServer server, BundleContext bc) throws ProjectSetupException {
         Dictionary dict = new Hashtable();
         safePut(dict,IServer.SP_SERVER_URL, server.getBuildServerURI());
         safePut(dict,IServer.SP_SERVER_ALIAS, server.getBuildServerAlias());

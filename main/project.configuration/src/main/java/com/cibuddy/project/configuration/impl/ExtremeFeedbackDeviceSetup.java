@@ -15,7 +15,8 @@
  */
 package com.cibuddy.project.configuration.impl;
 
-import com.cibuddy.core.build.configuration.ConfigurationMaterializationException;
+import com.cibuddy.core.build.MissingProjectException;
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.configuration.IConfigurationService;
 import com.cibuddy.core.build.configuration.IIndicatorBehaviorConfiguration;
 import com.cibuddy.core.build.configuration.IProjectSetup;
@@ -46,9 +47,9 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
     /**
      *
      * @param xfd
-     * @throws ConfigurationMaterializationException
+     * @throws ProjectSetupException
      */
-    public ExtremeFeedbackDeviceSetup (Xfd xfd) throws ConfigurationMaterializationException {
+    public ExtremeFeedbackDeviceSetup (Xfd xfd) throws ProjectSetupException {
         setup(xfd);
     }
     
@@ -88,7 +89,7 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
     }
 
     @Override
-    public List<IProject> getProjects() {
+    public List<IProject> getProjects() throws ProjectSetupException{
         List<IProject> projects = new ArrayList<IProject>();
         // assign the projects (this might fail due to missing server(s) f.i.
         Iterator<ProjectType> iter = xfd.getProject().iterator();
@@ -102,12 +103,14 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
             }
             if(tempProject != null){
                 projects.add(tempProject);
+            } else {
+                // FIXME: here goes the indicator that the project is missing
             }
         }
         return projects;
     }
     
-    private IProject getProject(String serverId, ProjectType pt) {
+    private IProject getProject(String serverId, ProjectType pt) throws ProjectSetupException {
         boolean useFirstAsDefault = false;
         if(serverId == null){
             // use the server Id from the project itself
@@ -126,7 +129,12 @@ public class ExtremeFeedbackDeviceSetup implements Triggerable, IProjectSetup {
         }
         
         if(server != null) {
-            return server.getProject(pt.getId());
+            try {
+                return server.getProject(pt.getId());
+            } catch (Exception e) {
+                LOG.warn(e.getMessage(), e);
+                 throw new MissingProjectException(pt.getId());
+            }
         } 
         return null;
     }

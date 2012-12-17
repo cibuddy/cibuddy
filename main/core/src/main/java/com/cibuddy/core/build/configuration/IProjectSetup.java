@@ -15,6 +15,7 @@
  */
 package com.cibuddy.core.build.configuration;
 
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.build.server.IProject;
 import java.util.List;
 
@@ -40,7 +41,8 @@ public interface IProjectSetup extends IConfigurationService {
      * Obtain the list of Projects associated with this particular setup.
      * 
      * @return all projects configured.
+     * @throws ProjectSetupException in case the project doesn't exist.
      */
-    List<IProject> getProjects();
+    List<IProject> getProjects() throws ProjectSetupException;
     
 }

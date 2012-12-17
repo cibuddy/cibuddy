@@ -13,12 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cibuddy.core.build.configuration;
+package com.cibuddy.core.build;
 
 /**
  *
  * @author Mirko Jahn <mirkojahn@gmail.com>
+ * @version 1.0
+ * @since 1.0
  */
-public class ConfigurationMaterializationException extends Exception {
+public class MissingProjectException extends ProjectSetupException {
+    public static final String MISSING_PROJECT_TYPE = "missing_project";
     
+    public MissingProjectException(String projectName) {
+        super(MISSING_PROJECT_TYPE, "Couldn't retrieve project for name: "+projectName);
+    }
+    public MissingProjectException(String projectName, Exception e) {
+        super(MISSING_PROJECT_TYPE, "Couldn't retrieve project for name: "+projectName, e);
+    }
 }

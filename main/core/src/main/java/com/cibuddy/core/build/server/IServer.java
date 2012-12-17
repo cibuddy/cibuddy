@@ -15,6 +15,7 @@
  */
 package com.cibuddy.core.build.server;
 
+import com.cibuddy.core.build.ProjectSetupException;
 import com.cibuddy.core.security.AuthenticationException;
 import java.net.URI;
 
@@ -42,15 +43,15 @@ public interface IServer {
     String TYPE_TEAM_CITY_SERVER = "TeamCity";
     String TYPE_BAMBOO_SERVER = "Bamboo";
     
-    URI getBuildServerURI();
+    URI getBuildServerURI() throws ProjectSetupException;
     
-    String getBuildServerType();
+    String getBuildServerType() throws ProjectSetupException;
     
     String getBuildServerSource();
     
-    String getBuildServerVersion();
+    String getBuildServerVersion() throws ProjectSetupException;
     
-    String getBuildServerAlias();
+    String getBuildServerAlias() throws ProjectSetupException;
         
     /**
      * Obtains a specific project from the server.
@@ -65,7 +66,7 @@ public interface IServer {
      * @throws AuthenticationException in case of failed authentication.
      * @return the state of the given project or null for none found or accessible.
      */
-    IProjectState getProjectState(String projectId) throws AuthenticationException;
+    IProjectState getProjectState(String projectId) throws AuthenticationException, ProjectSetupException;
     
-    IProject getProject(String projectId);
+    IProject getProject(String projectId) throws ProjectSetupException;
 }

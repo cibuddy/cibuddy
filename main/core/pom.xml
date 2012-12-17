@@ -28,6 +28,7 @@
             *
         </osgi.import.pkg>
         <osgi.export.pkg>
+            ${project.name}.build;version="1.0.0",
             ${project.name}.build.configuration;version="1.0.0",
             ${project.name}.build.configuration.helper;version="1.0.0",
             ${project.name}.build.indicator;version="1.0.0",

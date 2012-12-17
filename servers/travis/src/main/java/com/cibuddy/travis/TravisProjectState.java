@@ -18,7 +18,6 @@ package com.cibuddy.travis;
 import com.cibuddy.core.build.server.BuildStatus;
 import com.cibuddy.core.build.server.IProjectState;
 import com.google.gson.Gson;
-import java.net.URI;
 import java.util.Date;
 
 /**
