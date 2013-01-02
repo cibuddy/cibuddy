@@ -192,19 +192,19 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <scope>provided</scope>
-                <version>1.6.6</version>
+                <version>1.7.2</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <scope>test</scope>
-                <version>1.6.6</version>
+                <version>1.7.2</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <scope>provided</scope>
-                <version>1.6.6</version>
+                <version>1.7.2</version>
             </dependency>
             <!-- testing only -->
             <dependency>
