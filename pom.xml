@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,7 +9,7 @@
     
     <groupId>com.cibuddy</groupId>
     <artifactId>cibuddy</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId} (Main Project)</name>
@@ -100,7 +99,7 @@
         <!-- Default OSGi Bundle Properties used by the maven-bundle-plugin -->
         <bundle.symbolicNameDirective />
         <bundle.symbolicName>${project.groupId}.${project.artifactId}${bundle.symbolicNameDirective}</bundle.symbolicName>
-        <osgi.export.pkg></osgi.export.pkg>
+        <osgi.export.pkg />
         <osgi.import.pkg>*</osgi.import.pkg>
         <osgi.dynamic.import.pkg />
         <osgi.private.pkg />
@@ -110,7 +109,7 @@
         <osgi.fragment.host />
         <osgi.require.bundle />
         <osgi.spring.context />
-        <osgi.native.code/>
+        <osgi.native.code />
         <eclipse.supplement.bundle />
         <osgi.execution.env>JavaSE-1.6, JavaSE-1.7</osgi.execution.env>
         <osgi.bundle.vendor>com.cibuddy</osgi.bundle.vendor>
