@@ -9,7 +9,7 @@
     
     <groupId>com.cibuddy</groupId>
     <artifactId>cibuddy</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId} (Main Project)</name>
