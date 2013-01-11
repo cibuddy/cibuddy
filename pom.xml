@@ -267,7 +267,11 @@
                                 <doUpdate>false</doUpdate>
                             </configuration>
                         </execution>
-                        <execution>
+                        <!-- 
+                            This currently doesn't work for releases, so avoid
+                            it, because the release does a check as well.
+                        -->
+                        <!--execution>
                             <phase>deploy</phase>
                             <id>ensure_checkins</id>
                             <goals>
@@ -277,7 +281,7 @@
                                 <doCheck>true</doCheck>
                                 <doUpdate>true</doUpdate>
                             </configuration>
-                        </execution>
+                        </execution-->
                     </executions>
                     <configuration>
                         <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
