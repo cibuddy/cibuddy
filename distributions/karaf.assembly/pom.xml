@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.cibuddy</groupId>
         <artifactId>distributions</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
   
     <dependencies>
@@ -71,8 +71,7 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <!--descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml/features</descriptor-->
-                                <descriptor>file:${project.build.directory}/../../karaf.features/target/features/cibuddy_features.xml</descriptor>
+                                <descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <features>
                                 <feature>cibuddy-main</feature>
