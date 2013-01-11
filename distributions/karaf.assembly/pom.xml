@@ -71,7 +71,16 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml/features</descriptor>
+                                <!--
+                                    Workaround:
+                                    Currently, during a release there is no version of 
+                                    the xml in any repository, so this will not find
+                                    the artifact required here... Use the local path
+                                    to get it anyway - implies it is build locally and
+                                    the hierarchy is checked out of course.
+                                -->
+                                <!--descriptor>mvn:com.cibuddy/karaf.features/${project.version}/xml-->
+                                <descriptor>file:${project.build.directory}/../../karaf.features/target/features/cibuddy_features.xml</descriptor>
                             </descriptors>
                             <features>
                                 <feature>cibuddy-main</feature>
