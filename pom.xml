@@ -331,6 +331,8 @@
                             <Implementation-Build>GIT-Rev: ${buildNumber}</Implementation-Build>
                             <Build-Time>$(now)</Build-Time>
                             <CIBuddy-Configuration>${cibuddy.configuration}</CIBuddy-Configuration>
+                            <!-- In case we have an executable, reverence the main class -->
+                            <Main-Class>${jar.main.class}</Main-Class>
                         </instructions>
                     </configuration>
                     <executions>
