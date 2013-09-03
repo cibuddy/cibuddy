@@ -1,9 +1,10 @@
 package com.codeminders.hidapi;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import com.github.fommil.jni.JniLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
 
 
 public class ClassPathLibraryLoader {
@@ -26,49 +27,19 @@ public class ClassPathLibraryLoader {
 	        "/lib/linux/arm7/libhidapi-jni.so",
                 "/lib/linux/arm6/libhidapi-jni.so"
 	};
-	  
-	public static boolean loadNativeHIDLibrary()
-        {
-		  boolean isHIDLibLoaded = false;
-		  
-    	  for(String path : HID_LIB_NAMES)
-          {
-		        try {
-		                // have to use a stream
-		                InputStream in = ClassPathLibraryLoader.class.getResourceAsStream(path);
-		                if (in != null) {
-		                	try {
-				                // always write to different location
-				                String tempName = path.substring(path.lastIndexOf('/') + 1);
-				                File fileOut = File.createTempFile(tempName.substring(0, tempName.lastIndexOf('.')), tempName.substring(tempName.lastIndexOf('.'), tempName.length()));
-				                fileOut.deleteOnExit();
-				                
-				                OutputStream out = new FileOutputStream(fileOut);
-				                byte[] buf = new byte[1024];
-				                int len;
-				                while ((len = in.read(buf)) > 0){            
-				                	out.write(buf, 0, len);
-				                }
-				                
-				                out.close();
-				                Runtime.getRuntime().load(fileOut.toString());
-				                isHIDLibLoaded = true;
-		                	} finally {
-		                		in.close();
-		                	}
-		                }	                
-		        } catch (Exception e) {
-		        	  // ignore
-		        } catch (UnsatisfiedLinkError e) {
-		        	  // ignore
-		        }
-		        
-		        if (isHIDLibLoaded) {
-		        	break;
-		        }
-        }
-    	  
-    	return isHIDLibLoaded;  
+
+  private static final Logger log = LoggerFactory.getLogger(ClassPathLibraryLoader.class);
+
+  // legacy: return true if the libraries are loaded
+  // (it would be better to just throw the exception!)
+	public static boolean loadNativeHIDLibrary() {
+      try {
+        JniLoader.load(HID_LIB_NAMES);
+      } catch (ExceptionInInitializerError e) {
+        log.error("failed to load from: " + Arrays.toString(HID_LIB_NAMES), e);
+        return false;
+      }
+      return true;
     }
 
 }
